@@ -31,7 +31,7 @@ jobs:
 
       - name: Build wasm using wasm-pack
         working-directory: web
-        run: wasm-pack build --release
+        run: wasm-pack build --release --target no-modules
 
       - name: Remove .gitignore from pkg (so it's deployed)
         run: rm -f web/pkg/.gitignore
