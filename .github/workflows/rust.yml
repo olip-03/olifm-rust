@@ -36,6 +36,9 @@ jobs:
 
       - name: Diagnostics - list web/pkg contents
         run: ls -la web/pkg && echo "---- files ----" && find web/pkg -type f -print
+
+      - name: Remove .gitignore from pkg (so it's deployed)
+        run: rm -f web/pkg/.gitignore
         
       - name: Commit pkg to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
