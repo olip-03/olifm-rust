@@ -27,7 +27,7 @@ pub fn main() {
     let greeting = document
         .create_element("p")
         .expect("Failed to create element");
-    greeting.set_text_content(Some("🦀 Hello from Rust and WebAssembly! 🦀"));
+    greeting.set_text_content(Some("Under Construction! Check back soon :)"));
     greeting
         .set_attribute("style", "color: red; font-size: 20px; margin: 10px;")
         .expect("Failed to set style");
