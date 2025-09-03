@@ -4,5 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+futures = "0.3.31"
+reqwest = "0.12.23"
+tokio = "1.47.1"
 
 [lib]
