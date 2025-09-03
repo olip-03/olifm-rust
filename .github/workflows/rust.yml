@@ -33,6 +33,6 @@ jobs:
       - name: Commit pkg to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           BRANCH: gh-pages
           FOLDER: web/pkg
