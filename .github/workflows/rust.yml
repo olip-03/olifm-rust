@@ -42,4 +42,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           BRANCH: gh-pages
-          FOLDER: web/pkg
+          FOLDER: web
