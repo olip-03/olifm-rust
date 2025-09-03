@@ -3,9 +3,27 @@
     <head>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
         <script type="module" src="index.js"></script>
+        <style>
+            /* Center the image on the page */
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+            }
+            body {
+                display: flex;
+                align-items: center; /* vertical centering */
+                flex-direction: column;
+                background-color: #f0f0f0; /* optional pleasant background */
+            }
+            .logo {
+                width: 320px;
+                height: 320px;
+                object-fit: cover; /* ensure the image scales nicely if needed */
+            }
+        </style>
     </head>
     <body>
-        <img src="assets/radio.mkv0001-0250.gif" />
-        <p>A greeting from rust looks like...</p>
+        <img class="logo" src="assets/radio.mkv0001-0250.gif" />
     </body>
 </html>
