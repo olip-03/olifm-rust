@@ -1,34 +1,132 @@
 use reqwest;
+use serde::{Deserialize, Serialize};
 
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+pub async fn get_json(url: &str) -> Result<String, reqwest::Error> {
+    let result = reqwest::get(url).await?.text().await?;
+    Ok(result)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// GitHub API response structures
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GithubUser {
+    pub login: String,
+    pub id: u64,
+    pub name: Option<String>,
+    pub email: Option<String>,
+    pub bio: Option<String>,
+    pub public_repos: u32,
+    pub followers: u32,
+    pub following: u32,
+    pub created_at: String,
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GithubRepo {
+    pub id: u64,
+    pub name: String,
+    pub full_name: String,
+    pub description: Option<String>,
+    pub html_url: String,
+    pub clone_url: String,
+    pub language: Option<String>,
+    pub stargazers_count: u32,
+    pub forks_count: u32,
+    pub created_at: String,
+    pub updated_at: String,
+}
+
+#[derive(Debug)]
+pub enum GithubError {
+    RequestError(reqwest::Error),
+    ParseError(serde_json::Error),
+    NotFound,
+    RateLimited,
+}
+
+impl From<reqwest::Error> for GithubError {
+    fn from(error: reqwest::Error) -> Self {
+        GithubError::RequestError(error)
     }
 }
 
-pub fn pub_func() {
-    println!("Inside public function");
+impl From<serde_json::Error> for GithubError {
+    fn from(error: serde_json::Error) -> Self {
+        GithubError::ParseError(error)
+    }
 }
 
-fn pvt_func() {
-    println!("Calling pvt function");
+// GitHub Service struct
+pub struct GithubService {
+    base_url: String,
+    client: reqwest::Client,
 }
 
-pub fn indirect_fn_access() {
-    print!("Accessing indirect functions ");
-    pvt_func();
+impl GithubService {
+    pub fn new() -> Self {
+        let client = reqwest::Client::builder()
+            .user_agent("olifm-rust/1.0")
+            .build()
+            .unwrap();
+
+        GithubService {
+            base_url: "https://api.github.com".to_string(),
+            client,
+        }
+    }
+
+    pub fn get_url(&self) -> &str {
+        &self.base_url
+    }
+
+    pub async fn get_user(&self, username: &str) -> Result<GithubUser, GithubError> {
+        let url = format!("{}/users/{}", self.base_url, username);
+        let response = self.client.get(&url).send().await?;
+
+        if response.status() == 404 {
+            return Err(GithubError::NotFound);
+        }
+
+        let user: GithubUser = response.json().await?;
+        Ok(user)
+    }
+
+    pub async fn get_repo(&self, owner: &str, repo: &str) -> Result<GithubRepo, GithubError> {
+        let url = format!("{}/repos/{}/{}", self.base_url, owner, repo);
+        let response = self.client.get(&url).send().await?;
+
+        if response.status() == 404 {
+            return Err(GithubError::NotFound);
+        }
+
+        let repo: GithubRepo = response.json().await?;
+        Ok(repo)
+    }
+
+    pub async fn get_user_repos(&self, username: &str) -> Result<Vec<GithubRepo>, GithubError> {
+        let url = format!("{}/users/{}/repos", self.base_url, username);
+        let response = self.client.get(&url).send().await?;
+
+        if response.status() == 404 {
+            return Err(GithubError::NotFound);
+        }
+
+        let repos: Vec<GithubRepo> = response.json().await?;
+        Ok(repos)
+    }
+
+    // Raw JSON methods for backwards compatibility
+    pub async fn get_user_json(&self, username: &str) -> Result<String, reqwest::Error> {
+        let url = format!("{}/users/{}", self.base_url, username);
+        get_json(&url).await
+    }
+
+    pub async fn get_repo_json(&self, owner: &str, repo: &str) -> Result<String, reqwest::Error> {
+        let url = format!("{}/repos/{}/{}", self.base_url, owner, repo);
+        get_json(&url).await
+    }
 }
 
-pub async fn getJson(url: &str) -> Result<String, reqwest::Error> {
-    let result = reqwest::get(url).await.unwrap().text().await;
-    return result;
+// Factory function to create a GitHub service instance
+pub fn github_service() -> GithubService {
+    GithubService::new()
 }
