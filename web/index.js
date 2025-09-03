@@ -1,9 +1,11 @@
+import init from "./pkg/web.js";
+
 async function run() {
   console.log("Starting WASM initialization...");
   try {
-    // Initialize the wasm module (no-modules target)
-    console.log("Calling wasm_bindgen()...");
-    await wasm_bindgen("./pkg/web_bg.wasm");
+    // Initialize the wasm module
+    console.log("Calling init()...");
+    wasm = await init();
     console.log("WASM module initialized successfully!");
     // The wasm module's start function will run automatically after init
   } catch (error) {
