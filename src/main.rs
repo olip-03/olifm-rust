@@ -1,52 +1,49 @@
-use shared::github_service;
+use std::io::Error;
 
-#[tokio::main]
-async fn main() {
-    // let args: Vec<String> = std::env::args().collect();
+use futures::future;
+use github::{github_service, models::RepoContent};
+use smol::io;
 
-    // Example 1: Using the original getJson function
-    // println!("=== Original getJson example ===");
-    // match getJson("https://jsonplaceholder.typicode.com/posts/1").await {
-    //     Ok(result) => println!("{}", result),
-    //     Err(e) => println!("Error: {}", e),
-    // }
+fn main() -> io::Result<()> {
+    // test user service
+    smol::block_on(async {
+        let service = github_service();
 
-    // Example 2: Using the GitHub service
-    // println!("\n=== GitHub Service example ===");
-    let github = github_service();
+        let result = service
+            .get_repo_content("olip-03", "oli-fm-content", "")
+            .await;
 
-    println!("GitHub API URL: {}", github.get_url());
-
-    // Get user information
-    match github.get_user("octocat").await {
-        Ok(user) => {
-            println!(
-                "User: {} ({})",
-                user.login,
-                user.name.unwrap_or("No name".to_string())
-            );
-            println!(
-                "Public repos: {}, Followers: {}",
-                user.public_repos, user.followers
-            );
+        match result {
+            Ok(contents) => {
+                for item in contents {
+                    println!("Found document: {}", item.name)
+                }
+            }
+            Err(e) => {
+                // handle GithubError (InvalidInput, NotFound, RateLimited, etc.)
+                eprintln!("Failed to fetch repo content: {:?}", e);
+            }
         }
-        Err(e) => println!("Error getting user: {:?}", e),
-    }
 
-    // Get repository information
-    match github.get_repo("octocat", "Hello-World").await {
-        Ok(repo) => {
-            println!("Repo: {}", repo.full_name);
-            println!(
-                "Description: {}",
-                repo.description.unwrap_or("No description".to_string())
-            );
-            println!(
-                "Stars: {}, Language: {}",
-                repo.stargazers_count,
-                repo.language.unwrap_or("Unknown".to_string())
-            );
+        // Concurrent execution test
+        let mut usernames = vec!["olip-03", "torvalds", "graydon", "octocat"];
+        usernames.push("mary-ext");
+
+        let user_futures: Vec<_> = usernames
+            .iter()
+            .map(|username| service.get_user(username))
+            .collect();
+        let results = future::join_all(user_futures).await;
+        for (i, result) in results.into_iter().enumerate() {
+            match result {
+                Ok(user) => {
+                    let name = user.name.as_deref().unwrap_or("No name");
+                    println!("User {}: {} ({})", i + 1, name, user.login);
+                }
+                Err(e) => eprintln!("Failed to get user {}: {:?}", i + 1, e),
+            }
         }
-        Err(e) => println!("Error getting repo: {:?}", e),
-    }
+
+        Ok(())
+    })
 }
