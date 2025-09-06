@@ -4,7 +4,7 @@ use std::fmt;
 #[derive(Debug)]
 pub enum GithubError {
     /// HTTP request failed
-    RequestError(surf::Error),
+    RequestError(gloo_net::Error),
     /// JSON parsing failed
     ParseError(serde_json::Error),
     /// Resource not found (404)
@@ -13,6 +13,8 @@ pub enum GithubError {
     RateLimited,
     /// Invalid input provided
     InvalidInput(String),
+    /// Network error
+    NetworkError(String),
 }
 
 impl fmt::Display for GithubError {
@@ -23,14 +25,15 @@ impl fmt::Display for GithubError {
             GithubError::NotFound => write!(f, "Resource not found"),
             GithubError::RateLimited => write!(f, "Rate limit exceeded"),
             GithubError::InvalidInput(msg) => write!(f, "Invalid input: {}", msg),
+            GithubError::NetworkError(msg) => write!(f, "Network error: {}", msg),
         }
     }
 }
 
 impl std::error::Error for GithubError {}
 
-impl From<surf::Error> for GithubError {
-    fn from(error: surf::Error) -> Self {
+impl From<gloo_net::Error> for GithubError {
+    fn from(error: gloo_net::Error) -> Self {
         GithubError::RequestError(error)
     }
 }

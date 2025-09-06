@@ -7,13 +7,12 @@ mod router;
 
 use router::Router;
 
-// Import the `console.log` function from the `console` module
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
 }
-// A macro to provide `println!(..)`-style syntax for `console.log` logging
+
 #[macro_export]
 macro_rules! console_log {
     ( $( $t:tt )* ) => {
@@ -28,24 +27,6 @@ pub fn main() {
 
     init_shell(document);
     Router::init();
-}
-
-fn get_app_container() -> Element {
-    let window = window().expect("no global `window` exists");
-    let document = window.document().expect("should have a document on window");
-
-    if let Some(app) = document.get_element_by_id("app") {
-        app
-    } else {
-        let body = document.body().expect("document should have a body");
-        let app = document
-            .create_element("div")
-            .expect("Failed to create app div");
-        app.set_id("app");
-        body.append_child(&app)
-            .expect("Failed to append app container");
-        app
-    }
 }
 
 fn init_shell(document: web_sys::Document) {
@@ -86,9 +67,6 @@ fn init_nav(document: &web_sys::Document, nav: &web_sys::Element) {
     let home = create_button(&document, "Home", "");
     nav.append_child(&home);
 
-    let blog = create_button(&document, "Blog", "blog");
-    nav.append_child(&blog);
-
     let pictures = create_button(&document, "Pictures", "pictures");
     nav.append_child(&pictures);
 
@@ -108,9 +86,4 @@ fn create_button(document: &web_sys::Document, name: &str, page: &str) -> Elemen
     btn.set_attribute("href", href_value.as_str())
         .expect("Failed to set href attribute");
     btn
-}
-
-pub fn clear_content() {
-    let app = get_app_container();
-    app.set_inner_html("");
 }
