@@ -1,5 +1,5 @@
 use crate::page::Page as PageType;
-use crate::pages::{about_page, home_page, not_found_page};
+use crate::pages::{page_about, page_home, page_not_found, page_pictures, page_sounds};
 use wasm_bindgen::JsCast;
 use wasm_bindgen::prelude::*;
 use web_sys::{Event, window};
@@ -31,9 +31,11 @@ impl Router {
     fn handle_route(path: &str) {
         log(&format!("Routing to: {}", path));
         let page = match path {
-            "/" | "/home" => home_page::home_page(),
-            "/about" => about_page::about_page(),
-            _ => not_found_page::not_found_page(),
+            "/" | "/home" => page_home::page_home(),
+            "/about" => page_about::page_about(),
+            "/pictures" => page_pictures::page_pictures(),
+            "/sounds" => page_sounds::page_sounds(),
+            _ => page_not_found::page_not_found(),
         };
 
         Self::render(page);

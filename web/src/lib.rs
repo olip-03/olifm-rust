@@ -20,6 +20,25 @@ macro_rules! console_log {
     }
 }
 
+#[macro_export]
+macro_rules! get_app {
+    () => {{
+        let window = web_sys::window().expect("no global `window` exists");
+        let document = window.document().expect("should have a document on window");
+        document
+            .get_element_by_id("app")
+            .expect("document should have element with id 'app'")
+    }};
+}
+
+#[macro_export]
+macro_rules! clear_app {
+    () => {{
+        let app = get_app!();
+        app.set_inner_html("");
+    }};
+}
+
 #[wasm_bindgen(start)]
 pub fn main() {
     let window = window().expect("no global `window` exists");

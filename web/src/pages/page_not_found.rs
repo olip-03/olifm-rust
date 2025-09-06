@@ -1,7 +1,8 @@
+use crate::get_app;
 use crate::page::Page as PageType;
 use std::collections::HashMap;
 
-pub fn not_found_page() -> PageType {
+pub fn page_not_found() -> PageType {
     let mut params = HashMap::new();
     params.insert("title".to_string(), "404 - Page Not Found".to_string());
     params.insert(

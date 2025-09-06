@@ -1,7 +1,7 @@
+use crate::get_app;
 use crate::page::Page as PageType;
 use std::collections::HashMap;
-
-pub fn about_page() -> PageType {
+pub fn page_about() -> PageType {
     let mut params = HashMap::new();
     params.insert("title".to_string(), "About OliFM".to_string());
     params.insert(

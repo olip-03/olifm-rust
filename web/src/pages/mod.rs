@@ -1,3 +1,5 @@
-pub mod about_page;
-pub mod home_page;
-pub mod not_found_page;
+pub mod page_about;
+pub mod page_home;
+pub mod page_not_found;
+pub mod page_pictures;
+pub mod page_sounds;
