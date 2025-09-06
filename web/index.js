@@ -5,7 +5,7 @@ async function run() {
   try {
     // Initialize the wasm module
     console.log("Calling init()...");
-    wasm = await init();
+    await init();
     console.log("WASM module initialized successfully!");
     // The wasm module's start function will run automatically after init
   } catch (error) {

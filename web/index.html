@@ -4,7 +4,6 @@
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
         <script type="module" src="index.js"></script>
         <style>
-            /* Center the image on the page */
             html,
             body {
                 height: 100%;
@@ -12,18 +11,28 @@
             }
             body {
                 display: flex;
-                align-items: center; /* vertical centering */
+                align-items: center;
                 flex-direction: column;
-                background-color: #f0f0f0; /* optional pleasant background */
+                background-color: #f0f0f0;
             }
             .logo {
                 width: 320px;
                 height: 320px;
-                object-fit: cover; /* ensure the image scales nicely if needed */
+                object-fit: cover;
+            }
+            .nav {
+                display: flex;
+                max-width: 600px;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 1rem;
+                background-color: #fff;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
         </style>
     </head>
     <body>
-        <img class="logo" src="assets/radio.mkv0001-0250.gif" />
+        <h1 id="loading">loading...</h1>
     </body>
 </html>

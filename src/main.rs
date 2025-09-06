@@ -1,5 +1,3 @@
-use std::io::Error;
-
 use futures::future;
 use github::{github_service, models::RepoContent};
 use smol::io;

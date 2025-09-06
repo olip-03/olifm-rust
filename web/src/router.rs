@@ -1,6 +1,14 @@
+use crate::page::Page as PageType;
+use crate::pages::{about_page, home_page, not_found_page};
 use wasm_bindgen::JsCast;
 use wasm_bindgen::prelude::*;
 use web_sys::{Event, window};
+
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
+}
 
 // Simple function-based router that avoids static mut issues
 pub struct Router;
@@ -9,7 +17,6 @@ impl Router {
     pub fn init() {
         // Set up event listener for hash changes
         Self::setup_hash_listener();
-
         // Handle initial route
         Self::handle_current_route();
     }
@@ -22,11 +29,26 @@ impl Router {
     }
 
     fn handle_route(path: &str) {
-        match path {
-            "/" | "/home" => crate::render_home(),
-            "/documents" => crate::render_documents(),
-            "/about" => crate::render_about(),
-            _ => crate::render_404(),
+        log(&format!("Routing to: {}", path));
+        let page = match path {
+            "/" | "/home" => home_page::home_page(),
+            "/about" => about_page::about_page(),
+            _ => not_found_page::not_found_page(),
+        };
+
+        Self::render(page);
+    }
+
+    fn render(page: PageType) {
+        let window = window().expect("Cannot render: no global 'window' exists!");
+        let document = window
+            .document()
+            .expect("Cannot render: window should have a document!");
+        if let Some(app) = document.get_element_by_id("app") {
+            let content = page.to_html();
+            app.set_inner_html(&content);
+        } else {
+            log(&format!("Could not render content for page {}", page.name));
         }
     }
 
