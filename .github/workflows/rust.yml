@@ -1,0 +1,47 @@
+name: Rust
+
+permissions:
+  contents: write
+  pages: write
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash
+
+      - name: Build wasm using wasm-pack
+        working-directory: web
+        run: wasm-pack build --release --target web
+
+      - name: Remove .gitignore from pkg (so it's deployed)
+        run: rm -f web/pkg/.gitignore
+
+      - name: Add .nojekyll to disable Jekyll processing
+        run: touch web/.nojekyll
+
+      - name: Commit pkg to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          BRANCH: gh-pages
+          FOLDER: web
