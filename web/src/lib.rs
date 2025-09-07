@@ -21,6 +21,15 @@ macro_rules! console_log {
 }
 
 #[macro_export]
+macro_rules! get_document {
+    () => {{
+        let window = web_sys::window().expect("no global `window` exists");
+        let document = window.document().expect("should have a document on window");
+        document
+    }};
+}
+
+#[macro_export]
 macro_rules! get_app {
     () => {{
         let window = web_sys::window().expect("no global `window` exists");

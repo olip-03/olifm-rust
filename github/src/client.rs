@@ -2,8 +2,8 @@ use crate::error::GithubError;
 use crate::models::{GithubRepo, GithubUser, RepoContent};
 use gloo_net::http::Request;
 use serde_json;
+use std::thread::spawn;
 use wasm_bindgen_futures::spawn_local;
-
 /// User-Agent string for API requests
 const USER_AGENT: &str = "olifm-rust/1.0";
 
@@ -138,6 +138,16 @@ impl GithubClient {
         Ok(content)
     }
 
+    pub async fn get_document(&self, path: &str) -> Result<String, GithubError> {
+        if path.trim().is_empty() {
+            return Err(GithubError::InvalidInput(
+                "Path cannot be empty".to_string(),
+            ));
+        }
+        let doc_string = self.get_json(path).await?;
+        Ok(doc_string)
+    }
+
     /// Fetch raw JSON for a user (for backwards compatibility)
     pub async fn get_user_json(&self, username: &str) -> Result<String, GithubError> {
         if username.trim().is_empty() {
@@ -236,6 +246,18 @@ impl GithubClientCallback {
 
         spawn_local(async move {
             let result = inner.get_repo_content(&owner, &repo, &path).await;
+            callback(result);
+        });
+    }
+
+    pub fn get_document<F>(&self, path: &str, callback: F)
+    where
+        F: FnOnce(Result<String, GithubError>) + 'static,
+    {
+        let inner = self.inner.clone();
+        let doc_path = path.to_string();
+        spawn_local(async move {
+            let result = inner.get_document(&doc_path).await;
             callback(result);
         });
     }
