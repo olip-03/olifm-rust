@@ -7,7 +7,7 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-github = { path = "../github" }
+content_service = { path = "../content_service" }
 getrandom = { version = "0.2", features = ["js"] }
 wasm-bindgen = "0.2.100"
 web-sys = { version = "0.3.77", features = [

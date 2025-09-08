@@ -21,6 +21,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2fd1289c04a9ea8cb22300a459a72a385d7c73d3259e2ed7dcb2af674838cfa9"
 
 [[package]]
+name = "content_service"
+version = "0.1.0"
+dependencies = [
+ "gloo-net",
+ "gloo-utils",
+ "serde",
+ "serde_json",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -126,18 +138,6 @@ dependencies = [
  "libc",
  "wasi",
  "wasm-bindgen",
-]
-
-[[package]]
-name = "github"
-version = "0.1.0"
-dependencies = [
- "gloo-net",
- "gloo-utils",
- "serde",
- "serde_json",
- "wasm-bindgen",
- "wasm-bindgen-futures",
 ]
 
 [[package]]
@@ -443,9 +443,9 @@ dependencies = [
 name = "web"
 version = "0.1.0"
 dependencies = [
+ "content_service",
  "futures",
  "getrandom",
- "github",
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-sys",

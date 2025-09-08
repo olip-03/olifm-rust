@@ -1,0 +1,162 @@
+[
+  { "path": "./web/content", "type": "directory", "size": 65 },
+  { "path": "./web/content/readme.md", "type": "file", "size": 171 },
+  { "path": "./web/content/pictures", "type": "directory", "size": 108 },
+  { "path": "./web/content/pictures/readme.md", "type": "file", "size": 110 },
+  {
+    "path": "./web/content/pictures/21-5-25 Bluff Knoll.md",
+    "type": "file",
+    "size": 76
+  },
+  {
+    "path": "./web/content/pictures/19-12-12 Muriwai Gannet Colony.md",
+    "type": "file",
+    "size": 90
+  },
+  {
+    "path": "./web/content/pictures/assets",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "./web/content/pictures/assets/DSCN1661.jpg",
+    "type": "file",
+    "size": 5164764
+  },
+  {
+    "path": "./web/content/pictures/assets/DSCN1675.jpg",
+    "type": "file",
+    "size": 4778632
+  },
+  {
+    "path": "./web/content/pictures/assets/DSCN1670.jpg",
+    "type": "file",
+    "size": 4858698
+  },
+  {
+    "path": "./web/content/pictures/assets/DSCN1509.jpg",
+    "type": "file",
+    "size": 3315946
+  },
+  {
+    "path": "./web/content/pictures/assets/DSCN1529.jpg",
+    "type": "file",
+    "size": 3373076
+  },
+  {
+    "path": "./web/content/pictures/assets/DSCN1546.jpg",
+    "type": "file",
+    "size": 3435352
+  },
+  {
+    "path": "./web/content/pictures/assets/DSCN1608.jpg",
+    "type": "file",
+    "size": 7269491
+  },
+  {
+    "path": "./web/content/pictures/assets/Img.jpg",
+    "type": "file",
+    "size": 919623
+  },
+  {
+    "path": "./web/content/pictures/assets/Img10.jpg",
+    "type": "file",
+    "size": 400459
+  },
+  {
+    "path": "./web/content/pictures/assets/Img11.jpg",
+    "type": "file",
+    "size": 190889
+  },
+  {
+    "path": "./web/content/pictures/assets/Img12.jpg",
+    "type": "file",
+    "size": 237739
+  },
+  {
+    "path": "./web/content/pictures/assets/Img14.jpg",
+    "type": "file",
+    "size": 420293
+  },
+  {
+    "path": "./web/content/pictures/assets/Img15.jpg",
+    "type": "file",
+    "size": 292709
+  },
+  {
+    "path": "./web/content/pictures/assets/Img16.jpg",
+    "type": "file",
+    "size": 291665
+  },
+  {
+    "path": "./web/content/pictures/assets/Img18.jpg",
+    "type": "file",
+    "size": 412440
+  },
+  {
+    "path": "./web/content/pictures/assets/Img19.jpg",
+    "type": "file",
+    "size": 307820
+  },
+  {
+    "path": "./web/content/pictures/assets/Img2.jpg",
+    "type": "file",
+    "size": 163886
+  },
+  {
+    "path": "./web/content/pictures/assets/Img3.jpg",
+    "type": "file",
+    "size": 341646
+  },
+  {
+    "path": "./web/content/pictures/assets/Img4.jpg",
+    "type": "file",
+    "size": 804366
+  },
+  {
+    "path": "./web/content/pictures/assets/Img6.jpg",
+    "type": "file",
+    "size": 286678
+  },
+  {
+    "path": "./web/content/pictures/assets/Img7.jpg",
+    "type": "file",
+    "size": 331744
+  },
+  {
+    "path": "./web/content/pictures/assets/Img9.jpg",
+    "type": "file",
+    "size": 240954
+  },
+  {
+    "path": "./web/content/pictures/assets/PXL_20240623_191141618.jpg",
+    "type": "file",
+    "size": 2760107
+  },
+  {
+    "path": "./web/content/pictures/assets/PXL_20240705_215141089.jpg",
+    "type": "file",
+    "size": 4160743
+  },
+  {
+    "path": "./web/content/pictures/assets/PXL_20240707_173245044.jpg",
+    "type": "file",
+    "size": 5862429
+  },
+  {
+    "path": "./web/content/pictures/assets/PXL_20240709_182744715.jpg",
+    "type": "file",
+    "size": 2502493
+  },
+  { "path": "./web/content/sounds", "type": "directory", "size": 23 },
+  { "path": "./web/content/sounds/readme.md", "type": "file", "size": 185 },
+  { "path": "./web/content/blog", "type": "directory", "size": 93 },
+  { "path": "./web/content/blog/readme.md", "type": "file", "size": 199 },
+  { "path": "./web/content/blog/25-9-10 First.md", "type": "file", "size": 88 },
+  {
+    "path": "./web/content/blog/25-9-7 Second.md",
+    "type": "file",
+    "size": 741
+  },
+  { "path": "./web/content/blog/25-7-1 Last.md", "type": "file", "size": 41 }
+]

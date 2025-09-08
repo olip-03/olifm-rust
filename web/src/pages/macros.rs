@@ -1,7 +1,7 @@
 use crate::console_log;
 use crate::log;
+use content_service::{GithubClient, RepoContent, error::GithubError};
 use futures::join;
-use github::{GithubClient, RepoContent, error::GithubError};
 use wasm_bindgen_futures::spawn_local;
 
 pub enum Style {

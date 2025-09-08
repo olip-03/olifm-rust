@@ -36,6 +36,9 @@ jobs:
       - name: Remove .gitignore from pkg (so it's deployed)
         run: rm -f web/pkg/.gitignore
 
+      - name: Remove src
+        run: rm -rf web/src
+
       - name: Add .nojekyll to disable Jekyll processing
         run: touch web/.nojekyll
 

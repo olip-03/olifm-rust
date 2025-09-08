@@ -8,7 +8,7 @@ pub mod models;
 pub mod utils;
 
 // Re-export commonly used types for convenience
-pub use client::{GithubClient, GithubClientCallback};
-pub use error::GithubError;
-pub use models::{GithubRepo, GithubUser, RepoContent};
+pub use client::{ContentServiceClient, ContentServiceClientCallback};
+pub use error::ContentServiceError;
+pub use models::ContentPath;
 pub use utils::console_log;
