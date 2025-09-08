@@ -1,5 +1,4 @@
 use std::fmt;
-
 /// Content service specific errors
 #[derive(Debug)]
 pub enum ContentServiceError {

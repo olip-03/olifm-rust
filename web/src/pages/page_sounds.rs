@@ -1,11 +1,12 @@
 use crate::get_app;
+use crate::get_base_url;
 use crate::log;
 use crate::page::Page as PageType;
 use crate::pages::macros::Style;
+use crate::pages::macros::load_readme;
 use crate::render_site;
-use github::GithubClientCallback;
+use content_service::DirectoryItem;
 use std::collections::HashMap;
-
 pub fn page_sounds() -> PageType {
     let mut params = HashMap::new();
     params.insert("title".to_string(), "Welcome to oli.fm".to_string());
@@ -20,7 +21,7 @@ pub fn page_sounds() -> PageType {
     };
 
     let on_after_render = || {
-        render_site!("olip-03", "oli-fm-content", "sounds", Style::Music);
+        render_site!("sounds", Style::Music);
     };
 
     PageType::new("Home", params, render).with_on_after_render(Some(Box::new(on_after_render)))

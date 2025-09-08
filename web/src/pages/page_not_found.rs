@@ -1,7 +1,9 @@
 use crate::get_app;
+use crate::get_base_url;
 use crate::page::Page as PageType;
+use crate::pages::macros::load_readme;
+use content_service::DirectoryItem;
 use std::collections::HashMap;
-
 pub fn page_not_found() -> PageType {
     let mut params = HashMap::new();
     params.insert("title".to_string(), "404 - Page Not Found".to_string());

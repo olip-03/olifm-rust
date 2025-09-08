@@ -16,66 +16,11 @@ pub struct ContentServiceClient {
     pub images: HashMap<String, ImageEntry>,
 }
 
-fn dir_item_to_directory_entry(it: &DirectoryItem) -> Option<DirectoryEntry> {
-    match it {
-        DirectoryItem::Directory {
-            path,
-            entry_type,
-            size,
-            name,
-        } => Some(DirectoryEntry {
-            path: path.clone(),
-            entry_type: entry_type.clone(),
-            size: *size,
-            name: name.clone(),
-        }),
-        _ => None,
-    }
-}
-
-fn dir_item_to_file_entry(it: &DirectoryItem) -> Option<FileEntry> {
-    match it {
-        DirectoryItem::File {
-            path,
-            entry_type,
-            size,
-            name,
-        } => Some(FileEntry {
-            path: path.clone(),
-            entry_type: entry_type.clone(),
-            size: *size,
-            name: name.clone(),
-        }),
-        _ => None,
-    }
-}
-
-fn dir_item_to_image_entry(it: &DirectoryItem) -> Option<ImageEntry> {
-    match it {
-        DirectoryItem::Image {
-            path,
-            entry_type,
-            size,
-            blurhash,
-            aspect_ratio,
-            name,
-        } => Some(ImageEntry {
-            path: path.clone(),
-            entry_type: entry_type.clone(),
-            size: *size,
-            blurhash: blurhash.clone(),
-            aspect_ratio: aspect_ratio.clone(),
-            name: name.clone(),
-        }),
-        _ => None,
-    }
-}
-
 impl ContentServiceClient {
-    // Directory structure URL (root-level static JSON)
-    const DIRECTORY_STRUCTURE_URL: &'static str = "https://site.com/directory_structure.json";
+    pub fn directory_structure_url(&self) -> String {
+        format!("{}/directory_structure.json", self.base_url)
+    }
 
-    // Create a new content service client with the default API URL
     pub fn new() -> Self {
         Self {
             base_url: "https://oli.fm".to_string(),
@@ -85,7 +30,6 @@ impl ContentServiceClient {
         }
     }
 
-    /// Create a new content service client with a custom base URL
     pub fn with_base_url(base_url: impl Into<String>) -> Self {
         Self {
             base_url: base_url.into(),
@@ -102,7 +46,8 @@ impl ContentServiceClient {
 
     /// Internal: fetch and parse the directory structure from the static JSON
     async fn fetch_directory_structure(&self) -> Result<Vec<DirectoryItem>, ContentServiceError> {
-        let resp = Request::get(Self::DIRECTORY_STRUCTURE_URL)
+        let url = self.directory_structure_url();
+        let resp = Request::get(&url)
             .header("User-Agent", USER_AGENT)
             .send()
             .await?;
@@ -123,47 +68,44 @@ impl ContentServiceClient {
         Ok(items)
     }
 
-    /// Pull the directory structure and populate public maps.
-    /// Optional filter: only include items whose type matches the filter (e.g., "image").
     pub async fn get_content(
         &mut self,
-        _owner: &str,
-        _repo: &str,
-        _path: &str,
+        path: String,
         filter: Option<String>,
-    ) -> Result<(), ContentServiceError> {
-        // Fetch structure
+    ) -> Result<Vec<DirectoryItem>, ContentServiceError> {
+        // Fetch directory structure JSON
         let items = self.fetch_directory_structure().await?;
 
-        // Clear existing maps
-        self.directories.clear();
-        self.files.clear();
-        self.images.clear();
-
-        // Apply filter and populate maps
-        for item in items {
-            if let Some(ref f) = filter {
-                // Only include if the item's type matches the filter
-                let item_type = match &item {
-                    DirectoryItem::Directory { entry_type, .. } => entry_type.as_str(),
-                    DirectoryItem::File { entry_type, .. } => entry_type.as_str(),
-                    DirectoryItem::Image { entry_type, .. } => entry_type.as_str(),
+        // Filter items
+        let filtered_items: Vec<DirectoryItem> = items
+            .into_iter()
+            .filter(|item| {
+                // Check path prefix
+                let item_path = match item {
+                    DirectoryItem::Directory { path, .. } => path,
+                    DirectoryItem::File { path, .. } => path,
+                    DirectoryItem::Image { path, .. } => path,
                 };
-                if item_type != f.as_str() {
-                    continue;
+                if !item_path.starts_with(&path) {
+                    return false;
                 }
-            }
 
-            if let Some(d) = dir_item_to_directory_entry(&item) {
-                self.directories.insert(d.name.clone(), d);
-            } else if let Some(fil) = dir_item_to_file_entry(&item) {
-                self.files.insert(fil.name.clone(), fil);
-            } else if let Some(img) = dir_item_to_image_entry(&item) {
-                self.images.insert(img.name.clone(), img);
-            }
-        }
+                // Check optional type filter
+                if let Some(ref f) = filter {
+                    let item_type = match item {
+                        DirectoryItem::Directory { entry_type, .. } => entry_type.as_str(),
+                        DirectoryItem::File { entry_type, .. } => entry_type.as_str(),
+                        DirectoryItem::Image { entry_type, .. } => entry_type.as_str(),
+                    };
+                    if item_type != f.as_str() {
+                        return false;
+                    }
+                }
+                true
+            })
+            .collect();
 
-        Ok(())
+        Ok(filtered_items)
     }
 
     pub async fn get_document(&self, path: &str) -> Result<String, ContentServiceError> {
@@ -214,27 +156,15 @@ impl ContentServiceClientCallback {
 
     /// Fetch directory content by owner, repo name, and path with callback
     /// Added parameter: filter to apply on the loaded directory structure
-    pub fn get_content<F>(
-        &self,
-        _owner: &str,
-        _repo: &str,
-        path: &str,
-        filter: Option<String>,
-        callback: F,
-    ) where
-        F: FnOnce(Result<(), ContentServiceError>) + 'static,
+    pub fn get_content<F>(&self, path: String, filter: Option<String>, callback: F)
+    where
+        F: FnOnce(Result<Vec<DirectoryItem>, ContentServiceError>) + 'static,
     {
         let mut inner = self.inner.clone();
-        // Move ownership of the inputs into the async block
-        let owner = _owner.to_string();
-        let repo = _repo.to_string();
-        let path_owned = path.to_string();
-        let filter = filter;
 
-        // Run async load and then invoke callback
         spawn_local(async move {
-            let res = inner.get_content(&owner, &repo, &path_owned, filter).await;
-            callback(res.map(|_| ()));
+            let res = inner.get_content(path, filter).await;
+            callback(res);
         });
     }
 

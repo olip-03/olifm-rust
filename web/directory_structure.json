@@ -1,288 +1,280 @@
 [
   {
-    "path": "./readme.md",
+    "path": "/readme.md",
     "type": "file",
     "size": 171,
     "name": "readme.md"
   },
   {
-    "path": "./pictures",
-    "type": "directory",
-    "size": 108,
-    "name": "pictures"
-  },
-  {
-    "path": "./sounds",
-    "type": "directory",
-    "size": 23,
-    "name": "sounds"
-  },
-  {
-    "path": "./blog",
-    "type": "directory",
-    "size": 93,
-    "name": "blog"
-  },
-  {
-    "path": "./blog/readme.md",
+    "path": "/blog/readme.md",
     "type": "file",
     "size": 199,
     "name": "readme.md"
   },
   {
-    "path": "./blog/25-9-10 First.md",
+    "path": "/blog/25-9-10 First.md",
     "type": "file",
     "size": 88,
     "name": "25-9-10 First.md"
   },
   {
-    "path": "./blog/25-9-7 Second.md",
+    "path": "/blog/25-9-7 Second.md",
     "type": "file",
     "size": 741,
     "name": "25-9-7 Second.md"
   },
   {
-    "path": "./blog/25-7-1 Last.md",
+    "path": "/blog/25-7-1 Last.md",
     "type": "file",
     "size": 41,
     "name": "25-7-1 Last.md"
   },
   {
-    "path": "./sounds/readme.md",
+    "path": "/sounds/readme.md",
     "type": "file",
     "size": 185,
     "name": "readme.md"
   },
   {
-    "path": "./pictures/readme.md",
+    "path": "/pictures/readme.md",
     "type": "file",
     "size": 110,
     "name": "readme.md"
   },
   {
-    "path": "./pictures/21-5-25 Bluff Knoll.md",
+    "path": "/pictures/20-02-01 - Karri Valley Waterfall.md",
     "type": "file",
-    "size": 76,
-    "name": "21-5-25 Bluff Knoll.md"
+    "size": 71,
+    "name": "20-02-01 - Karri Valley Waterfall.md",
+    "images": [
+      {
+        "blurhash": "LA8:z~%00fNHNGNHofj[NGs.%2R+",
+        "aspect_ratio": "1920/1080",
+        "name": "Img4.jpg",
+        "path": "/pictures/assets/Img4.jpg"
+      }
+    ]
   },
   {
-    "path": "./pictures/19-12-12 Muriwai Gannet Colony.md",
+    "path": "/pictures/21-5-25 Bluff Knoll.md",
     "type": "file",
-    "size": 90,
-    "name": "19-12-12 Muriwai Gannet Colony.md"
+    "size": 69,
+    "name": "21-5-25 Bluff Knoll.md",
+    "images": [
+      {
+        "blurhash": "LNG[18xs0NE2?SR*IXog-.oJWCae",
+        "aspect_ratio": "1920/1080",
+        "name": "Img.jpg",
+        "path": "/pictures/assets/Img.jpg"
+      }
+    ]
   },
   {
-    "path": "./pictures/assets",
-    "type": "directory",
-    "size": 4096,
-    "name": "assets"
+    "path": "/pictures/19-12-12 Muriwai Gannet Colony.md",
+    "type": "file",
+    "size": 83,
+    "name": "19-12-12 Muriwai Gannet Colony.md",
+    "images": [
+      {
+        "blurhash": "LCA-;,xZD$NetWkWRjRi?bWBxtxt",
+        "aspect_ratio": "1920/1080",
+        "name": "Img2.jpg",
+        "path": "/pictures/assets/Img2.jpg"
+      }
+    ]
   },
   {
-    "path": "./pictures/assets/DSCN1661.jpg",
-    "type": "image",
+    "path": "/pictures/12-12-13 Nz Beach.md",
+    "type": "file",
+    "size": 103,
+    "name": "12-12-13 Nz Beach.md",
+    "images": [
+      {
+        "blurhash": "LlHyB]o#aej[_4WAa}a|V?aeWCa#",
+        "aspect_ratio": "1920/1080",
+        "name": "Img3.jpg",
+        "path": "/pictures/assets/Img3.jpg"
+      }
+    ]
+  },
+  {
+    "path": "/pictures/assets/DSCN1661.jpg",
+    "type": "file",
     "size": 5164764,
-    "name": "DSCN1661.jpg",
-    "blurhash": "LbFYiL%0-:oI0LRkWEkCRjxaM{of",
-    "aspect_ratio": "4608/3456"
+    "name": "DSCN1661.jpg"
   },
   {
-    "path": "./pictures/assets/DSCN1675.jpg",
-    "type": "image",
+    "path": "/pictures/assets/DSCN1675.jpg",
+    "type": "file",
     "size": 4778632,
-    "name": "DSCN1675.jpg",
-    "blurhash": "LMBzBt%FW8tR~l%KxsRks~f8%MIo",
-    "aspect_ratio": "4608/3456"
+    "name": "DSCN1675.jpg"
   },
   {
-    "path": "./pictures/assets/DSCN1670.jpg",
-    "type": "image",
+    "path": "/pictures/assets/DSCN1670.jpg",
+    "type": "file",
     "size": 4858698,
-    "name": "DSCN1670.jpg",
-    "blurhash": "LXL#2$-;~qIUt8D%9Zxua#x]WBM|",
-    "aspect_ratio": "4608/3456"
+    "name": "DSCN1670.jpg"
   },
   {
-    "path": "./pictures/assets/DSCN1509.jpg",
-    "type": "image",
+    "path": "/pictures/assets/DSCN1509.jpg",
+    "type": "file",
     "size": 3315946,
-    "name": "DSCN1509.jpg",
-    "blurhash": "LiK-a*aK_NSixukCIUoKW=WCRjs:",
-    "aspect_ratio": "4608/3456"
+    "name": "DSCN1509.jpg"
   },
   {
-    "path": "./pictures/assets/DSCN1529.jpg",
-    "type": "image",
+    "path": "/pictures/assets/DSCN1529.jpg",
+    "type": "file",
     "size": 3373076,
-    "name": "DSCN1529.jpg",
-    "blurhash": "LBFP1lE1$_4p^zax%KRj00%LWHoh",
-    "aspect_ratio": "4608/3456"
+    "name": "DSCN1529.jpg"
   },
   {
-    "path": "./pictures/assets/DSCN1546.jpg",
-    "type": "image",
+    "path": "/pictures/assets/DSCN1546.jpg",
+    "type": "file",
     "size": 3435352,
-    "name": "DSCN1546.jpg",
-    "blurhash": "LBDJIsjV9F4oRN-.%JWsDg-nWZt8",
-    "aspect_ratio": "4608/3456"
+    "name": "DSCN1546.jpg"
   },
   {
-    "path": "./pictures/assets/DSCN1608.jpg",
-    "type": "image",
+    "path": "/pictures/assets/DSCN1608.jpg",
+    "type": "file",
     "size": 7269491,
-    "name": "DSCN1608.jpg",
-    "blurhash": "LLF?UNM_~pfNVjE1%NbERDMzxvRj",
-    "aspect_ratio": "4608/3456"
+    "name": "DSCN1608.jpg"
   },
   {
-    "path": "./pictures/assets/Img.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img.jpg",
+    "type": "file",
     "size": 919623,
-    "name": "Img.jpg",
-    "blurhash": "LNG[18xs0NE2?SR*IXog-.oJWCae",
-    "aspect_ratio": "1920/1080"
+    "name": "Img.jpg"
   },
   {
-    "path": "./pictures/assets/Img10.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img10.jpg",
+    "type": "file",
     "size": 400459,
-    "name": "Img10.jpg",
-    "blurhash": "LPGu%f=r~XSK%Mn%IoSORQNFR*kC",
-    "aspect_ratio": "1920/1080"
+    "name": "Img10.jpg"
   },
   {
-    "path": "./pictures/assets/Img11.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img11.jpg",
+    "type": "file",
     "size": 190889,
-    "name": "Img11.jpg",
-    "blurhash": "LCE3C|vJ9ZMxTgITn#S4PXIU$y%M",
-    "aspect_ratio": "1920/1080"
+    "name": "Img11.jpg"
   },
   {
-    "path": "./pictures/assets/Img12.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img12.jpg",
+    "type": "file",
     "size": 237739,
-    "name": "Img12.jpg",
-    "blurhash": "LbDl{1WA00xuj?ofjsWBV@ayxufj",
-    "aspect_ratio": "1920/1080"
+    "name": "Img12.jpg"
   },
   {
-    "path": "./pictures/assets/Img14.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img14.jpg",
+    "type": "file",
     "size": 420293,
-    "name": "Img14.jpg",
-    "blurhash": "LNKHzJ0}AYKN,DXQo_s,IrkVNuxF",
-    "aspect_ratio": "1920/1080"
+    "name": "Img14.jpg"
   },
   {
-    "path": "./pictures/assets/Img15.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img15.jpg",
+    "type": "file",
     "size": 292709,
-    "name": "Img15.jpg",
-    "blurhash": "LNJRw5_4ofozyEMxWBaxM{IUWCR*",
-    "aspect_ratio": "1920/1080"
+    "name": "Img15.jpg"
   },
   {
-    "path": "./pictures/assets/Img16.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img16.jpg",
+    "type": "file",
     "size": 291665,
-    "name": "Img16.jpg",
-    "blurhash": "LEATTI_2-p?a~pxuWY-;R*D*IU%L",
-    "aspect_ratio": "1920/1080"
+    "name": "Img16.jpg"
   },
   {
-    "path": "./pictures/assets/Img18.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img18.jpg",
+    "type": "file",
     "size": 412440,
-    "name": "Img18.jpg",
-    "blurhash": "L9C6u.R48^?I0J?b%ND%tRE1tSt7",
-    "aspect_ratio": "1920/1080"
+    "name": "Img18.jpg"
   },
   {
-    "path": "./pictures/assets/Img19.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img19.jpg",
+    "type": "file",
     "size": 307820,
-    "name": "Img19.jpg",
-    "blurhash": "LEIDa%Ka0wo}IA^l?bn,IV?IOT$+",
-    "aspect_ratio": "1920/1080"
+    "name": "Img19.jpg"
   },
   {
-    "path": "./pictures/assets/Img2.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img2.jpg",
+    "type": "file",
     "size": 163886,
-    "name": "Img2.jpg",
-    "blurhash": "LCA-;,xZD$NetWkWRjRi?bWBxtxt",
-    "aspect_ratio": "1920/1080"
+    "name": "Img2.jpg"
   },
   {
-    "path": "./pictures/assets/Img3.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img3.jpg",
+    "type": "file",
     "size": 341646,
-    "name": "Img3.jpg",
-    "blurhash": "LlHyB]o#aej[_4WAa}a|V?aeWCa#",
-    "aspect_ratio": "1920/1080"
+    "name": "Img3.jpg"
   },
   {
-    "path": "./pictures/assets/Img4.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img4.jpg",
+    "type": "file",
     "size": 804366,
-    "name": "Img4.jpg",
-    "blurhash": "LA8:z~%00fNHNGNHofj[NGs.%2R+",
-    "aspect_ratio": "1920/1080"
+    "name": "Img4.jpg"
   },
   {
-    "path": "./pictures/assets/Img6.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img6.jpg",
+    "type": "file",
     "size": 286678,
-    "name": "Img6.jpg",
-    "blurhash": "LQJZL-9^E4~9?FNcm-XS5WE3xWM}",
-    "aspect_ratio": "1920/1080"
+    "name": "Img6.jpg"
   },
   {
-    "path": "./pictures/assets/Img7.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img7.jpg",
+    "type": "file",
     "size": 331744,
-    "name": "Img7.jpg",
-    "blurhash": "LDGkw8~lEfRi^8R$%3sqS~M|;UWU",
-    "aspect_ratio": "1920/1080"
+    "name": "Img7.jpg"
   },
   {
-    "path": "./pictures/assets/Img9.jpg",
-    "type": "image",
+    "path": "/pictures/assets/Img9.jpg",
+    "type": "file",
     "size": 240954,
-    "name": "Img9.jpg",
-    "blurhash": "LFLXJR^bVrE3n2VX4m_4xu?bX9Io",
-    "aspect_ratio": "1920/1080"
+    "name": "Img9.jpg"
   },
   {
-    "path": "./pictures/assets/PXL_20240623_191141618.jpg",
-    "type": "image",
+    "path": "/pictures/assets/PXL_20240623_191141618.jpg",
+    "type": "file",
     "size": 2760107,
-    "name": "PXL_20240623_191141618.jpg",
-    "blurhash": "L#H2pAR*Rja#_4t6WBofxvayWBfP",
-    "aspect_ratio": "4080/3072"
+    "name": "PXL_20240623_191141618.jpg"
   },
   {
-    "path": "./pictures/assets/PXL_20240705_215141089.jpg",
-    "type": "image",
+    "path": "/pictures/assets/PXL_20240705_215141089.jpg",
+    "type": "file",
     "size": 4160743,
-    "name": "PXL_20240705_215141089.jpg",
-    "blurhash": "LyEDSRj[V@j[yGaxj?j[M{axkDay",
-    "aspect_ratio": "4080/3072"
+    "name": "PXL_20240705_215141089.jpg"
   },
   {
-    "path": "./pictures/assets/PXL_20240707_173245044.jpg",
-    "type": "image",
+    "path": "/pictures/assets/PXL_20240707_173245044.jpg",
+    "type": "file",
     "size": 5862429,
-    "name": "PXL_20240707_173245044.jpg",
-    "blurhash": "LGE{wQN301IVXYxuRNNF_4s:ITaw",
-    "aspect_ratio": "4080/3072"
+    "name": "PXL_20240707_173245044.jpg"
   },
   {
-    "path": "./pictures/assets/PXL_20240709_182744715.jpg",
-    "type": "image",
+    "path": "/pictures/assets/PXL_20240709_182744715.jpg",
+    "type": "file",
     "size": 2502493,
-    "name": "PXL_20240709_182744715.jpg",
-    "blurhash": "LTHBbgbXxsE20eR*Rks:oys:jat7",
-    "aspect_ratio": "3253/2548"
+    "name": "PXL_20240709_182744715.jpg"
+  },
+  {
+    "path": "/.obsidian/core-plugins.json",
+    "type": "file",
+    "size": 697,
+    "name": "core-plugins.json"
+  },
+  {
+    "path": "/.obsidian/app.json",
+    "type": "file",
+    "size": 2,
+    "name": "app.json"
+  },
+  {
+    "path": "/.obsidian/appearance.json",
+    "type": "file",
+    "size": 2,
+    "name": "appearance.json"
+  },
+  {
+    "path": "/.obsidian/workspace.json",
+    "type": "file",
+    "size": 5118,
+    "name": "workspace.json"
   }
 ]
