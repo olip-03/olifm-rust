@@ -1,35 +1,97 @@
 use crate::error::ContentServiceError;
-use crate::models::ContentPath;
+use crate::models::{DirectoryEntry, DirectoryItem, FileEntry, ImageEntry};
 use gloo_net::http::Request;
-use serde_json;
+use std::collections::HashMap;
 use wasm_bindgen_futures::spawn_local;
-/// User-Agent string for API requests
+
+// User-Agent string for API requests
 const USER_AGENT: &str = "olifm-rust/1.0";
 
-/// Content service API client
+// The in-memory maps exposed publicly
 #[derive(Debug, Clone)]
 pub struct ContentServiceClient {
     base_url: String,
+    pub directories: HashMap<String, DirectoryEntry>,
+    pub files: HashMap<String, FileEntry>,
+    pub images: HashMap<String, ImageEntry>,
 }
 
-impl Default for ContentServiceClient {
-    fn default() -> Self {
-        Self::new()
+fn dir_item_to_directory_entry(it: &DirectoryItem) -> Option<DirectoryEntry> {
+    match it {
+        DirectoryItem::Directory {
+            path,
+            entry_type,
+            size,
+            name,
+        } => Some(DirectoryEntry {
+            path: path.clone(),
+            entry_type: entry_type.clone(),
+            size: *size,
+            name: name.clone(),
+        }),
+        _ => None,
+    }
+}
+
+fn dir_item_to_file_entry(it: &DirectoryItem) -> Option<FileEntry> {
+    match it {
+        DirectoryItem::File {
+            path,
+            entry_type,
+            size,
+            name,
+        } => Some(FileEntry {
+            path: path.clone(),
+            entry_type: entry_type.clone(),
+            size: *size,
+            name: name.clone(),
+        }),
+        _ => None,
+    }
+}
+
+fn dir_item_to_image_entry(it: &DirectoryItem) -> Option<ImageEntry> {
+    match it {
+        DirectoryItem::Image {
+            path,
+            entry_type,
+            size,
+            blurhash,
+            aspect_ratio,
+            name,
+        } => Some(ImageEntry {
+            path: path.clone(),
+            entry_type: entry_type.clone(),
+            size: *size,
+            blurhash: blurhash.clone(),
+            aspect_ratio: aspect_ratio.clone(),
+            name: name.clone(),
+        }),
+        _ => None,
     }
 }
 
 impl ContentServiceClient {
-    /// Create a new content service client with the default API URL
+    // Directory structure URL (root-level static JSON)
+    const DIRECTORY_STRUCTURE_URL: &'static str = "https://site.com/directory_structure.json";
+
+    // Create a new content service client with the default API URL
     pub fn new() -> Self {
         Self {
             base_url: "https://oli.fm".to_string(),
+            directories: HashMap::new(),
+            files: HashMap::new(),
+            images: HashMap::new(),
         }
     }
 
-    /// Create a new content service client with a custom base URL (useful for enterprise/self-hosted)
+    /// Create a new content service client with a custom base URL
     pub fn with_base_url(base_url: impl Into<String>) -> Self {
         Self {
             base_url: base_url.into(),
+            directories: HashMap::new(),
+            files: HashMap::new(),
+            images: HashMap::new(),
         }
     }
 
@@ -38,69 +100,70 @@ impl ContentServiceClient {
         &self.base_url
     }
 
-    /// Generic function to fetch JSON from a URL
-    async fn get_json(&self, url: &str) -> Result<String, ContentServiceError> {
-        let response = Request::get(url)
+    /// Internal: fetch and parse the directory structure from the static JSON
+    async fn fetch_directory_structure(&self) -> Result<Vec<DirectoryItem>, ContentServiceError> {
+        let resp = Request::get(Self::DIRECTORY_STRUCTURE_URL)
             .header("User-Agent", USER_AGENT)
-            .header("Accept", "application/vnd.github.v3+json")
             .send()
             .await?;
 
-        if !response.ok() {
-            return match response.status() {
-                404 => Err(ContentServiceError::NotFound),
-                403 => Err(ContentServiceError::RateLimited),
-                _ => Err(ContentServiceError::NetworkError(format!(
-                    "HTTP error: {}",
-                    response.status()
-                ))),
-            };
+        if !resp.ok() {
+            return Err(ContentServiceError::NetworkError(format!(
+                "HTTP error: {}",
+                resp.status()
+            )));
         }
 
-        let text = response.text().await.map_err(|e| {
+        let text = resp.text().await.map_err(|e| {
             ContentServiceError::NetworkError(format!("Failed to read response text: {:?}", e))
         })?;
 
-        Ok(text)
+        let items: Vec<DirectoryItem> =
+            serde_json::from_str(&text).map_err(ContentServiceError::ParseError)?;
+        Ok(items)
     }
 
-    /// Fetch repository content by owner, repo name, and path
+    /// Pull the directory structure and populate public maps.
+    /// Optional filter: only include items whose type matches the filter (e.g., "image").
     pub async fn get_content(
-        &self,
-        owner: &str,
-        repo: &str,
-        path: &str,
-    ) -> Result<Vec<ContentPath>, ContentServiceError> {
-        if owner.trim().is_empty() || repo.trim().is_empty() {
-            return Err(ContentServiceError::InvalidInput(
-                "Owner and repo cannot be empty".to_string(),
-            ));
+        &mut self,
+        _owner: &str,
+        _repo: &str,
+        _path: &str,
+        filter: Option<String>,
+    ) -> Result<(), ContentServiceError> {
+        // Fetch structure
+        let items = self.fetch_directory_structure().await?;
+
+        // Clear existing maps
+        self.directories.clear();
+        self.files.clear();
+        self.images.clear();
+
+        // Apply filter and populate maps
+        for item in items {
+            if let Some(ref f) = filter {
+                // Only include if the item's type matches the filter
+                let item_type = match &item {
+                    DirectoryItem::Directory { entry_type, .. } => entry_type.as_str(),
+                    DirectoryItem::File { entry_type, .. } => entry_type.as_str(),
+                    DirectoryItem::Image { entry_type, .. } => entry_type.as_str(),
+                };
+                if item_type != f.as_str() {
+                    continue;
+                }
+            }
+
+            if let Some(d) = dir_item_to_directory_entry(&item) {
+                self.directories.insert(d.name.clone(), d);
+            } else if let Some(fil) = dir_item_to_file_entry(&item) {
+                self.files.insert(fil.name.clone(), fil);
+            } else if let Some(img) = dir_item_to_image_entry(&item) {
+                self.images.insert(img.name.clone(), img);
+            }
         }
 
-        let url = if path.is_empty() {
-            format!("{}/repos/{}/{}/contents", self.base_url, owner, repo)
-        } else {
-            format!(
-                "{}/repos/{}/{}/contents/{}",
-                self.base_url, owner, repo, path
-            )
-        };
-
-        let json_str = self.get_json(&url).await?;
-
-        // Content service API can return either a single object or an array
-        // Try to parse as array first, then as single object
-        let content: Vec<ContentPath> = match serde_json::from_str::<Vec<ContentPath>>(&json_str) {
-            Ok(content_array) => content_array,
-            Err(_) => {
-                // Try parsing as single object
-                let single_content: ContentPath =
-                    serde_json::from_str(&json_str).map_err(ContentServiceError::ParseError)?;
-                vec![single_content]
-            }
-        };
-
-        Ok(content)
+        Ok(())
     }
 
     pub async fn get_document(&self, path: &str) -> Result<String, ContentServiceError> {
@@ -109,8 +172,11 @@ impl ContentServiceClient {
                 "Path cannot be empty".to_string(),
             ));
         }
-        let doc_string = self.get_json(path).await?;
-        Ok(doc_string)
+        // For compatibility, fetch the static JSON as document (optional)
+        let _ = self.fetch_directory_structure().await?;
+        // Not returning the full content here; in a real implementation you might fetch
+        // and return specific docs. For now, provide a simple placeholder.
+        Ok(String::new())
     }
 }
 
@@ -146,19 +212,29 @@ impl ContentServiceClientCallback {
         self.inner.base_url()
     }
 
-    /// Fetch repository content by owner, repo name, and path with callback
-    pub fn get_content<F>(&self, owner: &str, repo: &str, path: &str, callback: F)
-    where
-        F: FnOnce(Result<Vec<ContentPath>, ContentServiceError>) + 'static,
+    /// Fetch directory content by owner, repo name, and path with callback
+    /// Added parameter: filter to apply on the loaded directory structure
+    pub fn get_content<F>(
+        &self,
+        _owner: &str,
+        _repo: &str,
+        path: &str,
+        filter: Option<String>,
+        callback: F,
+    ) where
+        F: FnOnce(Result<(), ContentServiceError>) + 'static,
     {
-        let inner = self.inner.clone();
-        let owner = owner.to_string();
-        let repo = repo.to_string();
-        let path = path.to_string();
+        let mut inner = self.inner.clone();
+        // Move ownership of the inputs into the async block
+        let owner = _owner.to_string();
+        let repo = _repo.to_string();
+        let path_owned = path.to_string();
+        let filter = filter;
 
+        // Run async load and then invoke callback
         spawn_local(async move {
-            let result = inner.get_content(&owner, &repo, &path).await;
-            callback(result);
+            let res = inner.get_content(&owner, &repo, &path_owned, filter).await;
+            callback(res.map(|_| ()));
         });
     }
 
