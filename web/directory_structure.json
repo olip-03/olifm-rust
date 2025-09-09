@@ -3,49 +3,68 @@
     "path": "/readme.md",
     "type": "file",
     "size": 171,
-    "name": "readme.md"
+    "name": "readme.md",
+    "date": "2025-09-09T12:43:38.367006142+00:00"
   },
   {
     "path": "/blog/readme.md",
     "type": "file",
     "size": 199,
-    "name": "readme.md"
+    "name": "readme.md",
+    "date": "2025-09-09T12:43:38.370470159+00:00"
   },
   {
     "path": "/blog/25-9-10 First.md",
     "type": "file",
     "size": 88,
-    "name": "25-9-10 First.md"
+    "name": "25-9-10 First.md",
+    "date": "2025-11-11",
+    "metadata": {
+      "date": "2025-11-11"
+    }
   },
   {
     "path": "/blog/25-9-7 Second.md",
     "type": "file",
-    "size": 741,
-    "name": "25-9-7 Second.md"
+    "size": 757,
+    "name": "New blog!",
+    "date": "2025-05-30",
+    "metadata": {
+      "date": "2025-05-30",
+      "name": "New blog!",
+      "tags": "Sequence [String(\"site\"), String(\"github\"), String(\"software\")]"
+    }
   },
   {
     "path": "/blog/25-7-1 Last.md",
     "type": "file",
     "size": 41,
-    "name": "25-7-1 Last.md"
+    "name": "25-7-1 Last.md",
+    "date": "1970-01-01",
+    "metadata": {
+      "date": "1970-01-01"
+    }
   },
   {
     "path": "/sounds/readme.md",
     "type": "file",
     "size": 185,
-    "name": "readme.md"
+    "name": "readme.md",
+    "date": "2025-09-09T12:43:38.370375581+00:00"
   },
   {
     "path": "/pictures/readme.md",
     "type": "file",
     "size": 110,
-    "name": "readme.md"
+    "name": "readme.md",
+    "date": "2025-09-09T12:43:38.368472425+00:00"
   },
   {
-    "path": "/pictures/20-02-01 - Karri Valley Waterfall.md",
+    "path": "/pictures/20-02-01 Karri Valley Waterfall.md",
     "type": "file",
-    "size": 71,
-    "name": "20-02-01 - Karri Valley Waterfall.md",
+    "size": 368,
+    "name": "Karri Valley Waterfall",
+    "date": "2020-02-01",
     "images": [
       {
         "blurhash": "LA8:z~%00fNHNGNHofj[NGs.%2R+",
@@ -53,13 +72,19 @@
         "name": "Img4.jpg",
         "path": "/pictures/assets/Img4.jpg"
       }
-    ]
+    ],
+    "metadata": {
+      "name": "Karri Valley Waterfall",
+      "date": "2020-02-01",
+      "medium": "2009 Canon EOS 500D"
+    }
   },
   {
     "path": "/pictures/21-5-25 Bluff Knoll.md",
     "type": "file",
-    "size": 69,
-    "name": "21-5-25 Bluff Knoll.md",
+    "size": 261,
+    "name": "Bluff Knoll",
+    "date": "21-5-25",
     "images": [
       {
         "blurhash": "LNG[18xs0NE2?SR*IXog-.oJWCae",
@@ -67,13 +92,19 @@
         "name": "Img.jpg",
         "path": "/pictures/assets/Img.jpg"
       }
-    ]
+    ],
+    "metadata": {
+      "name": "Bluff Knoll",
+      "medium": "2009 Canon EOS 500D",
+      "date": "21-5-25"
+    }
   },
   {
     "path": "/pictures/19-12-12 Muriwai Gannet Colony.md",
     "type": "file",
-    "size": 83,
-    "name": "19-12-12 Muriwai Gannet Colony.md",
+    "size": 232,
+    "name": "Gannet In flight",
+    "date": "2019-12-01",
     "images": [
       {
         "blurhash": "LCA-;,xZD$NetWkWRjRi?bWBxtxt",
@@ -81,13 +112,19 @@
         "name": "Img2.jpg",
         "path": "/pictures/assets/Img2.jpg"
       }
-    ]
+    ],
+    "metadata": {
+      "name": "Gannet In flight",
+      "date": "2019-12-01",
+      "medium": "2009 Canon EOS 500D"
+    }
   },
   {
-    "path": "/pictures/12-12-13 Nz Beach.md",
+    "path": "/pictures/19-12-13 Nz Beach.md",
     "type": "file",
-    "size": 103,
-    "name": "12-12-13 Nz Beach.md",
+    "size": 218,
+    "name": "NZ Beach",
+    "date": "2019-12-12",
     "images": [
       {
         "blurhash": "LlHyB]o#aej[_4WAa}a|V?aeWCa#",
@@ -95,186 +132,39 @@
         "name": "Img3.jpg",
         "path": "/pictures/assets/Img3.jpg"
       }
-    ]
-  },
-  {
-    "path": "/pictures/assets/DSCN1661.jpg",
-    "type": "file",
-    "size": 5164764,
-    "name": "DSCN1661.jpg"
-  },
-  {
-    "path": "/pictures/assets/DSCN1675.jpg",
-    "type": "file",
-    "size": 4778632,
-    "name": "DSCN1675.jpg"
-  },
-  {
-    "path": "/pictures/assets/DSCN1670.jpg",
-    "type": "file",
-    "size": 4858698,
-    "name": "DSCN1670.jpg"
-  },
-  {
-    "path": "/pictures/assets/DSCN1509.jpg",
-    "type": "file",
-    "size": 3315946,
-    "name": "DSCN1509.jpg"
-  },
-  {
-    "path": "/pictures/assets/DSCN1529.jpg",
-    "type": "file",
-    "size": 3373076,
-    "name": "DSCN1529.jpg"
-  },
-  {
-    "path": "/pictures/assets/DSCN1546.jpg",
-    "type": "file",
-    "size": 3435352,
-    "name": "DSCN1546.jpg"
-  },
-  {
-    "path": "/pictures/assets/DSCN1608.jpg",
-    "type": "file",
-    "size": 7269491,
-    "name": "DSCN1608.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img.jpg",
-    "type": "file",
-    "size": 919623,
-    "name": "Img.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img10.jpg",
-    "type": "file",
-    "size": 400459,
-    "name": "Img10.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img11.jpg",
-    "type": "file",
-    "size": 190889,
-    "name": "Img11.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img12.jpg",
-    "type": "file",
-    "size": 237739,
-    "name": "Img12.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img14.jpg",
-    "type": "file",
-    "size": 420293,
-    "name": "Img14.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img15.jpg",
-    "type": "file",
-    "size": 292709,
-    "name": "Img15.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img16.jpg",
-    "type": "file",
-    "size": 291665,
-    "name": "Img16.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img18.jpg",
-    "type": "file",
-    "size": 412440,
-    "name": "Img18.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img19.jpg",
-    "type": "file",
-    "size": 307820,
-    "name": "Img19.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img2.jpg",
-    "type": "file",
-    "size": 163886,
-    "name": "Img2.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img3.jpg",
-    "type": "file",
-    "size": 341646,
-    "name": "Img3.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img4.jpg",
-    "type": "file",
-    "size": 804366,
-    "name": "Img4.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img6.jpg",
-    "type": "file",
-    "size": 286678,
-    "name": "Img6.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img7.jpg",
-    "type": "file",
-    "size": 331744,
-    "name": "Img7.jpg"
-  },
-  {
-    "path": "/pictures/assets/Img9.jpg",
-    "type": "file",
-    "size": 240954,
-    "name": "Img9.jpg"
-  },
-  {
-    "path": "/pictures/assets/PXL_20240623_191141618.jpg",
-    "type": "file",
-    "size": 2760107,
-    "name": "PXL_20240623_191141618.jpg"
-  },
-  {
-    "path": "/pictures/assets/PXL_20240705_215141089.jpg",
-    "type": "file",
-    "size": 4160743,
-    "name": "PXL_20240705_215141089.jpg"
-  },
-  {
-    "path": "/pictures/assets/PXL_20240707_173245044.jpg",
-    "type": "file",
-    "size": 5862429,
-    "name": "PXL_20240707_173245044.jpg"
-  },
-  {
-    "path": "/pictures/assets/PXL_20240709_182744715.jpg",
-    "type": "file",
-    "size": 2502493,
-    "name": "PXL_20240709_182744715.jpg"
+    ],
+    "metadata": {
+      "medium": "2009 Canon EOS 500D",
+      "date": "2019-12-12",
+      "name": "NZ Beach"
+    }
   },
   {
     "path": "/.obsidian/core-plugins.json",
     "type": "file",
     "size": 697,
-    "name": "core-plugins.json"
+    "name": "core-plugins.json",
+    "date": "2025-09-09T12:43:38.370470159+00:00"
   },
   {
     "path": "/.obsidian/app.json",
     "type": "file",
     "size": 2,
-    "name": "app.json"
+    "name": "app.json",
+    "date": "2025-09-09T12:43:38.370470159+00:00"
   },
   {
     "path": "/.obsidian/appearance.json",
     "type": "file",
     "size": 2,
-    "name": "appearance.json"
+    "name": "appearance.json",
+    "date": "2025-09-09T12:43:38.370470159+00:00"
   },
   {
     "path": "/.obsidian/workspace.json",
     "type": "file",
-    "size": 5118,
-    "name": "workspace.json"
+    "size": 5117,
+    "name": "workspace.json",
+    "date": "2025-09-09T12:43:38.370470159+00:00"
   }
 ]

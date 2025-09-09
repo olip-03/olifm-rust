@@ -1,5 +1,5 @@
 use crate::error::ContentServiceError;
-use crate::models::{DirectoryEntry, DirectoryItem, FileEntry, ImageEntry};
+use crate::models::{Img, JsonEntry};
 use gloo_net::http::Request;
 use std::collections::HashMap;
 use wasm_bindgen_futures::spawn_local;
@@ -7,13 +7,11 @@ use wasm_bindgen_futures::spawn_local;
 // User-Agent string for API requests
 const USER_AGENT: &str = "olifm-rust/1.0";
 
-// The in-memory maps exposed publicly
+// The in-memory map exposed publicly
 #[derive(Debug, Clone)]
 pub struct ContentServiceClient {
     base_url: String,
-    pub directories: HashMap<String, DirectoryEntry>,
-    pub files: HashMap<String, FileEntry>,
-    pub images: HashMap<String, ImageEntry>,
+    pub files: HashMap<String, JsonEntry>,
 }
 
 impl ContentServiceClient {
@@ -24,18 +22,14 @@ impl ContentServiceClient {
     pub fn new() -> Self {
         Self {
             base_url: "https://oli.fm".to_string(),
-            directories: HashMap::new(),
             files: HashMap::new(),
-            images: HashMap::new(),
         }
     }
 
     pub fn with_base_url(base_url: impl Into<String>) -> Self {
         Self {
             base_url: base_url.into(),
-            directories: HashMap::new(),
             files: HashMap::new(),
-            images: HashMap::new(),
         }
     }
 
@@ -45,7 +39,7 @@ impl ContentServiceClient {
     }
 
     /// Internal: fetch and parse the directory structure from the static JSON
-    async fn fetch_directory_structure(&self) -> Result<Vec<DirectoryItem>, ContentServiceError> {
+    async fn fetch_directory_structure(&self) -> Result<Vec<JsonEntry>, ContentServiceError> {
         let url = self.directory_structure_url();
         let resp = Request::get(&url)
             .header("User-Agent", USER_AGENT)
@@ -63,7 +57,7 @@ impl ContentServiceClient {
             ContentServiceError::NetworkError(format!("Failed to read response text: {:?}", e))
         })?;
 
-        let items: Vec<DirectoryItem> =
+        let items: Vec<JsonEntry> =
             serde_json::from_str(&text).map_err(ContentServiceError::ParseError)?;
         Ok(items)
     }
@@ -72,32 +66,27 @@ impl ContentServiceClient {
         &mut self,
         path: String,
         filter: Option<String>,
-    ) -> Result<Vec<DirectoryItem>, ContentServiceError> {
+    ) -> Result<Vec<JsonEntry>, ContentServiceError> {
         // Fetch directory structure JSON
         let items = self.fetch_directory_structure().await?;
 
+        // Update internal files map
+        for item in &items {
+            self.files.insert(item.path.clone(), item.clone());
+        }
+
         // Filter items
-        let filtered_items: Vec<DirectoryItem> = items
+        let mut filtered_items: Vec<JsonEntry> = items
             .into_iter()
             .filter(|item| {
                 // Check path prefix
-                let item_path = match item {
-                    DirectoryItem::Directory { path, .. } => path,
-                    DirectoryItem::File { path, .. } => path,
-                    DirectoryItem::Image { path, .. } => path,
-                };
-                if !item_path.starts_with(&path) {
+                if !item.path.starts_with(&path) {
                     return false;
                 }
 
                 // Check optional type filter
                 if let Some(ref f) = filter {
-                    let item_type = match item {
-                        DirectoryItem::Directory { entry_type, .. } => entry_type.as_str(),
-                        DirectoryItem::File { entry_type, .. } => entry_type.as_str(),
-                        DirectoryItem::Image { entry_type, .. } => entry_type.as_str(),
-                    };
-                    if item_type != f.as_str() {
+                    if item.entry_type != *f {
                         return false;
                     }
                 }
@@ -105,7 +94,56 @@ impl ContentServiceClient {
             })
             .collect();
 
+        // Sort by date (newest first)
+        filtered_items.sort_by(|a, b| {
+            match (&a.date, &b.date) {
+                (Some(date_a), Some(date_b)) => {
+                    // Sort in descending order (newest first)
+                    date_b.cmp(date_a)
+                }
+                (Some(_), None) => {
+                    // Items with dates come before items without dates
+                    std::cmp::Ordering::Less
+                }
+                (None, Some(_)) => {
+                    // Items without dates come after items with dates
+                    std::cmp::Ordering::Greater
+                }
+                (None, None) => {
+                    // If both have no date, sort by name
+                    a.name.cmp(&b.name)
+                }
+            }
+        });
+
         Ok(filtered_items)
+    }
+
+    /// Get all images from files that contain them (sorted by date)
+    pub fn get_all_images(&self) -> Vec<&Img> {
+        let mut files_with_images: Vec<&JsonEntry> = self
+            .files
+            .values()
+            .filter(|file| !file.images.is_empty())
+            .collect();
+
+        // Sort files by date first
+        files_with_images.sort_by(|a, b| match (&a.date, &b.date) {
+            (Some(date_a), Some(date_b)) => date_b.cmp(date_a),
+            (Some(_), None) => std::cmp::Ordering::Less,
+            (None, Some(_)) => std::cmp::Ordering::Greater,
+            (None, None) => a.name.cmp(&b.name),
+        });
+
+        files_with_images
+            .into_iter()
+            .flat_map(|file| &file.images)
+            .collect()
+    }
+
+    /// Get images from a specific file
+    pub fn get_file_images(&self, file_path: &str) -> Option<&Vec<Img>> {
+        self.files.get(file_path).map(|file| &file.images)
     }
 
     pub async fn get_document(&self, path: &str) -> Result<String, ContentServiceError> {
@@ -154,11 +192,11 @@ impl ContentServiceClientCallback {
         self.inner.base_url()
     }
 
-    /// Fetch directory content by owner, repo name, and path with callback
+    /// Fetch directory content by path with callback (results sorted by date)
     /// Added parameter: filter to apply on the loaded directory structure
     pub fn get_content<F>(&self, path: String, filter: Option<String>, callback: F)
     where
-        F: FnOnce(Result<Vec<DirectoryItem>, ContentServiceError>) + 'static,
+        F: FnOnce(Result<Vec<JsonEntry>, ContentServiceError>) + 'static,
     {
         let mut inner = self.inner.clone();
 
@@ -166,6 +204,16 @@ impl ContentServiceClientCallback {
             let res = inner.get_content(path, filter).await;
             callback(res);
         });
+    }
+
+    /// Get all images from the loaded files (sorted by file date)
+    pub fn get_all_images(&self) -> Vec<&Img> {
+        self.inner.get_all_images()
+    }
+
+    /// Get images from a specific file
+    pub fn get_file_images(&self, file_path: &str) -> Option<&Vec<Img>> {
+        self.inner.get_file_images(file_path)
     }
 
     pub fn get_document<F>(&self, path: &str, callback: F)

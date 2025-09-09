@@ -3,10 +3,14 @@ use crate::get_base_url;
 use crate::global_content_service;
 use crate::log;
 use content_service::ContentServiceError;
-use content_service::models::DirectoryItem;
+use content_service::{Img, JsonEntry};
 use futures::join;
 use gloo_net::Error;
+use image::{DynamicImage, ImageBuffer, ImageFormat, Rgb};
+use std::io::Cursor;
+use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::spawn_local;
+
 pub enum Style {
     Card,
     Photo,
@@ -17,13 +21,11 @@ pub enum Style {
 macro_rules! render_site {
     ($path:expr, $style:expr) => {{
         let content_path = $path.to_string();
+        let style = $style;
 
         wasm_bindgen_futures::spawn_local(async move {
             let base = get_base_url!().to_string();
-            let doc_url = format!(
-                "{}/content/{}/readme.md",
-                base, content_path
-            );
+            let doc_url = format!("{}/content/{}/readme.md", base, content_path);
             match crate::pages::macros::get_page_content(&content_path, &doc_url).await {
                 Ok((mut repo_content, document)) => {
                     let mut html = String::new();
@@ -34,26 +36,13 @@ macro_rules! render_site {
                     html.push_str(&format!("<div class=\"{}\">", div_class));
 
                     for item in repo_content {
-                        match item {
-                            DirectoryItem::File { name, entry_type, size, .. } => {}
-                            DirectoryItem::Image { name, entry_type, size, blurhash, aspect_ratio, .. } => {}
-                            DirectoryItem::Directory { name, entry_type, size, path, .. } => {
-                                if path.starts_with("/pictures") {
-                                    // Render with image-card style if path begins with content_path
-                                    html.push_str(&format!(
-                                        "<div class=\"image-card\">
-                                            <strong>{}</strong> - {} ({})
-                                        </div>",
-                                        name, entry_type, size
-                                    ));
-                                } else {
-                                    // Fall back to article-card style (or any other)
-                                    html.push_str(&format!(
-                                        "<div class=\"article-card\"><strong>{}</strong> - {} ({})</div>",
-                                        name, entry_type, size
-                                    ));
-                                }
-                            }
+                        match style {
+                            // TODO: Custom music card implementation
+                            Style::Card | Style::Music => html
+                                .push_str(&crate::pages::page_sounds::page_sounds_card_html(item)),
+                            Style::Photo => html.push_str(
+                                &crate::pages::page_pictures::page_pictures_card_html(item),
+                            ),
                         }
                     }
                     html.push_str("</div>");
@@ -75,9 +64,10 @@ macro_rules! render_site {
 pub async fn get_page_content(
     _path: &str,
     doc_url: &str,
-) -> Result<(Vec<DirectoryItem>, String), ContentServiceError> {
+) -> Result<(Vec<JsonEntry>, String), ContentServiceError> {
     console_log!("Fetching content from {}", _path);
     let client = global_content_service();
+
     let path = format!("/{}", _path);
     let items = client
         .clone()
@@ -106,13 +96,12 @@ pub async fn get_page_content(
     Ok((items, document))
 }
 
-pub fn load_readme(content: &mut Vec<DirectoryItem>, html: &mut String, document: &String) {
+pub fn load_readme(content: &mut Vec<JsonEntry>, html: &mut String, document: &String) {
     html.push_str("<div class=\"page-title\">");
-    if let Some(pos) = content.iter().position(|item| match item {
-        DirectoryItem::File { name, .. }
-        | DirectoryItem::Directory { name, .. }
-        | DirectoryItem::Image { name, .. } => name.to_lowercase() == "readme.md",
-    }) {
+    if let Some(pos) = content
+        .iter()
+        .position(|item| item.name.to_lowercase() == "readme.md")
+    {
         let readme = content.remove(pos);
         html.push_str(&document);
     } else {
@@ -122,7 +111,7 @@ pub fn load_readme(content: &mut Vec<DirectoryItem>, html: &mut String, document
     html.push_str("</div>");
 }
 
-async fn fetch_directory_structure() -> Result<Vec<DirectoryItem>, String> {
+async fn fetch_directory_structure() -> Result<Vec<JsonEntry>, String> {
     let site_url = get_base_url!().to_string();
     let url = format!("{}/directory_structure.json", site_url);
     let resp = gloo_net::http::Request::get(&url)
@@ -140,7 +129,7 @@ async fn fetch_directory_structure() -> Result<Vec<DirectoryItem>, String> {
         .await
         .map_err(|e| format!("Failed to read response text: {:?}", e))?;
 
-    let items: Vec<DirectoryItem> =
+    let items: Vec<JsonEntry> =
         serde_json::from_str(&text).map_err(|e| format!("Parse error: {}", e))?;
     Ok(items)
 }

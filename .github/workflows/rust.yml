@@ -29,9 +29,9 @@ jobs:
       - name: Install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash
 
-      - name: Build wasm using wasm-pack
+      - name: Run build script
         working-directory: web
-        run: wasm-pack build --release --target web
+        run: ./build.sh
 
       - name: Remove .gitignore from pkg (so it's deployed)
         run: rm -f web/pkg/.gitignore

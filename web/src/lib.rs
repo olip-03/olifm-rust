@@ -5,10 +5,10 @@ use std::sync::LazyLock;
 use std::sync::{Arc, Mutex};
 use wasm_bindgen::prelude::*;
 use web_sys::{Element, window};
-// remove: futures::future::Lazy
-// remove: futures::lock::Mutex
 
+pub mod image;
 pub mod page;
+
 mod pages;
 mod router;
 

@@ -1,33 +1,15 @@
 use blurhash::encode;
+use chrono::{DateTime, Utc};
+use content_service::models::{Img, JsonEntry};
 use image::{GenericImageView, ImageReader};
 use regex::Regex;
-use serde::Serialize;
+use serde_yaml::Value as YamlValue;
 use std::collections::HashMap;
 use std::env;
 use std::fs::{self, File};
 use std::io::Write;
 use std::path::{Path, PathBuf};
-
-/// Serializable JSON entry used for output (name included for all types)
-#[derive(Serialize)]
-struct JsonEntry {
-    path: String,
-    #[serde(rename = "type")]
-    entry_type: String,
-    size: u64,
-    name: String,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
-    images: Vec<Img>,
-}
-
-#[derive(Serialize, Clone)]
-struct Img {
-    blurhash: String,
-    aspect_ratio: String,
-    name: String,
-    path: String,
-}
-
+use std::time::SystemTime;
 /// Determine if a path points to an image based on extension
 fn is_image_file(path: &Path) -> bool {
     if let Some(ext) = path.extension().and_then(|e| e.to_str()) {
@@ -67,50 +49,73 @@ fn build_directory_structure(base: &Path) -> std::io::Result<Vec<JsonEntry>> {
                 let path = entry.path();
 
                 if meta.is_dir() {
-                    // Just add directories to processing queue, don't create entries
                     dirs.push(path);
-                } else if meta.is_file() {
-                    // Only process files
+                } else if meta.is_file() && !is_image_file(&path) {
                     let relative_path = path.strip_prefix(base).unwrap_or(&path);
                     let path_str = format!("/{}", relative_path.display());
-                    let name = path
+                    let mut name = path
                         .file_name()
                         .and_then(|s| s.to_str())
                         .unwrap_or("")
                         .to_string();
 
-                    // Find images referenced in this file
                     let file_images = find_images(path.to_str().unwrap_or(""), images.clone());
+
+                    // Extract frontmatter metadata
+                    let metadata = extract_frontmatter(path.to_str().unwrap_or(""));
+                    if metadata.contains_key("name") {
+                        name = metadata["name"].clone();
+                    }
+                    let date = if let Some(metadata_date) = metadata.get("date") {
+                        Some(metadata_date.clone())
+                    } else {
+                        meta.modified()
+                            .ok()
+                            .and_then(|time| system_time_to_iso8601(time))
+                    };
 
                     entries.push(JsonEntry {
                         path: path_str,
                         entry_type: "file".to_string(),
                         size: meta.len(),
                         name,
+                        date,
                         images: file_images,
+                        metadata,
                     });
                 }
             }
         }
-    } else if base.is_file() {
-        // Handle single file case
+    } else if base.is_file() && !is_image_file(base) {
         let meta = fs::metadata(base)?;
         let path_str = format!("./{}", base.display());
-        let name = base
+        let mut name = base
             .file_name()
             .and_then(|s| s.to_str())
             .unwrap_or("")
             .to_string();
 
-        // Find images referenced in this file
         let file_images = find_images(base.to_str().unwrap_or(""), images.clone());
+        let metadata = extract_frontmatter(base.to_str().unwrap_or(""));
+        if metadata.contains_key("name") {
+            name = metadata["name"].clone();
+        }
+        let date = if let Some(metadata_date) = metadata.get("date") {
+            Some(metadata_date.clone())
+        } else {
+            meta.modified()
+                .ok()
+                .and_then(|time| system_time_to_iso8601(time))
+        };
 
         entries.push(JsonEntry {
             path: path_str,
             entry_type: "file".to_string(),
             size: meta.len(),
             name,
+            date,
             images: file_images,
+            metadata,
         });
     }
 
@@ -208,6 +213,85 @@ fn find_images(path: &str, img_store: Vec<Img>) -> Vec<Img> {
     }
 
     images
+}
+
+fn extract_frontmatter(file_path: &str) -> HashMap<String, String> {
+    let mut metadata = HashMap::new();
+
+    let content = match fs::read_to_string(file_path) {
+        Ok(content) => content,
+        Err(e) => {
+            println!("Failed to read file {}: {}", file_path, e);
+            return metadata;
+        }
+    };
+
+    // More flexible regex that handles multiline YAML frontmatter
+    // (?s) enables DOTALL mode so . matches newlines
+    let re = match Regex::new(r"(?s)^---\s*\n(.*?)\n---\s*") {
+        Ok(re) => re,
+        Err(e) => {
+            println!("Regex error: {}", e);
+            return metadata;
+        }
+    };
+
+    if let Some(captures) = re.captures(&content) {
+        if let Some(yaml_content) = captures.get(1) {
+            let yaml_str = yaml_content.as_str().trim();
+
+            println!("Found frontmatter in {}: \n{}", file_path, yaml_str);
+
+            // Parse YAML using serde_yaml
+            match serde_yaml::from_str::<YamlValue>(yaml_str) {
+                Ok(yaml_value) => {
+                    println!("Parsed YAML: {:?}", yaml_value);
+
+                    if let YamlValue::Mapping(map) = yaml_value {
+                        for (key, value) in map {
+                            if let YamlValue::String(k) = key {
+                                let value_str = match value {
+                                    YamlValue::String(s) => s,
+                                    YamlValue::Number(n) => n.to_string(),
+                                    YamlValue::Bool(b) => b.to_string(),
+                                    YamlValue::Null => "null".to_string(),
+                                    _ => format!("{:?}", value),
+                                };
+                                println!("Adding metadata: {} = {}", k, value_str);
+                                metadata.insert(k, value_str);
+                            }
+                        }
+                    }
+                }
+                Err(e) => {
+                    println!("Failed to parse YAML in {}: {}", file_path, e);
+
+                    // Fallback to simple line-by-line parsing
+                    for line in yaml_str.lines() {
+                        let line = line.trim();
+                        if line.is_empty() || line.starts_with('#') {
+                            continue;
+                        }
+
+                        if let Some((key, value)) = line.split_once(':') {
+                            let key = key.trim().to_string();
+                            let value = value
+                                .trim()
+                                .trim_matches('"')
+                                .trim_matches('\'')
+                                .to_string();
+                            println!("Fallback parsing: {} = {}", key, value);
+                            metadata.insert(key, value);
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        println!("No frontmatter found in {}", file_path);
+    }
+
+    metadata
 }
 
 fn print_usage(program_name: &str) {
@@ -318,4 +402,9 @@ fn main() {
             eprintln!("Error building directory structure: {}", e);
         }
     }
+}
+
+fn system_time_to_iso8601(time: SystemTime) -> Option<String> {
+    let datetime: DateTime<Utc> = time.into();
+    Some(datetime.to_rfc3339())
 }
