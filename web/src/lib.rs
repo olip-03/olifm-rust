@@ -4,6 +4,7 @@ use once_cell::sync::Lazy;
 use std::sync::LazyLock;
 use std::sync::{Arc, Mutex};
 use wasm_bindgen::prelude::*;
+use wasm_bindgen_futures::spawn_local;
 use web_sys::{Element, window};
 
 pub mod image;
@@ -27,6 +28,36 @@ pub fn main() {
     });
     init_shell(document);
     Router::init();
+}
+
+#[wasm_bindgen]
+pub fn on_article_card_visible(card_id: &str, card_name: &str, card_path: &str) {
+    let card_id = card_id.to_string();
+    let card_name = card_name.to_string();
+    let card_path = card_path.to_string();
+
+    let url = format!("{}/content{}", get_base_url!(), card_path);
+
+    // Spawn the async task
+    spawn_local(async move {
+        // Obtain the global content service client
+        console_log!(
+            "Article card '{}' with ID '{}' is now visible!",
+            card_name,
+            card_id
+        );
+        let mut client = crate::global_content_service();
+
+        // Attempt to fetch the content for this article/card
+        match client.get_document(&url).await {
+            Ok(document) => {
+                console_log!("{}", document);
+            }
+            Err(e) => {
+                console_log!("Failed to load content for '{}': {:?}", card_name, e);
+            }
+        }
+    });
 }
 
 fn init_shell(document: web_sys::Document) {
@@ -104,6 +135,12 @@ fn create_button(document: &web_sys::Document, name: &str, page: &str) -> Elemen
 extern "C" {
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
+}
+
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_name = setupArticleObserver)]
+    fn setup_article_observer();
 }
 
 #[macro_export]

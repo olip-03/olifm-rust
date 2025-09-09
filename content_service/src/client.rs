@@ -152,11 +152,37 @@ impl ContentServiceClient {
                 "Path cannot be empty".to_string(),
             ));
         }
-        // For compatibility, fetch the static JSON as document (optional)
-        let _ = self.fetch_directory_structure().await?;
-        // Not returning the full content here; in a real implementation you might fetch
-        // and return specific docs. For now, provide a simple placeholder.
-        Ok(String::new())
+
+        // Construct the full URL for the document
+        let document_url = if path.starts_with("http://") || path.starts_with("https://") {
+            // If path is already a full URL, use it as-is
+            path.to_string()
+        } else {
+            // Otherwise, construct URL with base_url
+            let clean_path = path.trim_start_matches('/');
+            format!("{}/{}", self.base_url, clean_path)
+        };
+
+        // Make the HTTP request
+        let resp = Request::get(&document_url)
+            .header("User-Agent", USER_AGENT)
+            .send()
+            .await?;
+
+        if !resp.ok() {
+            return Err(ContentServiceError::NetworkError(format!(
+                "HTTP error {}: Failed to fetch document from {}",
+                resp.status(),
+                document_url
+            )));
+        }
+
+        // Get the response text (markdown content)
+        let markdown_content = resp.text().await.map_err(|e| {
+            ContentServiceError::NetworkError(format!("Failed to read document content: {:?}", e))
+        })?;
+
+        Ok(markdown_content)
     }
 }
 

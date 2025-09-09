@@ -29,7 +29,6 @@ impl Router {
     }
 
     fn handle_route(path: &str) {
-        log(&format!("Routing to: {}", path));
         let page = match path {
             "/" | "/home" => page_home::page_home(),
             "/about" => page_about::page_about(),
@@ -37,7 +36,6 @@ impl Router {
             "/sounds" => page_sounds::page_sounds(),
             _ => page_not_found::page_not_found(),
         };
-
         Self::render(page);
     }
 

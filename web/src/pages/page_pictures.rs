@@ -2,6 +2,8 @@ use crate::get_app;
 use crate::get_base_url;
 use crate::image::get_base64_from_blurhash;
 use crate::log;
+use crate::setup_article_observer;
+
 use crate::page::Page as PageType;
 use crate::pages::macros::Style;
 use crate::pages::macros::load_readme;

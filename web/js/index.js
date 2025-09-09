@@ -1,13 +1,12 @@
-import init from "./pkg/web.js";
+import init, { on_article_card_visible } from "../pkg/web.js";
+import "./article-observer.js";
+
+window.on_article_card_visible = on_article_card_visible; // export to global
 
 async function run() {
   console.log("Starting WASM initialization...");
   try {
-    // Initialize the wasm module
-    console.log("Calling init()...");
     await init();
-    console.log("WASM module initialized successfully!");
-    // The wasm module's start function will run automatically after init
   } catch (error) {
     console.error("Failed to initialize WASM module:", error);
   }

@@ -2,6 +2,7 @@ use crate::console_log;
 use crate::get_base_url;
 use crate::global_content_service;
 use crate::log;
+use crate::setup_article_observer;
 use content_service::ContentServiceError;
 use content_service::{Img, JsonEntry};
 use futures::join;
@@ -38,8 +39,9 @@ macro_rules! render_site {
                     for item in repo_content {
                         match style {
                             // TODO: Custom music card implementation
-                            Style::Card | Style::Music => html
-                                .push_str(&crate::pages::page_sounds::page_sounds_card_html(item)),
+                            Style::Card | Style::Music => {
+                                html.push_str(&crate::pages::page_home::page_home_card_html(item))
+                            }
                             Style::Photo => html.push_str(
                                 &crate::pages::page_pictures::page_pictures_card_html(item),
                             ),
@@ -48,6 +50,7 @@ macro_rules! render_site {
                     html.push_str("</div>");
 
                     get_app!().set_inner_html(&html);
+                    setup_article_observer();
                 }
                 Err(e) => {
                     crate::console_log!("Error fetching directory data: {:?}", e);
@@ -65,7 +68,6 @@ pub async fn get_page_content(
     _path: &str,
     doc_url: &str,
 ) -> Result<(Vec<JsonEntry>, String), ContentServiceError> {
-    console_log!("Fetching content from {}", _path);
     let client = global_content_service();
 
     let path = format!("/{}", _path);

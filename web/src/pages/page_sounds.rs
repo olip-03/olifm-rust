@@ -5,8 +5,10 @@ use crate::page::Page as PageType;
 use crate::pages::macros::Style;
 use crate::pages::macros::load_readme;
 use crate::render_site;
+use crate::setup_article_observer;
 use content_service::JsonEntry;
 use std::collections::HashMap;
+
 pub fn page_sounds() -> PageType {
     let mut params = HashMap::new();
     let render = |p: &PageType| "".to_string();
