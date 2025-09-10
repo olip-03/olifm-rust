@@ -4,14 +4,14 @@
     "type": "file",
     "size": 171,
     "name": "readme.md",
-    "date": "2025-09-09T14:26:56.814702131+00:00"
+    "date": "2025-09-10T03:30:42.373991705+00:00"
   },
   {
     "path": "/blog/readme.md",
     "type": "file",
     "size": 199,
     "name": "readme.md",
-    "date": "2025-09-09T14:26:56.817270353+00:00"
+    "date": "2025-09-10T03:30:42.377297348+00:00"
   },
   {
     "path": "/blog/25-9-10 First.md",
@@ -30,9 +30,9 @@
     "name": "New blog!",
     "date": "2025-05-30",
     "metadata": {
-      "date": "2025-05-30",
       "name": "New blog!",
-      "tags": "Sequence [String(\"site\"), String(\"github\"), String(\"software\")]"
+      "tags": "Sequence [String(\"site\"), String(\"github\"), String(\"software\")]",
+      "date": "2025-05-30"
     }
   },
   {
@@ -50,14 +50,14 @@
     "type": "file",
     "size": 185,
     "name": "readme.md",
-    "date": "2025-09-09T14:26:56.817191057+00:00"
+    "date": "2025-09-10T03:30:42.377146345+00:00"
   },
   {
     "path": "/pictures/readme.md",
     "type": "file",
     "size": 110,
     "name": "readme.md",
-    "date": "2025-09-09T14:26:56.815726813+00:00"
+    "date": "2025-09-10T03:30:42.374928737+00:00"
   },
   {
     "path": "/pictures/20-02-01 Karri Valley Waterfall.md",
@@ -74,9 +74,9 @@
       }
     ],
     "metadata": {
-      "date": "2020-02-01",
       "medium": "2009 Canon EOS 500D",
-      "name": "Karri Valley Waterfall"
+      "name": "Karri Valley Waterfall",
+      "date": "2020-02-01"
     }
   },
   {
@@ -95,8 +95,8 @@
     ],
     "metadata": {
       "date": "21-5-25",
-      "name": "Bluff Knoll",
-      "medium": "2009 Canon EOS 500D"
+      "medium": "2009 Canon EOS 500D",
+      "name": "Bluff Knoll"
     }
   },
   {
@@ -114,8 +114,8 @@
       }
     ],
     "metadata": {
-      "date": "2019-12-01",
       "name": "Gannet In flight",
+      "date": "2019-12-01",
       "medium": "2009 Canon EOS 500D"
     }
   },
@@ -134,9 +134,9 @@
       }
     ],
     "metadata": {
-      "date": "2019-12-12",
+      "medium": "2009 Canon EOS 500D",
       "name": "NZ Beach",
-      "medium": "2009 Canon EOS 500D"
+      "date": "2019-12-12"
     }
   },
   {
@@ -144,27 +144,27 @@
     "type": "file",
     "size": 697,
     "name": "core-plugins.json",
-    "date": "2025-09-09T14:26:56.817270353+00:00"
+    "date": "2025-09-10T03:30:42.377297348+00:00"
   },
   {
     "path": "/.obsidian/app.json",
     "type": "file",
     "size": 2,
     "name": "app.json",
-    "date": "2025-09-09T14:26:56.817270353+00:00"
+    "date": "2025-09-10T03:30:42.377297348+00:00"
   },
   {
     "path": "/.obsidian/appearance.json",
     "type": "file",
     "size": 2,
     "name": "appearance.json",
-    "date": "2025-09-09T14:26:56.817270353+00:00"
+    "date": "2025-09-10T03:30:42.377297348+00:00"
   },
   {
     "path": "/.obsidian/workspace.json",
     "type": "file",
-    "size": 5117,
+    "size": 5111,
     "name": "workspace.json",
-    "date": "2025-09-09T14:26:56.817270353+00:00"
+    "date": "2025-09-10T03:30:42.377297348+00:00"
   }
 ]

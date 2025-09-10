@@ -1,6 +1,6 @@
 use crate::console_log;
+use crate::content::{get_global_content, get_global_document}; // Add this import
 use crate::get_base_url;
-use crate::global_content_service;
 use crate::log;
 use crate::setup_article_observer;
 use content_service::ContentServiceError;
@@ -8,10 +8,10 @@ use content_service::{Img, JsonEntry};
 use futures::join;
 use gloo_net::Error;
 use image::{DynamicImage, ImageBuffer, ImageFormat, Rgb};
+use std::borrow::BorrowMut;
 use std::io::Cursor;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::spawn_local;
-
 pub enum Style {
     Card,
     Photo,
@@ -68,33 +68,9 @@ pub async fn get_page_content(
     _path: &str,
     doc_url: &str,
 ) -> Result<(Vec<JsonEntry>, String), ContentServiceError> {
-    let client = global_content_service();
-
     let path = format!("/{}", _path);
-    let items = client
-        .clone()
-        .get_content(path, Some("file".to_string()))
-        .await?;
-
-    let doc_resp = gloo_net::http::Request::get(doc_url)
-        .header("User-Agent", "olifm-rust/1.0")
-        .send()
-        .await
-        .map_err(|e| {
-            ContentServiceError::NetworkError(format!("Failed to read response text: {}", e))
-        })?;
-
-    if !doc_resp.ok() {
-        return Err(ContentServiceError::NetworkError(format!(
-            "HTTP error: {}",
-            doc_resp.status()
-        )));
-    }
-
-    let document = doc_resp.text().await.map_err(|e| {
-        ContentServiceError::NetworkError(format!("Failed to read response text: {}", e))
-    })?;
-
+    let items = get_global_content(path, Some("file".to_string())).await?;
+    let document = get_global_document(doc_url).await?;
     Ok((items, document))
 }
 
@@ -111,27 +87,4 @@ pub fn load_readme(content: &mut Vec<JsonEntry>, html: &mut String, document: &S
         html.push_str(&document);
     }
     html.push_str("</div>");
-}
-
-async fn fetch_directory_structure() -> Result<Vec<JsonEntry>, String> {
-    let site_url = get_base_url!().to_string();
-    let url = format!("{}/directory_structure.json", site_url);
-    let resp = gloo_net::http::Request::get(&url)
-        .header("User-Agent", "olifm-rust/1.0")
-        .send()
-        .await
-        .map_err(|e| format!("Network error: {}", e))?;
-
-    if !resp.ok() {
-        return Err(format!("HTTP error: {}", resp.status()));
-    }
-
-    let text = resp
-        .text()
-        .await
-        .map_err(|e| format!("Failed to read response text: {:?}", e))?;
-
-    let items: Vec<JsonEntry> =
-        serde_json::from_str(&text).map_err(|e| format!("Parse error: {}", e))?;
-    Ok(items)
 }

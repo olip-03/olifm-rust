@@ -1,31 +1,23 @@
+use crate::content::global_content_service;
+use crate::content::{get_global_content, get_global_document};
 use crate::router::Router;
 use content_service::ContentServiceClient;
-use once_cell::sync::Lazy;
-use std::sync::LazyLock;
-use std::sync::{Arc, Mutex};
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::spawn_local;
-use web_sys::{Element, window};
+use web_sys::{Element, window}; // Add this import
 
+pub mod content;
 pub mod image;
 pub mod page;
 
 mod pages;
 mod router;
 
-static GLOBAL_CONTENT_CLIENT: LazyLock<ContentServiceClient> = std::sync::LazyLock::new(|| {
-    let url = get_base_url!();
-    ContentServiceClient::with_base_url(url)
-});
-
 #[wasm_bindgen(start)]
 pub fn main() {
     let window = window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
 
-    wasm_bindgen_futures::spawn_local(async {
-        init_global_content_client_from_base_url().await;
-    });
     init_shell(document);
     Router::init();
 }
@@ -38,18 +30,14 @@ pub fn on_article_card_visible(card_id: &str, card_name: &str, card_path: &str) 
 
     let url = format!("{}/content{}", get_base_url!(), card_path);
 
-    // Spawn the async task
     spawn_local(async move {
-        // Obtain the global content service client
         console_log!(
             "Article card '{}' with ID '{}' is now visible!",
             card_name,
             card_id
         );
-        let mut client = crate::global_content_service();
 
-        // Attempt to fetch the content for this article/card
-        match client.get_document(&url).await {
+        match { get_global_document(&url).await } {
             Ok(document) => {
                 console_log!("{}", document);
             }
@@ -94,16 +82,6 @@ fn init_shell(document: web_sys::Document) {
 
     body.append_child(&app)
         .expect("Failed to append app container");
-}
-
-pub async fn init_global_content_client_from_base_url() {
-    let base_url = get_base_url!();
-
-    let client = ContentServiceClient::with_base_url(base_url);
-}
-
-pub fn global_content_service() -> ContentServiceClient {
-    GLOBAL_CONTENT_CLIENT.clone()
 }
 
 fn init_nav(document: &web_sys::Document, nav: &web_sys::Element) {

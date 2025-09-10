@@ -1,6 +1,7 @@
 use crate::error::ContentServiceError;
 use crate::models::{Img, JsonEntry};
 use gloo_net::http::Request;
+use gloo_utils::document;
 use std::collections::HashMap;
 use wasm_bindgen_futures::spawn_local;
 
@@ -11,7 +12,8 @@ const USER_AGENT: &str = "olifm-rust/1.0";
 #[derive(Debug, Clone)]
 pub struct ContentServiceClient {
     base_url: String,
-    pub files: HashMap<String, JsonEntry>,
+    pub files: Vec<JsonEntry>,
+    pub documents: HashMap<String, String>,
 }
 
 impl ContentServiceClient {
@@ -22,14 +24,16 @@ impl ContentServiceClient {
     pub fn new() -> Self {
         Self {
             base_url: "https://oli.fm".to_string(),
-            files: HashMap::new(),
+            files: Vec::new(),
+            documents: HashMap::new(),
         }
     }
 
     pub fn with_base_url(base_url: impl Into<String>) -> Self {
         Self {
             base_url: base_url.into(),
-            files: HashMap::new(),
+            files: Vec::new(),
+            documents: HashMap::new(),
         }
     }
 
@@ -39,27 +43,32 @@ impl ContentServiceClient {
     }
 
     /// Internal: fetch and parse the directory structure from the static JSON
-    async fn fetch_directory_structure(&self) -> Result<Vec<JsonEntry>, ContentServiceError> {
-        let url = self.directory_structure_url();
-        let resp = Request::get(&url)
-            .header("User-Agent", USER_AGENT)
-            .send()
-            .await?;
+    async fn fetch_directory_structure(&mut self) -> Result<Vec<JsonEntry>, ContentServiceError> {
+        if self.files.is_empty() {
+            let url = self.directory_structure_url();
+            let resp = Request::get(&url)
+                .header("User-Agent", USER_AGENT)
+                .send()
+                .await?;
 
-        if !resp.ok() {
-            return Err(ContentServiceError::NetworkError(format!(
-                "HTTP error: {}",
-                resp.status()
-            )));
+            if !resp.ok() {
+                return Err(ContentServiceError::NetworkError(format!(
+                    "HTTP error: {}",
+                    resp.status()
+                )));
+            }
+
+            let text = resp.text().await.map_err(|e| {
+                ContentServiceError::NetworkError(format!("Failed to read response text: {:?}", e))
+            })?;
+
+            let items: Vec<JsonEntry> =
+                serde_json::from_str(&text).map_err(ContentServiceError::ParseError)?;
+            self.files = items.clone();
+            Ok(items)
+        } else {
+            Ok(self.files.clone())
         }
-
-        let text = resp.text().await.map_err(|e| {
-            ContentServiceError::NetworkError(format!("Failed to read response text: {:?}", e))
-        })?;
-
-        let items: Vec<JsonEntry> =
-            serde_json::from_str(&text).map_err(ContentServiceError::ParseError)?;
-        Ok(items)
     }
 
     pub async fn get_content(
@@ -69,11 +78,6 @@ impl ContentServiceClient {
     ) -> Result<Vec<JsonEntry>, ContentServiceError> {
         // Fetch directory structure JSON
         let items = self.fetch_directory_structure().await?;
-
-        // Update internal files map
-        for item in &items {
-            self.files.insert(item.path.clone(), item.clone());
-        }
 
         // Filter items
         let mut filtered_items: Vec<JsonEntry> = items
@@ -119,70 +123,46 @@ impl ContentServiceClient {
         Ok(filtered_items)
     }
 
-    /// Get all images from files that contain them (sorted by date)
-    pub fn get_all_images(&self) -> Vec<&Img> {
-        let mut files_with_images: Vec<&JsonEntry> = self
-            .files
-            .values()
-            .filter(|file| !file.images.is_empty())
-            .collect();
-
-        // Sort files by date first
-        files_with_images.sort_by(|a, b| match (&a.date, &b.date) {
-            (Some(date_a), Some(date_b)) => date_b.cmp(date_a),
-            (Some(_), None) => std::cmp::Ordering::Less,
-            (None, Some(_)) => std::cmp::Ordering::Greater,
-            (None, None) => a.name.cmp(&b.name),
-        });
-
-        files_with_images
-            .into_iter()
-            .flat_map(|file| &file.images)
-            .collect()
-    }
-
-    /// Get images from a specific file
-    pub fn get_file_images(&self, file_path: &str) -> Option<&Vec<Img>> {
-        self.files.get(file_path).map(|file| &file.images)
-    }
-
-    pub async fn get_document(&self, path: &str) -> Result<String, ContentServiceError> {
+    pub async fn get_document(&mut self, path: &str) -> Result<String, ContentServiceError> {
         if path.trim().is_empty() {
             return Err(ContentServiceError::InvalidInput(
                 "Path cannot be empty".to_string(),
             ));
         }
 
-        // Construct the full URL for the document
         let document_url = if path.starts_with("http://") || path.starts_with("https://") {
-            // If path is already a full URL, use it as-is
             path.to_string()
         } else {
-            // Otherwise, construct URL with base_url
             let clean_path = path.trim_start_matches('/');
             format!("{}/{}", self.base_url, clean_path)
         };
 
-        // Make the HTTP request
-        let resp = Request::get(&document_url)
-            .header("User-Agent", USER_AGENT)
-            .send()
-            .await?;
+        if self.documents.contains_key(&document_url) {
+            return Ok(self.documents[&document_url].clone());
+        } else {
+            let resp = Request::get(&document_url)
+                .header("User-Agent", USER_AGENT)
+                .send()
+                .await?;
 
-        if !resp.ok() {
-            return Err(ContentServiceError::NetworkError(format!(
-                "HTTP error {}: Failed to fetch document from {}",
-                resp.status(),
-                document_url
-            )));
+            if !resp.ok() {
+                return Err(ContentServiceError::NetworkError(format!(
+                    "HTTP error {}: Failed to fetch document from {}",
+                    resp.status(),
+                    document_url
+                )));
+            }
+
+            let markdown_content = resp.text().await.map_err(|e| {
+                ContentServiceError::NetworkError(format!(
+                    "Failed to read document content: {:?}",
+                    e
+                ))
+            })?;
+            self.documents
+                .insert(document_url.clone(), markdown_content.clone());
+            Ok(markdown_content)
         }
-
-        // Get the response text (markdown content)
-        let markdown_content = resp.text().await.map_err(|e| {
-            ContentServiceError::NetworkError(format!("Failed to read document content: {:?}", e))
-        })?;
-
-        Ok(markdown_content)
     }
 }
 
@@ -232,21 +212,11 @@ impl ContentServiceClientCallback {
         });
     }
 
-    /// Get all images from the loaded files (sorted by file date)
-    pub fn get_all_images(&self) -> Vec<&Img> {
-        self.inner.get_all_images()
-    }
-
-    /// Get images from a specific file
-    pub fn get_file_images(&self, file_path: &str) -> Option<&Vec<Img>> {
-        self.inner.get_file_images(file_path)
-    }
-
     pub fn get_document<F>(&self, path: &str, callback: F)
     where
         F: FnOnce(Result<String, ContentServiceError>) + 'static,
     {
-        let inner = self.inner.clone();
+        let mut inner = self.inner.clone();
         let doc_path = path.to_string();
         spawn_local(async move {
             let result = inner.get_document(&doc_path).await;
