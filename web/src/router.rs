@@ -1,5 +1,7 @@
 use crate::page::Page as PageType;
-use crate::pages::{page_about, page_home, page_not_found, page_pictures, page_sounds};
+use crate::pages::{
+    page_about, page_document, page_home, page_not_found, page_pictures, page_sounds,
+};
 use wasm_bindgen::JsCast;
 use wasm_bindgen::prelude::*;
 use web_sys::{Event, window};
@@ -34,9 +36,26 @@ impl Router {
             "/about" => page_about::page_about(),
             "/pictures" => page_pictures::page_pictures(),
             "/sounds" => page_sounds::page_sounds(),
-            _ => page_not_found::page_not_found(),
+            _ => {
+                // Check for wildcard routes
+                if let Some(wildcard_entry) = Self::extract_wildcard(path, "/blog/") {
+                    page_document::page_document(&path)
+                } else if let Some(wildcard_entry) = Self::extract_wildcard(path, "/pictures/") {
+                    page_document::page_document(&path)
+                } else {
+                    page_not_found::page_not_found()
+                }
+            }
         };
         Self::render(page);
+    }
+
+    fn extract_wildcard(path: &str, prefix: &str) -> Option<String> {
+        if path.starts_with(prefix) && path.len() > prefix.len() {
+            Some(path[prefix.len()..].to_string())
+        } else {
+            None
+        }
     }
 
     fn render(page: PageType) {

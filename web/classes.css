@@ -6,13 +6,18 @@
 .nav {
     display: flex;
     max-width: 600px;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
     padding: 1rem;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.nav a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
 .app {
     max-width: 800px;
     width: 100%;
@@ -21,6 +26,16 @@
     padding: 1rem;
     font-size: 1.2rem;
 }
+
+.base-card {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.base-card:hover {
+    transform: scale(1.02);
+}
+
 .article-card {
     margin: 1rem;
     padding: 1rem;
@@ -28,10 +43,34 @@
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: 8rem;
-    width: 100%;
+    overflow: clip;
+    font-size: 1.2rem;
 }
-.pictures-container {
+.article-image-wrap {
+    position: relative;
     width: 100%;
+    margin: 1rem 0;
+}
+
+.article-image-wrap .article-image-blur,
+.article-image-wrap .article-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.article-image-wrap .article-image-blur {
+    z-index: 0;
+}
+
+.article-image-wrap .article-image {
+    z-index: 1;
+}
+
+.pictures-container {
     container-type: inline-size;
     display: flex;
     flex-wrap: wrap;
@@ -45,7 +84,7 @@
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: calc(33% - 2.5rem);
+    width: calc(50% - 2.6rem);
 }
 .photo-card-blur {
     width: 100%;
@@ -79,13 +118,7 @@
     z-index: 1;
 }
 
-@container (max-width: 768px) {
-    .photo-card {
-        width: calc(50% - 4rem);
-    }
-}
-
-@container (max-width: 480px) {
+@container (max-width: 600px) {
     .photo-card {
         width: 100%;
     }

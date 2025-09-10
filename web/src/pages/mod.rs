@@ -1,5 +1,6 @@
 pub mod macros;
 pub mod page_about;
+pub mod page_document;
 pub mod page_home;
 pub mod page_not_found;
 pub mod page_pictures;

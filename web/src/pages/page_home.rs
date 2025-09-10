@@ -26,10 +26,25 @@ pub fn page_home_card_html(item: JsonEntry) -> String {
     let card_id = format!("card-{}", item.name.replace(" ", "-").to_lowercase());
     let mut html = String::new();
     html.push_str(&format!(
-        "<div class=\"article-card\" data-card-id=\"{}\" data-card-name=\"{}\" data-card-path=\"{}\">
+        "<div class=\"base-card article-card\"
+              data-card-id=\"{}\"
+              data-card-name=\"{}\"
+              data-card-path=\"{}\"
+              onclick=\"on_article_card_click('{}', '{}')\">
             <strong>{}</strong> - {} ({})
+            <div id=\"content{}\">
+                Just a test for now. See how things look
+            </div>
         </div>",
-        card_id, item.name, item.path, item.name, item.entry_type, item.size
+        card_id,
+        item.name,
+        item.path,
+        item.name.replace("'", "\\'"), // Escape single quotes for JS
+        item.path.replace("'", "\\'"), // Escape single quotes for JS
+        item.name,
+        item.entry_type,
+        item.size,
+        item.path
     ));
     html
 }

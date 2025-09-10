@@ -4,60 +4,38 @@
     "type": "file",
     "size": 171,
     "name": "readme.md",
-    "date": "2025-09-10T03:30:42.373991705+00:00"
+    "date": "2025-09-10T08:28:48.180857875+00:00"
+  },
+  {
+    "path": "/blog/25-9-10 Testing.md",
+    "type": "file",
+    "size": 201,
+    "name": "New blog!",
+    "date": "2025-09-10T08:28:48.184242332+00:00",
+    "metadata": {
+      "name": "New blog!"
+    }
   },
   {
     "path": "/blog/readme.md",
     "type": "file",
     "size": 199,
     "name": "readme.md",
-    "date": "2025-09-10T03:30:42.377297348+00:00"
-  },
-  {
-    "path": "/blog/25-9-10 First.md",
-    "type": "file",
-    "size": 88,
-    "name": "25-9-10 First.md",
-    "date": "2025-11-11",
-    "metadata": {
-      "date": "2025-11-11"
-    }
-  },
-  {
-    "path": "/blog/25-9-7 Second.md",
-    "type": "file",
-    "size": 757,
-    "name": "New blog!",
-    "date": "2025-05-30",
-    "metadata": {
-      "name": "New blog!",
-      "tags": "Sequence [String(\"site\"), String(\"github\"), String(\"software\")]",
-      "date": "2025-05-30"
-    }
-  },
-  {
-    "path": "/blog/25-7-1 Last.md",
-    "type": "file",
-    "size": 41,
-    "name": "25-7-1 Last.md",
-    "date": "1970-01-01",
-    "metadata": {
-      "date": "1970-01-01"
-    }
+    "date": "2025-09-10T08:28:48.184242332+00:00"
   },
   {
     "path": "/sounds/readme.md",
     "type": "file",
     "size": 185,
     "name": "readme.md",
-    "date": "2025-09-10T03:30:42.377146345+00:00"
+    "date": "2025-09-10T08:28:48.184124051+00:00"
   },
   {
     "path": "/pictures/readme.md",
     "type": "file",
     "size": 110,
     "name": "readme.md",
-    "date": "2025-09-10T03:30:42.374928737+00:00"
+    "date": "2025-09-10T08:28:48.182250117+00:00"
   },
   {
     "path": "/pictures/20-02-01 Karri Valley Waterfall.md",
@@ -70,12 +48,12 @@
         "blurhash": "LA8:z~%00fNHNGNHofj[NGs.%2R+",
         "aspect_ratio": "1920/1080",
         "name": "Img4.jpg",
-        "path": "/pictures/assets/Img4.jpg"
+        "path": "/assets/Img4.jpg"
       }
     ],
     "metadata": {
-      "medium": "2009 Canon EOS 500D",
       "name": "Karri Valley Waterfall",
+      "medium": "2009 Canon EOS 500D",
       "date": "2020-02-01"
     }
   },
@@ -90,13 +68,13 @@
         "blurhash": "LNG[18xs0NE2?SR*IXog-.oJWCae",
         "aspect_ratio": "1920/1080",
         "name": "Img.jpg",
-        "path": "/pictures/assets/Img.jpg"
+        "path": "/assets/Img.jpg"
       }
     ],
     "metadata": {
+      "name": "Bluff Knoll",
       "date": "21-5-25",
-      "medium": "2009 Canon EOS 500D",
-      "name": "Bluff Knoll"
+      "medium": "2009 Canon EOS 500D"
     }
   },
   {
@@ -110,13 +88,13 @@
         "blurhash": "LCA-;,xZD$NetWkWRjRi?bWBxtxt",
         "aspect_ratio": "1920/1080",
         "name": "Img2.jpg",
-        "path": "/pictures/assets/Img2.jpg"
+        "path": "/assets/Img2.jpg"
       }
     ],
     "metadata": {
-      "name": "Gannet In flight",
       "date": "2019-12-01",
-      "medium": "2009 Canon EOS 500D"
+      "medium": "2009 Canon EOS 500D",
+      "name": "Gannet In flight"
     }
   },
   {
@@ -130,13 +108,13 @@
         "blurhash": "LlHyB]o#aej[_4WAa}a|V?aeWCa#",
         "aspect_ratio": "1920/1080",
         "name": "Img3.jpg",
-        "path": "/pictures/assets/Img3.jpg"
+        "path": "/assets/Img3.jpg"
       }
     ],
     "metadata": {
       "medium": "2009 Canon EOS 500D",
-      "name": "NZ Beach",
-      "date": "2019-12-12"
+      "date": "2019-12-12",
+      "name": "NZ Beach"
     }
   },
   {
@@ -144,27 +122,27 @@
     "type": "file",
     "size": 697,
     "name": "core-plugins.json",
-    "date": "2025-09-10T03:30:42.377297348+00:00"
+    "date": "2025-09-10T08:28:48.184242332+00:00"
   },
   {
     "path": "/.obsidian/app.json",
     "type": "file",
-    "size": 2,
+    "size": 27,
     "name": "app.json",
-    "date": "2025-09-10T03:30:42.377297348+00:00"
+    "date": "2025-09-10T08:28:48.184242332+00:00"
   },
   {
     "path": "/.obsidian/appearance.json",
     "type": "file",
     "size": 2,
     "name": "appearance.json",
-    "date": "2025-09-10T03:30:42.377297348+00:00"
+    "date": "2025-09-10T08:28:48.184242332+00:00"
   },
   {
     "path": "/.obsidian/workspace.json",
     "type": "file",
-    "size": 5111,
+    "size": 5224,
     "name": "workspace.json",
-    "date": "2025-09-10T03:30:42.377297348+00:00"
+    "date": "2025-09-10T08:28:48.184242332+00:00"
   }
 ]

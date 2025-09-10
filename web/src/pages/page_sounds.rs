@@ -23,7 +23,7 @@ pub fn page_sounds() -> PageType {
 pub fn page_sounds_card_html(item: JsonEntry) -> String {
     let mut html = String::new();
     html.push_str(&format!(
-        "<div class=\"article-card\">
+        "<div class=\"base-card article-card\">
             <strong>{}</strong> - {} ({})
         </div>",
         item.name, item.entry_type, item.size

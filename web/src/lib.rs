@@ -1,10 +1,11 @@
 use crate::content::global_content_service;
-use crate::content::{get_global_content, get_global_document};
+use crate::content::{get_global_content, get_global_document, strip_frontmatter};
 use crate::router::Router;
 use content_service::ContentServiceClient;
+use pulldown_cmark::{Parser, html};
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::spawn_local;
-use web_sys::{Element, window}; // Add this import
+use web_sys::{Element, window};
 
 pub mod content;
 pub mod image;
@@ -31,21 +32,30 @@ pub fn on_article_card_visible(card_id: &str, card_name: &str, card_path: &str) 
     let url = format!("{}/content{}", get_base_url!(), card_path);
 
     spawn_local(async move {
-        console_log!(
-            "Article card '{}' with ID '{}' is now visible!",
-            card_name,
-            card_id
-        );
-
         match { get_global_document(&url).await } {
-            Ok(document) => {
-                console_log!("{}", document);
+            Ok(markdown_content) => {
+                let fixed_content = strip_frontmatter(&markdown_content);
+
+                let parser = Parser::new(&fixed_content);
+                let mut html_output = String::new();
+                html::push_html(&mut html_output, parser);
+
+                let id = format!("content{}", &card_path);
+                let element = get_document!()
+                    .get_element_by_id(&id)
+                    .expect("element should exist");
+                element.set_inner_html(&html_output);
             }
             Err(e) => {
                 console_log!("Failed to load content for '{}': {:?}", card_name, e);
             }
         }
     });
+}
+
+#[wasm_bindgen]
+pub fn on_article_card_click(card_name: &str, card_path: &str) {
+    Router::navigate_to(&card_path);
 }
 
 fn init_shell(document: web_sys::Document) {
@@ -113,10 +123,7 @@ fn create_button(document: &web_sys::Document, name: &str, page: &str) -> Elemen
 extern "C" {
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
-}
 
-#[wasm_bindgen]
-extern "C" {
     #[wasm_bindgen(js_name = setupArticleObserver)]
     fn setup_article_observer();
 }

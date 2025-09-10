@@ -42,15 +42,16 @@ pub fn page_pictures_card_html(item: JsonEntry) -> String {
         img_url, item.name
     );
 
+    // Add click handler attributes to make the card clickable
     html.push_str(&format!(
-        "<div class=\"photo-card\">
+        "<div class=\"base-card photo-card\" onclick=\"on_article_card_click('{}', '{}')\" style=\"cursor: pointer;\">
             <div class=\"photo-card-img-wrap\" style=\"{}\">
                 {}
                 {}
             </div>
             <strong>{}</strong>
         </div>",
-        wrapper_style, img_blur, img_main, item.name
+        item.name, item.path, wrapper_style, img_blur, img_main, item.name
     ));
     html
 }
