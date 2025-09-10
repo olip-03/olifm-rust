@@ -1,7 +1,13 @@
 target/
 **/target/
 target*
+
+.obsidian/
+**/.obsidian/
+.obsidian*
+
 */web/pkg
 */web/target
 */github/target
-*/.zed
+
+/.zed

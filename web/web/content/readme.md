@@ -1,1 +1,0 @@
-Welcome to my website. If you're reading this you're either on the About page, or you're looking at the [contents repo itself ](https://github.com/olip-03/oli-fm-content).
