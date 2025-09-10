@@ -1,0 +1,148 @@
+[
+  {
+    "path": "/readme.md",
+    "type": "file",
+    "size": 171,
+    "name": "readme.md",
+    "date": "2025-09-10T08:28:48.180857875+00:00"
+  },
+  {
+    "path": "/blog/25-9-10 Testing.md",
+    "type": "file",
+    "size": 201,
+    "name": "New blog!",
+    "date": "2025-09-10T08:28:48.184242332+00:00",
+    "metadata": {
+      "name": "New blog!"
+    }
+  },
+  {
+    "path": "/blog/readme.md",
+    "type": "file",
+    "size": 199,
+    "name": "readme.md",
+    "date": "2025-09-10T08:28:48.184242332+00:00"
+  },
+  {
+    "path": "/sounds/readme.md",
+    "type": "file",
+    "size": 185,
+    "name": "readme.md",
+    "date": "2025-09-10T08:28:48.184124051+00:00"
+  },
+  {
+    "path": "/pictures/readme.md",
+    "type": "file",
+    "size": 110,
+    "name": "readme.md",
+    "date": "2025-09-10T08:28:48.182250117+00:00"
+  },
+  {
+    "path": "/pictures/20-02-01 Karri Valley Waterfall.md",
+    "type": "file",
+    "size": 368,
+    "name": "Karri Valley Waterfall",
+    "date": "2020-02-01",
+    "images": [
+      {
+        "blurhash": "LA8:z~%00fNHNGNHofj[NGs.%2R+",
+        "aspect_ratio": "1920/1080",
+        "name": "Img4.jpg",
+        "path": "/assets/Img4.jpg"
+      }
+    ],
+    "metadata": {
+      "name": "Karri Valley Waterfall",
+      "medium": "2009 Canon EOS 500D",
+      "date": "2020-02-01"
+    }
+  },
+  {
+    "path": "/pictures/21-5-25 Bluff Knoll.md",
+    "type": "file",
+    "size": 261,
+    "name": "Bluff Knoll",
+    "date": "21-5-25",
+    "images": [
+      {
+        "blurhash": "LNG[18xs0NE2?SR*IXog-.oJWCae",
+        "aspect_ratio": "1920/1080",
+        "name": "Img.jpg",
+        "path": "/assets/Img.jpg"
+      }
+    ],
+    "metadata": {
+      "name": "Bluff Knoll",
+      "date": "21-5-25",
+      "medium": "2009 Canon EOS 500D"
+    }
+  },
+  {
+    "path": "/pictures/19-12-12 Muriwai Gannet Colony.md",
+    "type": "file",
+    "size": 232,
+    "name": "Gannet In flight",
+    "date": "2019-12-01",
+    "images": [
+      {
+        "blurhash": "LCA-;,xZD$NetWkWRjRi?bWBxtxt",
+        "aspect_ratio": "1920/1080",
+        "name": "Img2.jpg",
+        "path": "/assets/Img2.jpg"
+      }
+    ],
+    "metadata": {
+      "date": "2019-12-01",
+      "medium": "2009 Canon EOS 500D",
+      "name": "Gannet In flight"
+    }
+  },
+  {
+    "path": "/pictures/19-12-13 Nz Beach.md",
+    "type": "file",
+    "size": 218,
+    "name": "NZ Beach",
+    "date": "2019-12-12",
+    "images": [
+      {
+        "blurhash": "LlHyB]o#aej[_4WAa}a|V?aeWCa#",
+        "aspect_ratio": "1920/1080",
+        "name": "Img3.jpg",
+        "path": "/assets/Img3.jpg"
+      }
+    ],
+    "metadata": {
+      "medium": "2009 Canon EOS 500D",
+      "date": "2019-12-12",
+      "name": "NZ Beach"
+    }
+  },
+  {
+    "path": "/.obsidian/core-plugins.json",
+    "type": "file",
+    "size": 697,
+    "name": "core-plugins.json",
+    "date": "2025-09-10T08:28:48.184242332+00:00"
+  },
+  {
+    "path": "/.obsidian/app.json",
+    "type": "file",
+    "size": 27,
+    "name": "app.json",
+    "date": "2025-09-10T08:28:48.184242332+00:00"
+  },
+  {
+    "path": "/.obsidian/appearance.json",
+    "type": "file",
+    "size": 2,
+    "name": "appearance.json",
+    "date": "2025-09-10T08:28:48.184242332+00:00"
+  },
+  {
+    "path": "/.obsidian/workspace.json",
+    "type": "file",
+    "size": 5224,
+    "name": "workspace.json",
+    "date": "2025-09-10T08:28:48.184242332+00:00"
+  }
+]

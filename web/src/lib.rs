@@ -1,39 +1,177 @@
+use crate::content::global_content_service;
+use crate::content::{get_global_content, get_global_document, strip_frontmatter};
+use crate::router::Router;
+use content_service::ContentServiceClient;
+use pulldown_cmark::{Parser, html};
 use wasm_bindgen::prelude::*;
+use wasm_bindgen_futures::spawn_local;
+use web_sys::{Element, window};
 
-// Import the `console.log` function from the `console` module
+pub mod content;
+pub mod image;
+pub mod page;
+
+mod pages;
+mod router;
+
+#[wasm_bindgen(start)]
+pub fn main() {
+    let window = window().expect("no global `window` exists");
+    let document = window.document().expect("should have a document on window");
+
+    init_shell(document);
+    Router::init();
+}
+
+#[wasm_bindgen]
+pub fn on_article_card_visible(card_id: &str, card_name: &str, card_path: &str) {
+    let card_id = card_id.to_string();
+    let card_name = card_name.to_string();
+    let card_path = card_path.to_string();
+
+    let url = format!("{}/content{}", get_base_url!(), card_path);
+
+    spawn_local(async move {
+        match { get_global_document(&url).await } {
+            Ok(markdown_content) => {
+                let fixed_content = strip_frontmatter(&markdown_content);
+
+                let parser = Parser::new(&fixed_content);
+                let mut html_output = String::new();
+                html::push_html(&mut html_output, parser);
+
+                let id = format!("content{}", &card_path);
+                let element = get_document!()
+                    .get_element_by_id(&id)
+                    .expect("element should exist");
+                element.set_inner_html(&html_output);
+            }
+            Err(e) => {
+                console_log!("Failed to load content for '{}': {:?}", card_name, e);
+            }
+        }
+    });
+}
+
+#[wasm_bindgen]
+pub fn on_article_card_click(card_name: &str, card_path: &str) {
+    Router::navigate_to(&card_path);
+}
+
+fn init_shell(document: web_sys::Document) {
+    let body = document.body().expect("document should have a body");
+
+    // remove loading
+    if let Some(element) = document.get_element_by_id("loading") {
+        body.remove_child(&element)
+            .expect("Failed to remove element");
+    }
+
+    // append image
+    let img = document
+        .create_element("img")
+        .expect("Failed to create img element");
+    img.set_attribute("src", "assets/radio.mkv0001-0250.gif");
+    img.set_attribute("class", "logo");
+    body.append_child(&img);
+
+    // append nav
+    let nav = document
+        .create_element("div")
+        .expect("Failed to create nav div");
+    nav.set_attribute("class", "nav");
+    init_nav(&document, &nav);
+    body.append_child(&nav);
+
+    // create app container
+    let app = document
+        .create_element("div")
+        .expect("Failed to create app div");
+    app.set_id("app");
+    app.set_attribute("class", "app");
+
+    body.append_child(&app)
+        .expect("Failed to append app container");
+}
+
+fn init_nav(document: &web_sys::Document, nav: &web_sys::Element) {
+    let home = create_button(&document, "Home", "");
+    nav.append_child(&home);
+
+    let pictures = create_button(&document, "Pictures", "pictures");
+    nav.append_child(&pictures);
+
+    let sounds = create_button(&document, "Sounds", "sounds");
+    nav.append_child(&sounds);
+
+    let about = create_button(&document, "About", "about");
+    nav.append_child(&about);
+}
+
+fn create_button(document: &web_sys::Document, name: &str, page: &str) -> Element {
+    let btn = document
+        .create_element("a")
+        .expect("Failed to create img element");
+    btn.set_inner_html(name);
+    let href_value = format!("#/{}", page.to_string());
+    btn.set_attribute("href", href_value.as_str())
+        .expect("Failed to set href attribute");
+    btn
+}
+
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
+
+    #[wasm_bindgen(js_name = setupArticleObserver)]
+    fn setup_article_observer();
 }
 
-// A macro to provide `println!(..)`-style syntax for `console.log` logging
+#[macro_export]
 macro_rules! console_log {
     ( $( $t:tt )* ) => {
         log(&format!( $( $t )* ))
     }
 }
 
-// Called when the WASM module is instantiated
-#[wasm_bindgen(start)]
-pub fn main() {
-    console_log!("WASM module loaded successfully!");
+#[macro_export]
+macro_rules! get_document {
+    () => {{
+        let window = web_sys::window().expect("no global `window` exists");
+        let document = window.document().expect("should have a document on window");
+        document
+    }};
+}
 
-    let window = web_sys::window().expect("no global `window` exists");
-    let document = window.document().expect("should have a document on window");
-    let body = document.body().expect("document should have a body");
+#[macro_export]
+macro_rules! get_app {
+    () => {{
+        let window = web_sys::window().expect("no global `window` exists");
+        let document = window.document().expect("should have a document on window");
+        document
+            .get_element_by_id("app")
+            .expect("document should have element with id 'app'")
+    }};
+}
 
-    // Create a simple greeting paragraph
-    let greeting = document
-        .create_element("p")
-        .expect("Failed to create element");
-    greeting.set_text_content(Some("Under Construction! Check back soon :)"));
-    greeting
-        .set_attribute("style", "color: red; font-size: 20px; margin: 10px;")
-        .expect("Failed to set style");
+#[macro_export]
+macro_rules! clear_app {
+    () => {{
+        let app = get_app!();
+        app.set_inner_html("");
+    }};
+}
 
-    body.append_child(&greeting)
-        .expect("Failed to append child");
-
-    console_log!("DOM element added successfully!");
+#[macro_export]
+macro_rules! get_base_url {
+    () => {{
+        let window = web_sys::window().expect("no global `window` exists");
+        let location = window.location();
+        // origin is the base URL of the site, e.g. "https://example.com"
+        location
+            .origin()
+            .expect("Couldn't get site base url")
+            .to_string()
+    }};
 }

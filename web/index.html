@@ -2,28 +2,28 @@
 <html>
     <head>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
-        <script type="module" src="index.js"></script>
+        <script src="js/article-observer.js"></script>
+        <script type="module" src="js/index.js"></script>
+        <script type="module" src="pkg/web.js"></script>
+        <link rel="stylesheet" href="./classes.css" />
         <style>
-            /* Center the image on the page */
             html,
             body {
                 height: 100%;
+                width: 100%;
                 margin: 0;
-            }
-            body {
+                font-size: 1.2rem;
                 display: flex;
-                align-items: center; /* vertical centering */
+                align-items: center;
                 flex-direction: column;
-                background-color: #f0f0f0; /* optional pleasant background */
+                background-color: #f0f0f0;
             }
-            .logo {
-                width: 320px;
-                height: 320px;
-                object-fit: cover; /* ensure the image scales nicely if needed */
+            p {
+                font-size: 1.2rem;
             }
         </style>
     </head>
     <body>
-        <img class="logo" src="assets/radio.mkv0001-0250.gif" />
+        <h1 id="loading">loading...</h1>
     </body>
 </html>
