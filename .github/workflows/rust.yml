@@ -30,7 +30,6 @@ jobs:
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash
 
       - name: Run build script
-        working-directory: web
         run: ./build.sh
 
       - name: Remove .gitignore from pkg (so it's deployed)
