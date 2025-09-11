@@ -1,6 +1,6 @@
 ---
 name: Bluff Knoll
-date: 21-5-25
+date: 2021-05-25
 medium: 2009 Canon EOS 500D
 tags:
   - Scenic

@@ -26,6 +26,7 @@
 }
 
 .base-card {
+    height: fit-content;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
 }
@@ -69,12 +70,10 @@
 }
 
 .pictures-container {
-    container-type: inline-size;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1rem;
     padding: 1rem;
-    justify-content: space-between;
 }
 
 .photo-card {
@@ -82,7 +81,7 @@
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: calc(50% - 2.6rem);
+    /* Remove the width calculation */
 }
 .photo-card-blur {
     width: 100%;
@@ -115,12 +114,57 @@
     z-index: 1;
 }
 
-@container (max-width: 700px) {
-    .photo-card {
-        width: 100%;
-    }
-}
-
 .document-container {
     padding: 1rem;
+}
+
+.text-inline {
+    margin: 1rem 0;
+}
+
+.metadata {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.metadata td {
+    overflow: scroll;
+}
+
+.metadata tr {
+    vertical-align: middle;
+}
+
+.list-cell {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+}
+
+.list-cell img {
+    margin: 0;
+    margin-right: 0.7rem;
+}
+
+.list-cell p {
+    margin: 0.5rem;
+}
+
+.list-cell::-webkit-scrollbar {
+    height: 4px;
+}
+
+.list-cell::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 2px;
+}
+
+.list-cell::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 2px;
+}
+
+.list-cell::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
 }
