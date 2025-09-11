@@ -4,17 +4,18 @@ use crate::get_base_url;
 use crate::image::get_base64_from_blurhash;
 use crate::log;
 use crate::page::Page as PageType;
-use crate::pages::macros::Style;
 use crate::pages::macros::load_readme;
+use crate::pages::macros::Style;
 use crate::render_site;
 use crate::setup_article_observer;
+use content_service::console_log;
 use content_service::JsonEntry;
-use pulldown_cmark::{Parser, html};
+use pulldown_cmark::{html, Parser};
 use std::collections::HashMap;
 
 pub fn page_pictures() -> PageType {
-    let mut params = HashMap::new();
-    let render = |p: &PageType| "".to_string();
+    let params = HashMap::new();
+    let render = |_: &PageType| "".to_string();
 
     let on_after_render = || {
         render_site!("pictures", Style::Photo);
@@ -25,9 +26,16 @@ pub fn page_pictures() -> PageType {
 
 pub fn page_pictures_card_html(item: JsonEntry) -> String {
     let base = get_base_url!().to_string();
+
     let mut html = String::new();
+    if item.images.is_empty() {
+        console_log!("No images available, returning empty HTML");
+        return html;
+    }
+
     let first_img = item.images.first().unwrap();
     let blurhash = &first_img.blurhash;
+
     let base64 = get_base64_from_blurhash(&blurhash);
 
     let img_url = format!("{}/content{}", base, first_img.path);
@@ -38,7 +46,7 @@ pub fn page_pictures_card_html(item: JsonEntry) -> String {
         base64
     );
     let img_main = format!(
-        "<img class=\"photo-card-img\" src=\"{}\" alt=\"{}\" loading=\"lazy\"/>",
+        "<img class=\"photo-card-img\" src=\"{}\" alt=\"{}\" loading=\"lazy\" onload=\"this.style.opacity=1\"/>",
         img_url, item.name
     );
 
@@ -49,7 +57,7 @@ pub fn page_pictures_card_html(item: JsonEntry) -> String {
     }
 
     html.push_str(&format!(
-        "<div class=\"base-card photo-card\" data-card-id=\"{}\" data-card-name=\"{}\" data-card-path=\"{}\" onclick=\"on_article_card_click('{}', '{}')\" style=\"cursor: pointer;\">
+        "<div class=\"base-card photo-card\" data-card-id=\"{}\" data-card-name=\"{}\" data-card-path=\"{}\" onclick=\"on_article_card_click('{}')\" style=\"cursor: pointer;\">
             <div class=\"photo-card-img-wrap\" style=\"{}\">
                 {}
                 {}
@@ -60,7 +68,6 @@ pub fn page_pictures_card_html(item: JsonEntry) -> String {
         card_id,
         item.name,
         item.path,
-        item.name,
         item.path,
         wrapper_style,
         img_blur,

@@ -3,27 +3,21 @@ use crate::content::{
     get_global_content, get_global_document, parse_debug_sequence, replace_images,
     strip_frontmatter,
 };
-use crate::get_app;
 use crate::get_base_url;
 use crate::get_document;
 use crate::log;
 use crate::page::Page as PageType;
-use crate::pages::macros::Style;
-use crate::pages::macros::load_readme;
-use crate::render_site;
-use crate::setup_article_observer;
 use content_service::{Img, JsonEntry};
-use pulldown_cmark::{Parser, html};
+use pulldown_cmark::{html, Parser};
 use std::collections::HashMap;
-use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::spawn_local;
 
 pub fn page_document(document: &str) -> PageType {
-    let mut params = HashMap::new();
+    let params = HashMap::new();
 
     let container_id = "document-content";
 
-    let render = move |p: &PageType| {
+    let render = move |_: &PageType| {
         format!(
             r#"
             <div class="document-container">
@@ -45,15 +39,10 @@ pub fn page_document(document: &str) -> PageType {
                 .unwrap_or_else(|_| document_path.clone().into())
                 .into_owned();
 
-            let mut base_path = "/blog".to_string();
             let url = if decoded_path.starts_with("/blog/") {
-                base_path = "/blog".to_string();
-                format!("{}/content{}", get_base_url!(), decoded_path)
-            } else if decoded_path.starts_with("/pictures/") {
-                base_path = "/pictures".to_string();
-                format!("{}/content{}", get_base_url!(), decoded_path)
+                format!("{}/content{}", get_base_url!(), decoded_path).to_string()
             } else {
-                format!("{}/content/blog/{}", get_base_url!(), decoded_path)
+                format!("{}/content/blog/{}", get_base_url!(), "/blog".to_string()).to_string()
             };
 
             let mut img: Vec<Img> = Vec::new();

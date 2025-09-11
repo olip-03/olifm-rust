@@ -215,62 +215,33 @@ export function main() {
 }
 
 /**
- * @param {string} card_id
  * @param {string} card_name
  * @param {string} card_path
  */
-export function on_article_card_visible(card_id, card_name, card_path) {
-    const ptr0 = passStringToWasm0(card_id, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-    const len0 = WASM_VECTOR_LEN;
-    const ptr1 = passStringToWasm0(card_name, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-    const len1 = WASM_VECTOR_LEN;
-    const ptr2 = passStringToWasm0(card_path, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-    const len2 = WASM_VECTOR_LEN;
-    wasm.on_article_card_visible(ptr0, len0, ptr1, len1, ptr2, len2);
-}
-
-/**
- * @param {string} card_name
- * @param {string} card_path
- */
-export function on_article_card_click(card_name, card_path) {
+export function on_article_card_visible(card_name, card_path) {
     const ptr0 = passStringToWasm0(card_name, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
     const ptr1 = passStringToWasm0(card_path, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len1 = WASM_VECTOR_LEN;
-    wasm.on_article_card_click(ptr0, len0, ptr1, len1);
-}
-
-function __wbg_adapter_22(arg0, arg1, arg2) {
-    wasm.closure811_externref_shim(arg0, arg1, arg2);
-}
-
-function __wbg_adapter_25(arg0, arg1, arg2) {
-    wasm.closure815_externref_shim(arg0, arg1, arg2);
+    wasm.on_article_card_visible(ptr0, len0, ptr1, len1);
 }
 
 /**
- * Chroma subsampling format
- * @enum {0 | 1 | 2 | 3}
+ * @param {string} card_path
  */
-export const ChromaSampling = Object.freeze({
-    /**
-     * Both vertically and horizontally subsampled.
-     */
-    Cs420: 0, "0": "Cs420",
-    /**
-     * Horizontally subsampled.
-     */
-    Cs422: 1, "1": "Cs422",
-    /**
-     * Not subsampled.
-     */
-    Cs444: 2, "2": "Cs444",
-    /**
-     * Monochrome.
-     */
-    Cs400: 3, "3": "Cs400",
-});
+export function on_article_card_click(card_path) {
+    const ptr0 = passStringToWasm0(card_path, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    wasm.on_article_card_click(ptr0, len0);
+}
+
+function __wbg_adapter_22(arg0, arg1, arg2) {
+    wasm.closure796_externref_shim(arg0, arg1, arg2);
+}
+
+function __wbg_adapter_25(arg0, arg1, arg2) {
+    wasm.closure837_externref_shim(arg0, arg1, arg2);
+}
 
 const EXPECTED_RESPONSE_TYPES = new Set(['basic', 'cors', 'default']);
 
@@ -401,6 +372,9 @@ function __wbg_get_imports() {
         return ret;
     };
     imports.wbg.__wbg_log_bfd38b2a363684e4 = function(arg0, arg1) {
+        console.log(getStringFromWasm0(arg0, arg1));
+    };
+    imports.wbg.__wbg_log_e48726ae39201034 = function(arg0, arg1) {
         console.log(getStringFromWasm0(arg0, arg1));
     };
     imports.wbg.__wbg_message_4159c15dac08c5e9 = function(arg0) {
@@ -555,12 +529,12 @@ function __wbg_get_imports() {
         const ret = false;
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper2496 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 802, __wbg_adapter_22);
+    imports.wbg.__wbindgen_closure_wrapper1666 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 795, __wbg_adapter_22);
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper2525 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 814, __wbg_adapter_25);
+    imports.wbg.__wbindgen_closure_wrapper2271 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 836, __wbg_adapter_25);
         return ret;
     };
     imports.wbg.__wbindgen_debug_string = function(arg0, arg1) {

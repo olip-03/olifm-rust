@@ -1,18 +1,14 @@
-// import init from "../pkg/web.js";
-
-// article-observer.js
 function setupArticleObserver() {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(async (entry) => {
         if (entry.isIntersecting) {
           const card = entry.target;
-          const cardId = card.dataset.cardId;
           const cardName = card.dataset.cardName;
           const cardPath = card.dataset.cardPath;
 
           if (window.on_article_card_visible) {
-            await window.on_article_card_visible(cardId, cardName, cardPath);
+            await window.on_article_card_visible(cardName, cardPath);
           } else {
             console.warn("on_article_card_visible not available yet");
           }
