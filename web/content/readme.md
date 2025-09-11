@@ -1,6 +1,6 @@
+Thanks for dropping in. 
 
-
-Thanks for dropping in. My name's Oliver. I enjoy software development, music, photography, electronics and writing. I've started this blog as a means to document and share the things that I do.
+My name's Oliver. I enjoy software development, music, photography, electronics and writing. I've started this blog as a means to document and share the things that I do.
 
 I'm focusing most of my time at the moment to my music player: Portajel, maintaining this website, as well as the music I'm recording with my band.
 
