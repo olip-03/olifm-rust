@@ -4,19 +4,19 @@
     "type": "file",
     "size": 171,
     "name": "readme.md",
-    "date": "2025-09-11T03:40:42.446383492+00:00"
+    "date": "2025-09-11T06:00:25.353061800+00:00"
   },
   {
-    "path": "/sounds/readme.md",
+    "path": "/sounds\\readme.md",
     "type": "file",
     "size": 185,
     "name": "readme.md",
-    "date": "2025-09-11T03:40:42.446383492+00:00"
+    "date": "2025-09-11T06:00:25.355082900+00:00"
   },
   {
-    "path": "/pictures/19-12-12 Muriwai Gannet Colony.md",
+    "path": "/pictures\\19-12-12 Muriwai Gannet Colony.md",
     "type": "file",
-    "size": 232,
+    "size": 240,
     "name": "Gannet In flight",
     "date": "2019-12-01",
     "images": [
@@ -24,19 +24,19 @@
         "blurhash": "LCA-;,xZD$NetWkWRjRi?bWBxtxt",
         "aspect_ratio": "1920/1080",
         "name": "Img2.jpg",
-        "path": "/assets/Img2.jpg"
+        "path": "/assets\\Img2.jpg"
       }
     ],
     "metadata": {
+      "medium": "2009 Canon EOS 500D",
       "name": "Gannet In flight",
-      "date": "2019-12-01",
-      "medium": "2009 Canon EOS 500D"
+      "date": "2019-12-01"
     }
   },
   {
-    "path": "/pictures/19-12-13 Nz Beach.md",
+    "path": "/pictures\\19-12-13 Nz Beach.md",
     "type": "file",
-    "size": 218,
+    "size": 226,
     "name": "NZ Beach",
     "date": "2019-12-12",
     "images": [
@@ -44,19 +44,19 @@
         "blurhash": "LlHyB]o#aej[_4WAa}a|V?aeWCa#",
         "aspect_ratio": "1920/1080",
         "name": "Img3.jpg",
-        "path": "/assets/Img3.jpg"
+        "path": "/assets\\Img3.jpg"
       }
     ],
     "metadata": {
       "date": "2019-12-12",
-      "name": "NZ Beach",
-      "medium": "2009 Canon EOS 500D"
+      "medium": "2009 Canon EOS 500D",
+      "name": "NZ Beach"
     }
   },
   {
-    "path": "/pictures/20-02-01 Karri Valley Waterfall.md",
+    "path": "/pictures\\20-02-01 Karri Valley Waterfall.md",
     "type": "file",
-    "size": 368,
+    "size": 378,
     "name": "Karri Valley Waterfall",
     "date": "2020-02-01",
     "images": [
@@ -64,19 +64,19 @@
         "blurhash": "LA8:z~%00fNHNGNHofj[NGs.%2R+",
         "aspect_ratio": "1920/1080",
         "name": "Img4.jpg",
-        "path": "/assets/Img4.jpg"
+        "path": "/assets\\Img4.jpg"
       }
     ],
     "metadata": {
-      "date": "2020-02-01",
+      "medium": "2009 Canon EOS 500D",
       "name": "Karri Valley Waterfall",
-      "medium": "2009 Canon EOS 500D"
+      "date": "2020-02-01"
     }
   },
   {
-    "path": "/pictures/21-5-25 Bluff Knoll.md",
+    "path": "/pictures\\21-5-25 Bluff Knoll.md",
     "type": "file",
-    "size": 261,
+    "size": 269,
     "name": "Bluff Knoll",
     "date": "21-5-25",
     "images": [
@@ -84,65 +84,65 @@
         "blurhash": "LNG[18xs0NE2?SR*IXog-.oJWCae",
         "aspect_ratio": "1920/1080",
         "name": "Img.jpg",
-        "path": "/assets/Img.jpg"
+        "path": "/assets\\Img.jpg"
       }
     ],
     "metadata": {
+      "name": "Bluff Knoll",
       "date": "21-5-25",
-      "medium": "2009 Canon EOS 500D",
-      "name": "Bluff Knoll"
+      "medium": "2009 Canon EOS 500D"
     }
   },
   {
-    "path": "/pictures/readme.md",
+    "path": "/pictures\\readme.md",
     "type": "file",
     "size": 110,
     "name": "readme.md",
-    "date": "2025-09-11T03:40:42.446058558+00:00"
+    "date": "2025-09-11T06:00:25.353061800+00:00"
   },
   {
-    "path": "/blog/25-9-10 Testing.md",
+    "path": "/blog\\25-9-10 Testing.md",
     "type": "file",
-    "size": 201,
+    "size": 204,
     "name": "New blog!",
-    "date": "2025-09-11T03:40:42.445904964+00:00",
+    "date": "2025-09-11T06:00:25.340463200+00:00",
     "metadata": {
       "name": "New blog!"
     }
   },
   {
-    "path": "/blog/readme.md",
+    "path": "/blog\\readme.md",
     "type": "file",
-    "size": 199,
+    "size": 203,
     "name": "readme.md",
-    "date": "2025-09-11T03:40:42.445904964+00:00"
+    "date": "2025-09-11T06:00:25.341973600+00:00"
   },
   {
-    "path": "/.obsidian/app.json",
+    "path": "/.obsidian\\app.json",
     "type": "file",
-    "size": 27,
+    "size": 29,
     "name": "app.json",
-    "date": "2025-09-11T03:40:42.446383492+00:00"
+    "date": "2025-09-11T06:00:25.253376500+00:00"
   },
   {
-    "path": "/.obsidian/appearance.json",
+    "path": "/.obsidian\\appearance.json",
     "type": "file",
     "size": 2,
     "name": "appearance.json",
-    "date": "2025-09-11T03:40:42.446383492+00:00"
+    "date": "2025-09-11T06:00:25.255383400+00:00"
   },
   {
-    "path": "/.obsidian/core-plugins.json",
+    "path": "/.obsidian\\core-plugins.json",
     "type": "file",
-    "size": 697,
+    "size": 729,
     "name": "core-plugins.json",
-    "date": "2025-09-11T03:40:42.446383492+00:00"
+    "date": "2025-09-11T06:00:25.258415200+00:00"
   },
   {
-    "path": "/.obsidian/workspace.json",
+    "path": "/.obsidian\\workspace.json",
     "type": "file",
-    "size": 5210,
+    "size": 5403,
     "name": "workspace.json",
-    "date": "2025-09-11T03:40:42.446383492+00:00"
+    "date": "2025-09-11T06:00:25.273846700+00:00"
   }
 ]
