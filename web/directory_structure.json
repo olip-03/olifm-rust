@@ -2,19 +2,40 @@
   {
     "path": "/readme.md",
     "type": "file",
-    "size": 1163,
+    "size": 1177,
     "name": "readme.md",
-    "date": "2025-09-11T10:40:57.334575234+00:00"
+    "date": "2025-09-11T13:02:04.722452800+00:00"
   },
   {
-    "path": "/sounds/readme.md",
+    "path": "/sounds\\readme.md",
     "type": "file",
     "size": 187,
     "name": "readme.md",
-    "date": "2025-09-11T10:40:57.334575234+00:00"
+    "date": "2025-09-11T13:02:04.722452800+00:00"
   },
   {
-    "path": "/pictures/19-12-12 Gannet In flight 1.md",
+    "path": "/pictures\\19-12-12 Gannet Family.md",
+    "type": "file",
+    "size": 227,
+    "name": "Gannet Family",
+    "date": "2019-12-12",
+    "images": [
+      {
+        "blurhash": "LFLXJR^bVrE3n2VX4m_4xu?bX9Io",
+        "aspect_ratio": "1920/1080",
+        "name": "Img9.jpg",
+        "path": "/assets\\Img9.jpg"
+      }
+    ],
+    "metadata": {
+      "date": "2019-12-12",
+      "name": "Gannet Family",
+      "medium": "2009 Canon EOS 500D",
+      "tags": "Sequence [String(\"Gannet\"), String(\"Bird\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]"
+    }
+  },
+  {
+    "path": "/pictures\\19-12-12 Gannet In flight 1.md",
     "type": "file",
     "size": 293,
     "name": "Gannet In flight",
@@ -24,39 +45,18 @@
         "blurhash": "LCA-;,xZD$NetWkWRjRi?bWBxtxt",
         "aspect_ratio": "1920/1080",
         "name": "Img2.jpg",
-        "path": "/assets/Img2.jpg"
+        "path": "/assets\\Img2.jpg"
       }
     ],
     "metadata": {
-      "tags": "Sequence [String(\"Bird\"), String(\"Gannet\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]",
-      "date": "2019-12-01",
       "medium": "2009 Canon EOS 500D",
+      "date": "2019-12-01",
+      "tags": "Sequence [String(\"Bird\"), String(\"Gannet\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]",
       "name": "Gannet In flight"
     }
   },
   {
-    "path": "/pictures/19-12-12 Gannet Family.md",
-    "type": "file",
-    "size": 216,
-    "name": "Gannet Family",
-    "date": "2019-12-12",
-    "images": [
-      {
-        "blurhash": "LFLXJR^bVrE3n2VX4m_4xu?bX9Io",
-        "aspect_ratio": "1920/1080",
-        "name": "Img9.jpg",
-        "path": "/assets/Img9.jpg"
-      }
-    ],
-    "metadata": {
-      "date": "2019-12-12",
-      "tags": "Sequence [String(\"Gannet\"), String(\"Bird\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]",
-      "name": "Gannet Family",
-      "medium": "2009 Canon EOS 500D"
-    }
-  },
-  {
-    "path": "/pictures/19-12-12 Gannet in flight 2.md",
+    "path": "/pictures\\19-12-12 Gannet in flight 2.md",
     "type": "file",
     "size": 285,
     "name": "Gannet In Flight 2",
@@ -66,18 +66,18 @@
         "blurhash": "LCE3C|vJ9ZMxTgITn#S4PXIU$y%M",
         "aspect_ratio": "1920/1080",
         "name": "Img11.jpg",
-        "path": "/assets/Img11.jpg"
+        "path": "/assets\\Img11.jpg"
       }
     ],
     "metadata": {
-      "medium": "2009 Canon EOS 500D",
-      "name": "Gannet In Flight 2",
       "tags": "Sequence [String(\"Bird\"), String(\"Gannet\"), String(\"Scenic\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]",
-      "date": "2019-12-12"
+      "medium": "2009 Canon EOS 500D",
+      "date": "2019-12-12",
+      "name": "Gannet In Flight 2"
     }
   },
   {
-    "path": "/pictures/19-12-12 Mauriwai Beach.md",
+    "path": "/pictures\\19-12-12 Mauriwai Beach.md",
     "type": "file",
     "size": 211,
     "name": "Mauriwai Beach",
@@ -87,18 +87,18 @@
         "blurhash": "LNJRw5_4ofozyEMxWBaxM{IUWCR*",
         "aspect_ratio": "1920/1080",
         "name": "Img15.jpg",
-        "path": "/assets/Img15.jpg"
+        "path": "/assets\\Img15.jpg"
       }
     ],
     "metadata": {
+      "name": "Mauriwai Beach",
       "tags": "Sequence [String(\"Scenic\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]",
       "date": "2019-12-12",
-      "name": "Mauriwai Beach",
       "medium": "2009 Canon EOS 500D"
     }
   },
   {
-    "path": "/pictures/19-12-13 Nz Beach.md",
+    "path": "/pictures\\19-12-13 Nz Beach.md",
     "type": "file",
     "size": 251,
     "name": "NZ Beach",
@@ -108,18 +108,18 @@
         "blurhash": "LlHyB]o#aej[_4WAa}a|V?aeWCa#",
         "aspect_ratio": "1920/1080",
         "name": "Img3.jpg",
-        "path": "/assets/Img3.jpg"
+        "path": "/assets\\Img3.jpg"
       }
     ],
     "metadata": {
       "date": "2019-12-12",
       "medium": "2009 Canon EOS 500D",
-      "name": "NZ Beach",
-      "tags": "Sequence [String(\"Scenic\"), String(\"New-Zealand\")]"
+      "tags": "Sequence [String(\"Scenic\"), String(\"New-Zealand\")]",
+      "name": "NZ Beach"
     }
   },
   {
-    "path": "/pictures/19-12-14 Bee Photography!.md",
+    "path": "/pictures\\19-12-14 Bee Photography!.md",
     "type": "file",
     "size": 407,
     "name": "Bee Photography!",
@@ -129,18 +129,18 @@
         "blurhash": "LDGkw8~lEfRi^8R$%3sqS~M|;UWU",
         "aspect_ratio": "1920/1080",
         "name": "Img7.jpg",
-        "path": "/assets/Img7.jpg"
+        "path": "/assets\\Img7.jpg"
       }
     ],
     "metadata": {
-      "date": "2019-12-14",
       "medium": "2009 Canon EOS 500D",
       "name": "Bee Photography!",
-      "tags": "Sequence [String(\"Flowers\"), String(\"New-Zealand\"), String(\"Insects\"), String(\"Bee\")]"
+      "tags": "Sequence [String(\"Flowers\"), String(\"New-Zealand\"), String(\"Insects\"), String(\"Bee\")]",
+      "date": "2019-12-14"
     }
   },
   {
-    "path": "/pictures/19-12-14 Ducks.md",
+    "path": "/pictures\\19-12-14 Ducks.md",
     "type": "file",
     "size": 217,
     "name": "Ducks",
@@ -150,18 +150,18 @@
         "blurhash": "L9C6u.R48^?I0J?b%ND%tRE1tSt7",
         "aspect_ratio": "1920/1080",
         "name": "Img18.jpg",
-        "path": "/assets/Img18.jpg"
+        "path": "/assets\\Img18.jpg"
       }
     ],
     "metadata": {
-      "medium": "2009 Canon EOS 500D",
       "date": "2019-12-12",
-      "name": "Ducks",
-      "tags": "Sequence [String(\"Statues\"), String(\"Bird\"), String(\"New-Zealand\")]"
+      "medium": "2009 Canon EOS 500D",
+      "tags": "Sequence [String(\"Statues\"), String(\"Bird\"), String(\"New-Zealand\")]",
+      "name": "Ducks"
     }
   },
   {
-    "path": "/pictures/19-12-14 More bees!.md",
+    "path": "/pictures\\19-12-14 More bees!.md",
     "type": "file",
     "size": 221,
     "name": "More bees!",
@@ -171,18 +171,18 @@
         "blurhash": "LEIDa%Ka0wo}IA^l?bn,IV?IOT$+",
         "aspect_ratio": "1920/1080",
         "name": "Img19.jpg",
-        "path": "/assets/Img19.jpg"
+        "path": "/assets\\Img19.jpg"
       }
     ],
     "metadata": {
-      "tags": "Sequence [String(\"Insects\"), String(\"Flowers\"), String(\"New-Zealand\"), String(\"Bee\")]",
-      "medium": "2009 Canon EOS 500D",
       "name": "More bees!",
-      "date": "2019-12-14"
+      "date": "2019-12-14",
+      "medium": "2009 Canon EOS 500D",
+      "tags": "Sequence [String(\"Insects\"), String(\"Flowers\"), String(\"New-Zealand\"), String(\"Bee\")]"
     }
   },
   {
-    "path": "/pictures/19-12-14 Wall of flowers.md",
+    "path": "/pictures\\19-12-14 Wall of flowers.md",
     "type": "file",
     "size": 167,
     "name": "Wall of flowers",
@@ -192,18 +192,18 @@
         "blurhash": "LNKHzJ0}AYKN,DXQo_s,IrkVNuxF",
         "aspect_ratio": "1920/1080",
         "name": "Img14.jpg",
-        "path": "/assets/Img14.jpg"
+        "path": "/assets\\Img14.jpg"
       }
     ],
     "metadata": {
-      "medium": "2009 Canon EOS 500D",
-      "date": "2019-12-14",
       "name": "Wall of flowers",
-      "tags": "Sequence [String(\"Flowers\"), String(\"New-Zealand\")]"
+      "medium": "2009 Canon EOS 500D",
+      "tags": "Sequence [String(\"Flowers\"), String(\"New-Zealand\")]",
+      "date": "2019-12-14"
     }
   },
   {
-    "path": "/pictures/19-12-14 Yellow Dahlia.md",
+    "path": "/pictures\\19-12-14 Yellow Dahlia.md",
     "type": "file",
     "size": 190,
     "name": "Yellow Dahlia",
@@ -213,18 +213,18 @@
         "blurhash": "LQJZL-9^E4~9?FNcm-XS5WE3xWM}",
         "aspect_ratio": "1920/1080",
         "name": "Img6.jpg",
-        "path": "/assets/Img6.jpg"
+        "path": "/assets\\Img6.jpg"
       }
     ],
     "metadata": {
-      "tags": "Sequence [String(\"New-Zealand\"), String(\"Flowers\")]",
       "medium": "2009 Canon EOS 500D",
+      "tags": "Sequence [String(\"New-Zealand\"), String(\"Flowers\")]",
       "name": "Yellow Dahlia",
       "date": "2019-12-14"
     }
   },
   {
-    "path": "/pictures/20-02-01 Karri Valley Waterfall.md",
+    "path": "/pictures\\20-02-01 Karri Valley Waterfall.md",
     "type": "file",
     "size": 416,
     "name": "Karri Valley Waterfall",
@@ -234,18 +234,18 @@
         "blurhash": "LA8:z~%00fNHNGNHofj[NGs.%2R+",
         "aspect_ratio": "1920/1080",
         "name": "Img4.jpg",
-        "path": "/assets/Img4.jpg"
+        "path": "/assets\\Img4.jpg"
       }
     ],
     "metadata": {
-      "date": "2020-02-01",
-      "name": "Karri Valley Waterfall",
+      "tags": "Sequence [String(\"Scenic\"), String(\"WA-South-West\"), String(\"Australia\")]",
       "medium": "2009 Canon EOS 500D",
-      "tags": "Sequence [String(\"Scenic\"), String(\"WA-South-West\"), String(\"Australia\")]"
+      "date": "2020-02-01",
+      "name": "Karri Valley Waterfall"
     }
   },
   {
-    "path": "/pictures/20-04-12 Djiti-Djiti.md",
+    "path": "/pictures\\20-04-12 Djiti-Djiti.md",
     "type": "file",
     "size": 302,
     "name": "Djiti-Djiti",
@@ -255,20 +255,20 @@
         "blurhash": "LEATTI_2-p?a~pxuWY-;R*D*IU%L",
         "aspect_ratio": "1920/1080",
         "name": "Img16.jpg",
-        "path": "/assets/Img16.jpg"
+        "path": "/assets\\Img16.jpg"
       }
     ],
     "metadata": {
-      "tags": "Sequence [String(\"Djiti-Djiti\"), String(\"Bird\"), String(\"WA-South-West\"), String(\"Australia\")]",
       "date": "2020-04-08",
-      "medium": "2009 Canon EOS 500D",
-      "name": "Djiti-Djiti"
+      "tags": "Sequence [String(\"Djiti-Djiti\"), String(\"Bird\"), String(\"WA-South-West\"), String(\"Australia\")]",
+      "name": "Djiti-Djiti",
+      "medium": "2009 Canon EOS 500D"
     }
   },
   {
-    "path": "/pictures/21-5-25 Bluff Knoll.md",
+    "path": "/pictures\\21-5-25 Bluff Knoll.md",
     "type": "file",
-    "size": 313,
+    "size": 325,
     "name": "Bluff Knoll",
     "date": "2021-05-25",
     "images": [
@@ -276,18 +276,18 @@
         "blurhash": "LNG[18xs0NE2?SR*IXog-.oJWCae",
         "aspect_ratio": "1920/1080",
         "name": "Img.jpg",
-        "path": "/assets/Img.jpg"
+        "path": "/assets\\Img.jpg"
       }
     ],
     "metadata": {
       "tags": "Sequence [String(\"Scenic\"), String(\"WA-South-West\"), String(\"Australia\")]",
-      "medium": "2009 Canon EOS 500D",
+      "name": "Bluff Knoll",
       "date": "2021-05-25",
-      "name": "Bluff Knoll"
+      "medium": "2009 Canon EOS 500D"
     }
   },
   {
-    "path": "/pictures/24-06-23 Daisies in Vancouver.md",
+    "path": "/pictures\\24-06-23 Daisies in Vancouver.md",
     "type": "file",
     "size": 212,
     "name": "Daisies in Vancouver",
@@ -297,18 +297,18 @@
         "blurhash": "L#H2pAR*Rja#_4t6WBofxvayWBfP",
         "aspect_ratio": "4080/3072",
         "name": "PXL_20240623_191141618.jpg",
-        "path": "/assets/PXL_20240623_191141618.jpg"
+        "path": "/assets\\PXL_20240623_191141618.jpg"
       }
     ],
     "metadata": {
-      "name": "Daisies in Vancouver",
-      "date": "2024-06-24",
+      "medium": "Google Pixel 8",
       "tags": "Sequence [String(\"Flowers\"), String(\"Scenic\"), String(\"Canada\"), String(\"Vancouver\")]",
-      "medium": "Google Pixel 8"
+      "name": "Daisies in Vancouver",
+      "date": "2024-06-24"
     }
   },
   {
-    "path": "/pictures/24-07-05 Saskatoon.md",
+    "path": "/pictures\\24-07-05 Saskatoon.md",
     "type": "file",
     "size": 231,
     "name": "Saskatoon",
@@ -318,7 +318,7 @@
         "blurhash": "LyEDSRj[V@j[yGaxj?j[M{axkDay",
         "aspect_ratio": "4080/3072",
         "name": "PXL_20240705_215141089.jpg",
-        "path": "/assets/PXL_20240705_215141089.jpg"
+        "path": "/assets\\PXL_20240705_215141089.jpg"
       }
     ],
     "metadata": {
@@ -328,7 +328,7 @@
     }
   },
   {
-    "path": "/pictures/24-07-07 Friends-Aunties Garden.md",
+    "path": "/pictures\\24-07-07 Friends-Aunties Garden.md",
     "type": "file",
     "size": 257,
     "name": "Friends-Aunties Garden",
@@ -338,18 +338,18 @@
         "blurhash": "LGE{wQN301IVXYxuRNNF_4s:ITaw",
         "aspect_ratio": "4080/3072",
         "name": "PXL_20240707_173245044.jpg",
-        "path": "/assets/PXL_20240707_173245044.jpg"
+        "path": "/assets\\PXL_20240707_173245044.jpg"
       }
     ],
     "metadata": {
+      "name": "Friends-Aunties Garden",
       "medium": "Google Pixel 8",
-      "date": "2024-07-07",
       "tags": "Sequence [String(\"Scenic\"), String(\"Flowers\"), String(\"Canada\"), String(\"Saskatchewan\")]",
-      "name": "Friends-Aunties Garden"
+      "date": "2024-07-07"
     }
   },
   {
-    "path": "/pictures/24-07-09 Fisherman.md",
+    "path": "/pictures\\24-07-09 Fisherman.md",
     "type": "file",
     "size": 241,
     "name": "Fisherman",
@@ -359,18 +359,18 @@
         "blurhash": "LTHBbgbXxsE20eR*Rks:oys:jat7",
         "aspect_ratio": "3253/2548",
         "name": "PXL_20240709_182744715.jpg",
-        "path": "/assets/PXL_20240709_182744715.jpg"
+        "path": "/assets\\PXL_20240709_182744715.jpg"
       }
     ],
     "metadata": {
       "medium": "Google Pixel 8",
-      "name": "Fisherman",
       "tags": "Sequence [String(\"Fox\"), String(\"Canada\"), String(\"Saskatchewan\")]",
-      "date": "2024-07-09"
+      "date": "2024-07-09",
+      "name": "Fisherman"
     }
   },
   {
-    "path": "/pictures/25-06-12 Mr. Magpie.md",
+    "path": "/pictures\\25-06-12 Mr. Magpie.md",
     "type": "file",
     "size": 221,
     "name": "Mr. Magpie",
@@ -380,18 +380,18 @@
         "blurhash": "LXL#2$-;~qIUt8D%9Zxua#x]WBM|",
         "aspect_ratio": "4608/3456",
         "name": "DSCN1670.jpg",
-        "path": "/assets/DSCN1670.jpg"
+        "path": "/assets\\DSCN1670.jpg"
       }
     ],
     "metadata": {
       "date": "2025-06-12",
-      "tags": "Sequence [String(\"Magpie\"), String(\"Perth\"), String(\"Australia\"), String(\"Portrait\"), String(\"Bird\")]",
       "name": "Mr. Magpie",
-      "medium": "Nikon Coolpix P900"
+      "medium": "Nikon Coolpix P900",
+      "tags": "Sequence [String(\"Magpie\"), String(\"Perth\"), String(\"Australia\"), String(\"Portrait\"), String(\"Bird\")]"
     }
   },
   {
-    "path": "/pictures/25-06-12 Mrs. Magpie.md",
+    "path": "/pictures\\25-06-12 Mrs. Magpie.md",
     "type": "file",
     "size": 246,
     "name": "Mrs. Magpie",
@@ -401,18 +401,18 @@
         "blurhash": "LMBzBt%FW8tR~l%KxsRks~f8%MIo",
         "aspect_ratio": "4608/3456",
         "name": "DSCN1675.jpg",
-        "path": "/assets/DSCN1675.jpg"
+        "path": "/assets\\DSCN1675.jpg"
       }
     ],
     "metadata": {
-      "name": "Mrs. Magpie",
-      "date": "2025-06-12",
       "medium": "Nikon Coolpix P900",
-      "tags": "Sequence [String(\"Bird\"), String(\"Magpie\"), String(\"Australia\"), String(\"Perth\"), String(\"Portrait\")]"
+      "date": "2025-06-12",
+      "tags": "Sequence [String(\"Bird\"), String(\"Magpie\"), String(\"Australia\"), String(\"Perth\"), String(\"Portrait\")]",
+      "name": "Mrs. Magpie"
     }
   },
   {
-    "path": "/pictures/25-07-27 Oystercatchers.md",
+    "path": "/pictures\\25-07-27 Oystercatchers.md",
     "type": "file",
     "size": 207,
     "name": "Oystercatchers",
@@ -422,18 +422,18 @@
         "blurhash": "LbFYiL%0-:oI0LRkWEkCRjxaM{of",
         "aspect_ratio": "4608/3456",
         "name": "DSCN1661.jpg",
-        "path": "/assets/DSCN1661.jpg"
+        "path": "/assets\\DSCN1661.jpg"
       }
     ],
     "metadata": {
+      "medium": "Nikon Coolpix P900",
       "name": "Oystercatchers",
       "date": "2025-07-27",
-      "medium": "Nikon Coolpix P900",
       "tags": "Sequence [String(\"Pied-Oystercatchers\"), String(\"Australia\"), String(\"Perth\"), String(\"Bird\")]"
     }
   },
   {
-    "path": "/pictures/25-08-12 Crow Couple.md",
+    "path": "/pictures\\25-08-12 Crow Couple.md",
     "type": "file",
     "size": 153,
     "name": "Crow Couple",
@@ -443,20 +443,20 @@
         "blurhash": "LLF?UNM_~pfNVjE1%NbERDMzxvRj",
         "aspect_ratio": "4608/3456",
         "name": "DSCN1608.jpg",
-        "path": "/assets/DSCN1608.jpg"
+        "path": "/assets\\DSCN1608.jpg"
       }
     ],
     "metadata": {
-      "tags": "Sequence [String(\"Australia\"), String(\"Perth\"), String(\"Bird\"), String(\"Crow\")]",
-      "name": "Crow Couple",
       "medium": "Nikon Coolpix P900",
-      "date": "2025-08-11"
+      "tags": "Sequence [String(\"Australia\"), String(\"Perth\"), String(\"Bird\"), String(\"Crow\")]",
+      "date": "2025-08-11",
+      "name": "Crow Couple"
     }
   },
   {
-    "path": "/pictures/25-08-15 Puffy.md",
+    "path": "/pictures\\25-08-15 Puffy.md",
     "type": "file",
-    "size": 185,
+    "size": 196,
     "name": "Puffy",
     "date": "2025-08-15",
     "images": [
@@ -464,68 +464,75 @@
         "blurhash": "LiK-a*aK_NSixukCIUoKW=WCRjs:",
         "aspect_ratio": "4608/3456",
         "name": "DSCN1509.jpg",
-        "path": "/assets/DSCN1509.jpg"
+        "path": "/assets\\DSCN1509.jpg"
       }
     ],
     "metadata": {
-      "name": "Puffy",
+      "date": "2025-08-15",
       "tags": "Sequence [String(\"Australia\"), String(\"Bird\"), String(\"Perth\")]",
       "medium": "Nikon Coolpix P900",
-      "date": "2025-08-15"
+      "name": "Puffy"
     }
   },
   {
-    "path": "/pictures/readme.md",
+    "path": "/pictures\\readme.md",
     "type": "file",
     "size": 224,
     "name": "readme.md",
-    "date": "2025-09-11T10:40:57.333476637+00:00"
+    "date": "2025-09-11T13:02:04.711357900+00:00"
   },
   {
-    "path": "/blog/25-9-10 Testing.md",
+    "path": "/blog\\25-9-10 Testing.md",
     "type": "file",
-    "size": 245,
+    "size": 252,
     "name": "New blog!",
     "date": "2025-09-10",
     "metadata": {
-      "tags": "Sequence [String(\"Blog\"), String(\"Testing\")]",
       "name": "New blog!",
-      "date": "2025-09-10"
+      "date": "2025-09-10",
+      "tags": "Sequence [String(\"Blog\"), String(\"Testing\")]"
     }
   },
   {
-    "path": "/blog/readme.md",
+    "path": "/blog\\readme.md",
     "type": "file",
-    "size": 199,
+    "size": 224,
     "name": "readme.md",
-    "date": "2025-09-11T10:40:57.332830562+00:00"
+    "date": "2025-09-11T13:02:04.706171500+00:00"
   },
   {
-    "path": "/.obsidian/app.json",
+    "path": "/.obsidian\\app.json",
     "type": "file",
     "size": 27,
     "name": "app.json",
-    "date": "2025-09-11T10:40:57.334575234+00:00"
+    "date": "2025-09-11T13:02:04.649680100+00:00"
   },
   {
-    "path": "/.obsidian/appearance.json",
+    "path": "/.obsidian\\appearance.json",
     "type": "file",
     "size": 2,
     "name": "appearance.json",
-    "date": "2025-09-11T10:40:57.334575234+00:00"
+    "date": "2025-09-11T13:02:04.649680100+00:00"
   },
   {
-    "path": "/.obsidian/core-plugins.json",
+    "path": "/.obsidian\\core-plugins.json",
     "type": "file",
     "size": 697,
     "name": "core-plugins.json",
-    "date": "2025-09-11T10:40:57.334575234+00:00"
+    "date": "2025-09-11T13:02:04.649680100+00:00"
   },
   {
-    "path": "/.obsidian/workspace.json",
+    "path": "/.obsidian\\graph.json",
     "type": "file",
-    "size": 5831,
+    "size": 494,
+    "name": "graph.json",
+    "date": "2025-09-11T13:02:04.652165900+00:00"
+  },
+  {
+    "path": "/.obsidian\\workspace.json",
+    "type": "file",
+    "size": 6043,
     "name": "workspace.json",
-    "date": "2025-09-11T10:40:57.334575234+00:00"
+    "date": "2025-09-11T13:02:04.652165900+00:00"
   }
 ]

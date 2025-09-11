@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "readme.md",
+                "file": "blog/readme.md",
                 "mode": "source",
                 "source": false
               },
@@ -172,6 +172,7 @@
   "active": "241bd0294c2b79e0",
   "lastOpenFiles": [
     "blog/25-9-10 Testing.md",
+    "readme.md",
     "pictures/readme.md",
     "pictures/21-5-25 Bluff Knoll.md",
     "pictures/19-12-12 Gannet Family.md",
@@ -196,7 +197,6 @@
     "assets/DSCN1529(edit-plz).jpg",
     "blog/readme.md",
     "sounds/readme.md",
-    "readme.md",
     "pictures/19-12-12 Muriwai Gannet Colony.md",
     "blog/assets/DSCN1670.jpg",
     "blog/assets",

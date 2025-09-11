@@ -1,11 +1,9 @@
-use crate::content::global_content_service;
-use crate::content::{get_global_content, get_global_document, strip_frontmatter};
+use crate::content::{get_global_document, strip_frontmatter};
 use crate::router::Router;
-use content_service::ContentServiceClient;
-use pulldown_cmark::{Parser, html};
+use pulldown_cmark::{html, Parser};
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::spawn_local;
-use web_sys::{Element, window};
+use web_sys::{window, Element};
 
 pub mod content;
 pub mod image;
@@ -24,8 +22,8 @@ pub fn main() {
 }
 
 #[wasm_bindgen]
-pub fn on_article_card_visible(card_id: &str, card_name: &str, card_path: &str) {
-    let card_id = card_id.to_string();
+pub fn on_article_card_visible(card_name: &str, card_path: &str) {
+    // let card_id = card_id.to_string();
     let card_name = card_name.to_string();
     let card_path = card_path.to_string();
 
@@ -58,7 +56,7 @@ pub fn on_article_card_visible(card_id: &str, card_name: &str, card_path: &str) 
 }
 
 #[wasm_bindgen]
-pub fn on_article_card_click(card_name: &str, card_path: &str) {
+pub fn on_article_card_click(card_path: &str) {
     Router::navigate_to(&card_path);
 }
 
@@ -75,24 +73,28 @@ fn init_shell(document: web_sys::Document) {
     let img = document
         .create_element("img")
         .expect("Failed to create img element");
-    img.set_attribute("src", "assets/radio.mkv0001-0250.gif");
-    img.set_attribute("class", "logo");
-    body.append_child(&img);
+    img.set_attribute("src", "assets/radio.mkv0001-0250.gif")
+        .expect("Failed to add source to img");
+    img.set_attribute("class", "logo")
+        .expect("Failed to add class to img");
+    body.append_child(&img).expect("Failed to add img");
 
     // append nav
     let nav = document
         .create_element("div")
         .expect("Failed to create nav div");
-    nav.set_attribute("class", "nav");
+    nav.set_attribute("class", "nav")
+        .expect("Failed to add class to nav");
     init_nav(&document, &nav);
-    body.append_child(&nav);
+    body.append_child(&nav).expect("Failed to add navigation");
 
     // create app container
     let app = document
         .create_element("div")
         .expect("Failed to create app div");
     app.set_id("app");
-    app.set_attribute("class", "app");
+    app.set_attribute("class", "app")
+        .expect("Failed to set class attribute for app");
 
     body.append_child(&app)
         .expect("Failed to append app container");
@@ -100,16 +102,20 @@ fn init_shell(document: web_sys::Document) {
 
 fn init_nav(document: &web_sys::Document, nav: &web_sys::Element) {
     let home = create_button(&document, "Home", "");
-    nav.append_child(&home);
+    nav.append_child(&home)
+        .expect("Failed to append home button");
 
     let pictures = create_button(&document, "Pictures", "pictures");
-    nav.append_child(&pictures);
+    nav.append_child(&pictures)
+        .expect("Failed to append pictures button");
 
     let sounds = create_button(&document, "Sounds", "sounds");
-    nav.append_child(&sounds);
+    nav.append_child(&sounds)
+        .expect("Failed to append sounds button");
 
     let about = create_button(&document, "About", "about");
-    nav.append_child(&about);
+    nav.append_child(&about)
+        .expect("Failed to append about button");
 }
 
 fn create_button(document: &web_sys::Document, name: &str, page: &str) -> Element {

@@ -1,7 +1,6 @@
 use crate::error::ContentServiceError;
-use crate::models::{Img, JsonEntry};
+use crate::models::JsonEntry;
 use gloo_net::http::Request;
-use gloo_utils::document;
 use std::collections::HashMap;
 use wasm_bindgen_futures::spawn_local;
 

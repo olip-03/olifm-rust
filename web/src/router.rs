@@ -2,9 +2,9 @@ use crate::page::Page as PageType;
 use crate::pages::{
     page_about, page_document, page_home, page_not_found, page_pictures, page_sounds,
 };
-use wasm_bindgen::JsCast;
 use wasm_bindgen::prelude::*;
-use web_sys::{Event, window};
+use wasm_bindgen::JsCast;
+use web_sys::{window, Event};
 
 #[wasm_bindgen]
 extern "C" {
@@ -38,9 +38,9 @@ impl Router {
             "/sounds" => page_sounds::page_sounds(),
             _ => {
                 // Check for wildcard routes
-                if let Some(wildcard_entry) = Self::extract_wildcard(path, "/blog/") {
+                if let Some(_) = Self::extract_wildcard(path, "/blog/") {
                     page_document::page_document(&path)
-                } else if let Some(wildcard_entry) = Self::extract_wildcard(path, "/pictures/") {
+                } else if let Some(_) = Self::extract_wildcard(path, "/pictures/") {
                     page_document::page_document(&path)
                 } else {
                     page_not_found::page_not_found()

@@ -3,19 +3,18 @@ use crate::get_app;
 use crate::get_base_url;
 use crate::log;
 use crate::page::Page as PageType;
-use crate::pages::macros::Style;
 use crate::pages::macros::load_readme;
+use crate::pages::macros::Style;
 use crate::render_site;
 use crate::setup_article_observer;
 use content_service::JsonEntry;
-use pulldown_cmark::{Parser, html};
+use pulldown_cmark::{html, Parser};
 use std::collections::HashMap;
-use wasm_bindgen::prelude::*;
 
 pub fn page_home() -> PageType {
     // todo: loading spinner
-    let mut params = HashMap::new();
-    let render = |p: &PageType| "loading contents...".to_string();
+    let params = HashMap::new();
+    let render = |_: &PageType| "loading contents...".to_string();
 
     let on_after_render = || {
         render_site!("blog", Style::Card);
@@ -33,11 +32,10 @@ pub fn page_home_card_html(item: JsonEntry) -> String {
               data-card-id=\"{}\"
               data-card-name=\"{}\"
               data-card-path=\"{}\"
-              onclick=\"on_article_card_click('{}', '{}')\">",
+              onclick=\"on_article_card_click('{}')\">",
         card_id,
         item.name,
         item.path,
-        item.name.replace("'", "\\'"),
         item.path.replace("'", "\\'")
     ));
 

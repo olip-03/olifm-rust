@@ -1,18 +1,8 @@
 use crate::console_log;
 use crate::content::{get_global_content, get_global_document}; // Add this import
-use crate::get_base_url;
 use crate::log;
-use crate::setup_article_observer;
 use content_service::ContentServiceError;
-use content_service::{Img, JsonEntry};
-use futures::join;
-use gloo_net::Error;
-use image::{DynamicImage, ImageBuffer, ImageFormat, Rgb};
-use pulldown_cmark::{Parser, html};
-use std::borrow::BorrowMut;
-use std::io::Cursor;
-use wasm_bindgen::prelude::*;
-use wasm_bindgen_futures::spawn_local;
+use content_service::JsonEntry;
 pub enum Style {
     Card,
     Photo,
@@ -81,11 +71,11 @@ pub async fn get_page_content(
 
 pub fn load_readme(content: &mut Vec<JsonEntry>, html: &mut String, document: &String) {
     html.push_str("<div class=\"page-title\">");
-    if let Some(pos) = content
+    if let Some(index) = content
         .iter()
         .position(|item| item.name.to_lowercase() == "readme.md")
     {
-        let readme = content.remove(pos);
+        content.remove(index);
         html.push_str(&document);
     } else {
         console_log!("No readme found");
