@@ -1,5 +1,8 @@
 use crate::console_log;
-use crate::content::{get_global_content, get_global_document, replace_images, strip_frontmatter};
+use crate::content::{
+    get_global_content, get_global_document, parse_debug_sequence, replace_images,
+    strip_frontmatter,
+};
 use crate::get_app;
 use crate::get_base_url;
 use crate::get_document;
@@ -54,13 +57,17 @@ pub fn page_document(document: &str) -> PageType {
             };
 
             let mut img: Vec<Img> = Vec::new();
+            let mut metadata_entry: Option<JsonEntry> = None;
+
             let items: Vec<JsonEntry> =
                 get_global_content(decoded_path.clone(), Some("file".to_string()))
                     .await
                     .expect("should have content");
+
             if let Some(pos) = items.iter().position(|item| item.path == decoded_path) {
                 let meta = items[pos].clone();
                 img = meta.images.clone();
+                metadata_entry = Some(meta);
             }
 
             match get_global_document(&url).await {
@@ -72,8 +79,18 @@ pub fn page_document(document: &str) -> PageType {
                     let mut html_output = String::new();
                     html::push_html(&mut html_output, parser);
 
+                    // Generate metadata section
+                    let metadata_html = if let Some(entry) = metadata_entry {
+                        render_document_metadata(&entry)
+                    } else {
+                        String::new()
+                    };
+
+                    // Combine metadata and content
+                    let final_html = format!("{}{}", metadata_html, html_output);
+
                     if let Some(element) = get_document!().get_element_by_id(container_id) {
-                        element.set_inner_html(&html_output);
+                        element.set_inner_html(&final_html);
                     } else {
                         console_log!("Could not find document container element");
                     }
@@ -98,4 +115,58 @@ pub fn page_document(document: &str) -> PageType {
     };
 
     PageType::new(document, params, render).with_on_after_render(Some(Box::new(on_after_render)))
+}
+
+fn render_document_metadata(entry: &JsonEntry) -> String {
+    let mut html = String::new();
+
+    // Document title and date header
+    html.push_str("<div class=\"document-header\">");
+
+    html.push_str(&format!("<h1 style=\"margin: 0;\">{}</h1>", entry.name));
+
+    if let Some(date) = entry.metadata.get("date") {
+        html.push_str(&format!("<h2 style=\"margin-top: 0;\">{}</div>", date));
+    }
+
+    html.push_str("</div>");
+
+    let mut metadata_rows = String::new();
+    if let Some(medium) = entry.metadata.get("medium") {
+        metadata_rows.push_str(&format!(
+            "<tr>
+                <td class=\"list-cell\">
+                    <img class=\"list-image\" src=\"img/photo_camera.svg\" alt=\"Camera Icon\">
+                    <p>{}</p>
+                </td>
+            </tr>",
+            medium
+        ));
+    }
+
+    if let Some(tags) = entry.metadata.get("tags") {
+        let formatted_tags = parse_debug_sequence(tags);
+        metadata_rows.push_str(&format!(
+            "<tr>
+                <td class=\"list-cell\">
+                    <img class=\"list-image\" src=\"img/tag.svg\" alt=\"Tag Icon\">
+                    <p>{}</p>
+                </td>
+            </tr>",
+            formatted_tags
+        ));
+    }
+
+    if !metadata_rows.is_empty() {
+        html.push_str(&format!(
+            "<div class=\"document-metadata\">
+                <table class=\"metadata-table\">
+                    <tbody>{}</tbody>
+                </table>
+            </div>",
+            metadata_rows
+        ));
+    }
+
+    html
 }

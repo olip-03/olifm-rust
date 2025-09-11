@@ -34,21 +34,21 @@ macro_rules! render_site {
 
                     load_readme(&mut repo_content, &mut html, &document);
 
-                    let div_class = format!("{}-container", &content_path);
-                    html.push_str(&format!("<div class=\"{}\">", div_class));
-
-                    for item in repo_content {
-                        match style {
-                            // TODO: Custom music card implementation
-                            Style::Card | Style::Music => {
-                                html.push_str(&crate::pages::page_home::page_home_card_html(item))
+                    if content_path != "" {
+                        let div_class = format!("{}-container", &content_path);
+                        html.push_str(&format!("<div class=\"{}\">", div_class));
+                        for item in repo_content {
+                            match style {
+                                // TODO: Custom music card implementation
+                                Style::Card | Style::Music => html
+                                    .push_str(&crate::pages::page_home::page_home_card_html(item)),
+                                Style::Photo => html.push_str(
+                                    &crate::pages::page_pictures::page_pictures_card_html(item),
+                                ),
                             }
-                            Style::Photo => html.push_str(
-                                &crate::pages::page_pictures::page_pictures_card_html(item),
-                            ),
                         }
+                        html.push_str("</div>");
                     }
-                    html.push_str("</div>");
 
                     let parser = Parser::new(&html);
                     let mut html_output = String::new();

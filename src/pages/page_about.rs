@@ -1,35 +1,22 @@
 use crate::get_app;
+use crate::get_base_url;
+use crate::log;
 use crate::page::Page as PageType;
+use crate::pages::macros::Style;
+use crate::pages::macros::load_readme;
+use crate::render_site;
+use crate::setup_article_observer;
+use content_service::JsonEntry;
+use pulldown_cmark::{Parser, html};
 use std::collections::HashMap;
+
 pub fn page_about() -> PageType {
     let mut params = HashMap::new();
-    params.insert("title".to_string(), "About OliFM".to_string());
-    params.insert(
-        "description".to_string(),
-        "Blogging site written in Rust, running on Github.".to_string(),
-    );
+    let render = |p: &PageType| "".to_string();
 
-    let render = |p: &PageType| {
-        let title = p.params.get("title").map(|s| s.as_str()).unwrap_or("About");
-        let description = p
-            .params
-            .get("description")
-            .map(|s| s.as_str())
-            .unwrap_or("");
-
-        format!(
-            "<h1>{}</h1>\
-            <p>{}</p>\
-            <p>I've built this site with:</p>\
-            <ul>\
-                <li>Rust for the backend logic</li>\
-                <li>Client-side routing</li>\
-                <li>WebAssembly running the show</li>\
-            </ul>\
-            <nav><a href=\"#/\">← Back to Home</a></nav>",
-            title, description
-        )
+    let on_after_render = || {
+        render_site!("", Style::Card);
     };
 
-    PageType::new("About", params, render)
+    PageType::new("About", params, render).with_on_after_render(Some(Box::new(on_after_render)))
 }

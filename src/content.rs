@@ -2,6 +2,7 @@ use crate::console_log;
 use crate::get_base_url;
 use crate::image::get_base64_from_blurhash;
 use crate::log;
+
 use content_service::{ContentServiceClient, ContentServiceError, Img, JsonEntry};
 use futures::lock::Mutex;
 use std::sync::{Arc, LazyLock};
@@ -73,5 +74,21 @@ pub async fn get_entry_by_path(path: &str) -> Option<JsonEntry> {
             console_log!("Failed to load content: {:?}", e);
             None
         }
+    }
+}
+
+pub fn parse_debug_sequence(debug_str: &str) -> String {
+    use regex::Regex;
+
+    let re = Regex::new(r#"String\("([^"]*)"\)"#).unwrap();
+    let items: Vec<&str> = re
+        .captures_iter(debug_str)
+        .map(|cap| cap.get(1).unwrap().as_str())
+        .collect();
+
+    if items.is_empty() {
+        debug_str.to_string()
+    } else {
+        items.join(" • ")
     }
 }
