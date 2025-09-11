@@ -3,12 +3,12 @@ use crate::get_app;
 use crate::get_base_url;
 use crate::log;
 use crate::page::Page as PageType;
-use crate::pages::macros::load_readme;
 use crate::pages::macros::Style;
+use crate::pages::macros::load_readme;
 use crate::render_site;
 use crate::setup_article_observer;
 use content_service::JsonEntry;
-use pulldown_cmark::{html, Parser};
+use pulldown_cmark::{Parser, html};
 use std::collections::HashMap;
 
 pub fn page_home() -> PageType {
