@@ -1,9 +1,9 @@
 use crate::content::{get_global_document, strip_frontmatter};
 use crate::router::Router;
-use pulldown_cmark::{html, Parser};
+use pulldown_cmark::{Parser, html};
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::spawn_local;
-use web_sys::{window, Element};
+use web_sys::{Element, window};
 
 pub mod content;
 pub mod image;

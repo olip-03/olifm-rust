@@ -42,7 +42,7 @@ pub fn page_document(document: &str) -> PageType {
             let url = if decoded_path.starts_with("/blog/") {
                 format!("{}/content{}", get_base_url!(), decoded_path).to_string()
             } else if decoded_path.starts_with("/pictures/") {
-                format!("{}/content/{}", get_base_url!(), decoded_path).to_string()
+                format!("{}/content{}", get_base_url!(), decoded_path).to_string()
             } else {
                 format!("{}/content/blog/{}", get_base_url!(), "/blog".to_string()).to_string()
             };
