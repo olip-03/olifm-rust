@@ -1,0 +1,8 @@
+/home/runner/work/olifm-rust/olifm-rust/web/target/wasm32-unknown-unknown/release/deps/byteorder_lite-d399574fbe677b71.d: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/byteorder-lite-0.1.0/src/lib.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/byteorder-lite-0.1.0/src/io.rs
+
+/home/runner/work/olifm-rust/olifm-rust/web/target/wasm32-unknown-unknown/release/deps/libbyteorder_lite-d399574fbe677b71.rlib: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/byteorder-lite-0.1.0/src/lib.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/byteorder-lite-0.1.0/src/io.rs
+
+/home/runner/work/olifm-rust/olifm-rust/web/target/wasm32-unknown-unknown/release/deps/libbyteorder_lite-d399574fbe677b71.rmeta: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/byteorder-lite-0.1.0/src/lib.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/byteorder-lite-0.1.0/src/io.rs
+
+/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/byteorder-lite-0.1.0/src/lib.rs:
+/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/byteorder-lite-0.1.0/src/io.rs:
