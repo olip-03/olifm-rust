@@ -9,7 +9,9 @@ use crate::pages::macros::Style;
 use crate::pages::macros::load_readme;
 use crate::render_site;
 use content_service::JsonEntry;
+use pulldown_cmark::{Parser, html};
 use std::collections::HashMap;
+
 pub fn page_pictures() -> PageType {
     let mut params = HashMap::new();
     let render = |p: &PageType| "".to_string();
@@ -42,16 +44,28 @@ pub fn page_pictures_card_html(item: JsonEntry) -> String {
         img_url, item.name
     );
 
-    // Add click handler attributes to make the card clickable
+    let card_id = format!("card-{}", item.name.replace(" ", "-").to_lowercase());
     html.push_str(&format!(
-        "<div class=\"base-card photo-card\" onclick=\"on_article_card_click('{}', '{}')\" style=\"cursor: pointer;\">
+        "<div class=\"base-card photo-card\"
+            data-card-id=\"{}\"
+            data-card-name=\"{}\"
+            data-card-path=\"{}\"
+            onclick=\"on_article_card_click('{}', '{}')\" style=\"cursor: pointer;\">
             <div class=\"photo-card-img-wrap\" style=\"{}\">
                 {}
                 {}
             </div>
             <strong>{}</strong>
         </div>",
-        item.name, item.path, wrapper_style, img_blur, img_main, item.name
+        card_id,
+        item.name,
+        item.path,
+        item.name,
+        item.path,
+        wrapper_style,
+        img_blur,
+        img_main,
+        item.name
     ));
     html
 }

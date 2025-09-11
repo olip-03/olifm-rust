@@ -7,6 +7,7 @@ use crate::pages::macros::load_readme;
 use crate::render_site;
 use crate::setup_article_observer;
 use content_service::JsonEntry;
+use pulldown_cmark::{Parser, html};
 use std::collections::HashMap;
 use wasm_bindgen::prelude::*;
 
@@ -39,8 +40,8 @@ pub fn page_home_card_html(item: JsonEntry) -> String {
         card_id,
         item.name,
         item.path,
-        item.name.replace("'", "\\'"), // Escape single quotes for JS
-        item.path.replace("'", "\\'"), // Escape single quotes for JS
+        item.name.replace("'", "\\'"),
+        item.path.replace("'", "\\'"),
         item.name,
         item.entry_type,
         item.size,
