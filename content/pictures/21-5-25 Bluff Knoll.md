@@ -2,6 +2,10 @@
 name: Bluff Knoll
 date: 21-5-25
 medium: 2009 Canon EOS 500D
+tags:
+  - Scenic
+  - WA-South-West
+  - Australia
 ---
 ![[Img.jpg]]
 

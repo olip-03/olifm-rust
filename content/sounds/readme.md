@@ -1,1 +1,2 @@
 I used to be pretty good. Nowadays I'm lazy and can't be bothered writing or recording very much. One day that energy will return but I doubt it'll be today, I doubt it'll be tomorrow. 
+
