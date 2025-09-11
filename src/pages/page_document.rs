@@ -18,7 +18,6 @@ use wasm_bindgen_futures::spawn_local;
 pub fn page_document(document: &str) -> PageType {
     let mut params = HashMap::new();
 
-    // Create a unique container ID for this document
     let container_id = "document-content";
 
     let render = move |p: &PageType| {
@@ -34,7 +33,6 @@ pub fn page_document(document: &str) -> PageType {
         )
     };
 
-    // Extract the document path from the route
     let document_path = document.to_string();
     let on_after_render = move || {
         let document_path = document_path.clone();
@@ -74,7 +72,6 @@ pub fn page_document(document: &str) -> PageType {
                     let mut html_output = String::new();
                     html::push_html(&mut html_output, parser);
 
-                    // Find the container element and update its content
                     if let Some(element) = get_document!().get_element_by_id(container_id) {
                         element.set_inner_html(&html_output);
                     } else {
@@ -83,8 +80,6 @@ pub fn page_document(document: &str) -> PageType {
                 }
                 Err(e) => {
                     console_log!("Failed to load document '{}': {:?}", decoded_path, e);
-
-                    // Show error message
                     if let Some(element) = get_document!().get_element_by_id(container_id) {
                         element.set_inner_html(&format!(
                             r#"

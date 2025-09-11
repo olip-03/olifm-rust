@@ -1,6 +1,6 @@
 .logo {
-    width: 320px;
-    height: 320px;
+    width: 12rem;
+    height: 12rem;
     object-fit: cover;
 }
 .nav {
@@ -8,14 +8,13 @@
     max-width: 600px;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
+    width: 90%;
     padding: 1rem;
 }
 .nav a {
     text-decoration: none;
     color: #000;
     font-weight: bold;
-    font-size: 1.5rem;
 }
 
 .app {
@@ -23,13 +22,12 @@
     width: 100%;
 }
 .page-title {
-    padding: 1rem;
-    font-size: 1.2rem;
+    padding: 0 1rem;
 }
 
 .base-card {
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
 .base-card:hover {
@@ -42,9 +40,9 @@
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 8rem;
+    max-height: 12rem;
+    height: fit-content;
     overflow: clip;
-    font-size: 1.2rem;
 }
 .article-image-wrap {
     position: relative;
@@ -96,17 +94,16 @@
 
 .photo-card-img-wrap {
     position: relative;
-    /* Optional: define a width; otherwise it will expand to parent width */
     width: 100%;
 }
 
 .photo-card-img-wrap .photo-card-blur,
 .photo-card-img-wrap .photo-card-img {
     position: absolute;
-    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* preserves the aspect behavior inside the box */
+    object-fit: cover;
     display: block;
 }
 
@@ -118,8 +115,12 @@
     z-index: 1;
 }
 
-@container (max-width: 600px) {
+@container (max-width: 700px) {
     .photo-card {
         width: 100%;
     }
+}
+
+.document-container {
+    padding: 1rem;
 }

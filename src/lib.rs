@@ -41,10 +41,14 @@ pub fn on_article_card_visible(card_id: &str, card_name: &str, card_path: &str) 
                 html::push_html(&mut html_output, parser);
 
                 let id = format!("content{}", &card_path);
-                let element = get_document!()
-                    .get_element_by_id(&id)
-                    .expect("element should exist");
-                element.set_inner_html(&html_output);
+                match get_document!().get_element_by_id(&id) {
+                    Some(element) => {
+                        element.set_inner_html(&html_output);
+                    }
+                    None => {
+                        // do nun
+                    }
+                }
             }
             Err(e) => {
                 console_log!("Failed to load content for '{}': {:?}", card_name, e);

@@ -8,6 +8,7 @@ use content_service::{Img, JsonEntry};
 use futures::join;
 use gloo_net::Error;
 use image::{DynamicImage, ImageBuffer, ImageFormat, Rgb};
+use pulldown_cmark::{Parser, html};
 use std::borrow::BorrowMut;
 use std::io::Cursor;
 use wasm_bindgen::prelude::*;
@@ -49,7 +50,11 @@ macro_rules! render_site {
                     }
                     html.push_str("</div>");
 
-                    get_app!().set_inner_html(&html);
+                    let parser = Parser::new(&html);
+                    let mut html_output = String::new();
+                    html::push_html(&mut html_output, parser);
+
+                    get_app!().set_inner_html(&html_output);
                     setup_article_observer();
                 }
                 Err(e) => {
