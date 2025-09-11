@@ -40,7 +40,7 @@ pub fn page_pictures_card_html(item: JsonEntry) -> String {
         base64
     );
     let img_main = format!(
-        "<img class=\"photo-card-img\" src=\"{}\" alt=\"{}\" />",
+        "<img class=\"photo-card-img\" src=\"{}\" alt=\"{}\" loading=\"lazy\"/>",
         img_url, item.name
     );
 
