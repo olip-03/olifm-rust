@@ -89,7 +89,7 @@
 .photo-card-img {
     width: 100%;
     opacity: 0;
-    transition: all 2s ease;
+    transition: all 1s ease;
 }
 
 .photo-card-img-wrap {

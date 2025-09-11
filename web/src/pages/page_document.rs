@@ -8,7 +8,7 @@ use crate::get_document;
 use crate::log;
 use crate::page::Page as PageType;
 use content_service::{Img, JsonEntry};
-use pulldown_cmark::{html, Parser};
+use pulldown_cmark::{Parser, html};
 use std::collections::HashMap;
 use wasm_bindgen_futures::spawn_local;
 
@@ -41,6 +41,8 @@ pub fn page_document(document: &str) -> PageType {
 
             let url = if decoded_path.starts_with("/blog/") {
                 format!("{}/content{}", get_base_url!(), decoded_path).to_string()
+            } else if decoded_path.starts_with("/pictures/") {
+                format!("{}/content/{}", get_base_url!(), decoded_path).to_string()
             } else {
                 format!("{}/content/blog/{}", get_base_url!(), "/blog".to_string()).to_string()
             };

@@ -10,7 +10,7 @@ use std::fs::{self, File};
 use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::time::SystemTime;
-/// Determine if a path points to an image based on extension
+
 fn is_image_file(path: &Path) -> bool {
     if let Some(ext) = path.extension().and_then(|e| e.to_str()) {
         matches!(
@@ -22,7 +22,6 @@ fn is_image_file(path: &Path) -> bool {
     }
 }
 
-/// Encode a blurhash and aspect ratio for an image path
 fn encode_blurhash_and_aspect(path: &Path) -> Option<(String, String)> {
     let reader = ImageReader::open(path).ok()?;
     let img = reader.decode().ok()?;
@@ -52,7 +51,7 @@ fn build_directory_structure(base: &Path) -> std::io::Result<Vec<JsonEntry>> {
                     dirs.push(path);
                 } else if meta.is_file() && !is_image_file(&path) {
                     let relative_path = path.strip_prefix(base).unwrap_or(&path);
-                    let path_str = format!("/{}", relative_path.display());
+                    let path_str = format!("/{}", to_forward_slashes(relative_path));
                     let mut name = path
                         .file_name()
                         .and_then(|s| s.to_str())
@@ -61,7 +60,6 @@ fn build_directory_structure(base: &Path) -> std::io::Result<Vec<JsonEntry>> {
 
                     let file_images = find_images(path.to_str().unwrap_or(""), images.clone());
 
-                    // Extract frontmatter metadata
                     let metadata = extract_frontmatter(path.to_str().unwrap_or(""));
                     if metadata.contains_key("name") {
                         name = metadata["name"].clone();
@@ -124,7 +122,6 @@ fn build_directory_structure(base: &Path) -> std::io::Result<Vec<JsonEntry>> {
     Ok(entries)
 }
 
-/// Recursively traverse a directory and collect all image files with their metadata
 fn build_img_structure(base: &Path) -> std::io::Result<Vec<Img>> {
     let mut images: Vec<Img> = Vec::new();
 
@@ -137,12 +134,10 @@ fn build_img_structure(base: &Path) -> std::io::Result<Vec<Img>> {
                 let path = entry.path();
 
                 if meta.is_dir() {
-                    // Add directories to processing queue
                     dirs.push(path);
                 } else if meta.is_file() && is_image_file(&path) {
-                    // Process image files
                     let relative_path = path.strip_prefix(base).unwrap_or(&path);
-                    let path_str = format!("/{}", relative_path.display());
+                    let path_str = format!("/{}", to_forward_slashes(relative_path));
                     let name = path
                         .file_name()
                         .and_then(|s| s.to_str())
@@ -165,7 +160,9 @@ fn build_img_structure(base: &Path) -> std::io::Result<Vec<Img>> {
         }
     } else if base.is_file() && is_image_file(base) {
         // Handle single image file case
-        let path_str = format!("./{}", base.display());
+        let url = format!("{}", base.display());
+        let path_str = format!("/{}", to_forward_slashes(url));
+
         let name = base
             .file_name()
             .and_then(|s| s.to_str())
@@ -399,4 +396,8 @@ fn main() {
 fn system_time_to_iso8601(time: SystemTime) -> Option<String> {
     let datetime: DateTime<Utc> = time.into();
     Some(datetime.to_rfc3339())
+}
+
+fn to_forward_slashes<P: AsRef<Path>>(path: P) -> String {
+    path.as_ref().to_string_lossy().replace('\\', "/")
 }
