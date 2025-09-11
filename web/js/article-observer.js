@@ -12,10 +12,6 @@ function setupArticleObserver() {
           const cardPath = card.dataset.cardPath;
 
           if (window.on_article_card_visible) {
-            console.log(cardId);
-            console.log(cardName);
-            console.log(cardPath);
-            console.log("---");
             await window.on_article_card_visible(cardId, cardName, cardPath);
           } else {
             console.warn("on_article_card_visible not available yet");
