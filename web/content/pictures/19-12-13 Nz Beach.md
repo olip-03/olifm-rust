@@ -2,6 +2,9 @@
 name: NZ Beach
 date: 2019-12-12
 medium: 2009 Canon EOS 500D
+tags:
+  - Scenic
+  - New-Zealand
 ---
 ![[Img3.jpg]]
 

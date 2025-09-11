@@ -74,6 +74,7 @@ fn build_directory_structure(base: &Path) -> std::io::Result<Vec<JsonEntry>> {
                             .and_then(|time| system_time_to_iso8601(time))
                     };
 
+                    println!("Added {}", path_str);
                     entries.push(JsonEntry {
                         path: path_str,
                         entry_type: "file".to_string(),
@@ -108,6 +109,7 @@ fn build_directory_structure(base: &Path) -> std::io::Result<Vec<JsonEntry>> {
                 .and_then(|time| system_time_to_iso8601(time))
         };
 
+        println!("Added {}", path_str);
         entries.push(JsonEntry {
             path: path_str,
             entry_type: "file".to_string(),
@@ -149,6 +151,7 @@ fn build_img_structure(base: &Path) -> std::io::Result<Vec<Img>> {
 
                     // Get blurhash and aspect ratio
                     if let Some((blurhash, aspect_ratio)) = encode_blurhash_and_aspect(&path) {
+                        println!("Image added: {}", path_str);
                         images.push(Img {
                             blurhash,
                             aspect_ratio,
@@ -239,14 +242,8 @@ fn extract_frontmatter(file_path: &str) -> HashMap<String, String> {
     if let Some(captures) = re.captures(&content) {
         if let Some(yaml_content) = captures.get(1) {
             let yaml_str = yaml_content.as_str().trim();
-
-            println!("Found frontmatter in {}: \n{}", file_path, yaml_str);
-
-            // Parse YAML using serde_yaml
             match serde_yaml::from_str::<YamlValue>(yaml_str) {
                 Ok(yaml_value) => {
-                    println!("Parsed YAML: {:?}", yaml_value);
-
                     if let YamlValue::Mapping(map) = yaml_value {
                         for (key, value) in map {
                             if let YamlValue::String(k) = key {
@@ -265,8 +262,6 @@ fn extract_frontmatter(file_path: &str) -> HashMap<String, String> {
                 }
                 Err(e) => {
                     println!("Failed to parse YAML in {}: {}", file_path, e);
-
-                    // Fallback to simple line-by-line parsing
                     for line in yaml_str.lines() {
                         let line = line.trim();
                         if line.is_empty() || line.starts_with('#') {
@@ -287,10 +282,7 @@ fn extract_frontmatter(file_path: &str) -> HashMap<String, String> {
                 }
             }
         }
-    } else {
-        println!("No frontmatter found in {}", file_path);
     }
-
     metadata
 }
 

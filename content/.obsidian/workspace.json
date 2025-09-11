@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "702063d21670a759",
+        "id": "7d9f57e7823e2588",
         "type": "tabs",
         "children": [
           {
-            "id": "3da3ad3ca473db99",
+            "id": "241bd0294c2b79e0",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "pictures/readme.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "readme"
             }
           }
         ]
@@ -165,43 +169,40 @@
       "bases:Create new base": false
     }
   },
-  "active": "3da3ad3ca473db99",
+  "active": "241bd0294c2b79e0",
   "lastOpenFiles": [
-    "pictures/19-12-12 Gannet Family.md",
-    "pictures/19-12-12 Gannet In flight 1.md",
-    "pictures/19-12-12 Gannet in flight 2.md",
-    "pictures/19-12-12 Mauriwai Beach.md",
-    "pictures/19-12-13 Nz Beach.md",
-    "pictures/19-12-14 Bee Photography!.md",
-    "pictures/19-12-14 Ducks.md",
-    "pictures/19-12-14 More bees!.md",
-    "pictures/19-12-14 Yellow Dahlia.md",
-    "pictures/20-02-01 Karri Valley Waterfall.md",
-    "pictures/20-04-12 Djiti-Djiti.md",
-    "pictures/24-07-07 Friends-Aunties Garden.md",
-    "pictures/24-06-23 Daisies in Vancouver.md",
-    "pictures/24-07-05 Saskatoon.md",
-    "pictures/24-07-09 Fisherman.md",
-    "pictures/25-06-12 Mr. Magpie.md",
     "pictures/25-08-15 Puffy.md",
     "pictures/25-08-12 Crow Couple.md",
     "pictures/25-07-27 Oystercatchers.md",
     "pictures/25-06-12 Mrs. Magpie.md",
-    "assets/DSCN1509.jpg",
-    "assets/DSCN1529(edit-plz).jpg",
-    "assets/DSCN1608.jpg",
-    "assets/PXL_20240623_191141618.jpg",
-    "assets/DSCN1661.jpg",
-    "assets/DSCN1670.jpg",
-    "pictures/readme.md",
-    "assets/DSCN1675.jpg",
-    "pictures/21-5-25 Bluff Knoll.md",
-    "assets/PXL_20240705_215141089.jpg",
-    "assets/PXL_20240707_173245044.jpg",
-    "assets/PXL_20240709_182744715.jpg",
+    "pictures/25-06-12 Mr. Magpie.md",
+    "pictures/24-07-09 Fisherman.md",
+    "pictures/24-07-07 Friends-Aunties Garden.md",
+    "pictures/24-07-05 Saskatoon.md",
+    "pictures/24-06-23 Daisies in Vancouver.md",
+    "pictures/20-04-12 Djiti-Djiti.md",
+    "pictures/19-12-14 Yellow Dahlia.md",
     "pictures/19-12-14 Wall of flowers.md",
-    "blog/25-9-10 Testing.md",
+    "pictures/19-12-14 More bees!.md",
+    "pictures/19-12-14 Ducks.md",
+    "pictures/19-12-14 Bee Photography!.md",
+    "pictures/19-12-12 Mauriwai Beach.md",
+    "pictures/19-12-12 Gannet in flight 2.md",
+    "pictures/19-12-12 Gannet In flight 1.md",
+    "pictures/19-12-12 Gannet Family.md",
+    "assets/DSCN1529(edit-plz).jpg",
     "blog/readme.md",
-    "blog/assets"
+    "pictures/readme.md",
+    "sounds/readme.md",
+    "readme.md",
+    "blog/25-9-10 Testing.md",
+    "pictures/19-12-12 Muriwai Gannet Colony.md",
+    "pictures/19-12-13 Nz Beach.md",
+    "blog/assets/DSCN1670.jpg",
+    "blog/assets",
+    "assets/Img4.jpg",
+    "assets/Img3.jpg",
+    "assets/Img2.jpg",
+    "assets/Img.jpg"
   ]
 }
