@@ -54,7 +54,7 @@ pub fn replace_images(content: &str, images: &[Img]) -> String {
         let html_img = format!(
             r#"<div class="article-image-wrap" style="aspect-ratio: {};">
                 <img class="article-image-blur" src="data:image/bmp;base64,{}" alt="blurred image" />
-                <img class="photo-card-img" src="{}" alt="{}" loading="lazy" onload="this.style.opacity=1" />
+                <img class="photo-card-img article-image" src="{}" alt="{}" loading="lazy" onload="this.style.opacity=1" />
             </div>"#,
             img.aspect_ratio, base64, img_url, img.name
         );
