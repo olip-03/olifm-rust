@@ -17,12 +17,111 @@
     font-weight: bold;
 }
 
+/* base variables so you can change color and side width easily */
+:root {
+    --tags-bg: 240, 240, 240; /* rgb parts for background color */
+    --tags-side-fade: 1rem; /* width of the left/right fades */
+}
+
+.tag-container {
+    top: 0;
+    position: sticky;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 64px;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(var(--tags-bg), 1) 30%,
+        rgba(var(--tags-bg), 0) 100%
+    );
+    scrollbar-width: none;
+}
+.tag-container::before {
+    pointer-events: none;
+    content: "";
+    background-image: linear-gradient(
+        to right,
+        rgba(var(--tags-bg), 1) 30%,
+        rgba(var(--tags-bg), 0) 100%
+    );
+    height: 100%;
+    width: 1rem;
+    position: absolute;
+    left: 0;
+    z-index: 6;
+}
+.tag-container::after {
+    pointer-events: none;
+    content: "";
+    background-image: linear-gradient(
+        to left,
+        rgba(var(--tags-bg), 1) 30%,
+        rgba(var(--tags-bg), 0) 100%
+    );
+    height: 100%;
+    width: 10rem;
+    position: absolute;
+    right: 0;
+    z-index: 6;
+}
+.tags {
+    height: 100%;
+    top: 0;
+    padding: 0 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    scrollbar-width: none;
+}
+
+.tag {
+    padding: 0.5rem 1rem;
+    border-radius: 32px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+.tag:hover {
+    transform: scale(1.1);
+}
+.tags::-webkit-scrollbar {
+    height: 4px;
+}
+
+.tags::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 2px;
+}
+
+.tags::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 2px;
+}
+
+.tag::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+.filter-icon {
+    position: absolute;
+    right: 0;
+    background-color: black;
+    z-index: 7;
+}
+
 .app {
     max-width: 800px;
     width: 100%;
 }
 .page-title {
-    padding: 0 1rem;
+    padding: 0 1rem 1rem 1rem;
 }
 
 .base-card {

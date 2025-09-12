@@ -27,6 +27,17 @@ macro_rules! render_site {
 
                     console_log!("{:?}", tags);
 
+                    html.push_str("<div class=\"tag-container\">");
+                    html.push_str("<div class=\"tags\">");
+                    for tag in tags {
+                        html.push_str(&format!("<span class=\"tag\">{}</span>", tag));
+                    }
+                    html.push_str("</div>");
+                    html.push_str(
+                        "<img class=\"filter-icon\" src=\"/img/tag.svg\" alt=\"Filter\">",
+                    );
+                    html.push_str("</div>");
+
                     if content_path != "" {
                         let div_class = format!("{}-container", &content_path);
                         html.push_str(&format!("<div class=\"{}\">", div_class));
