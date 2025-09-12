@@ -21,6 +21,12 @@ pub async fn get_global_content(
     client_ref.get_content(path, filter).await
 }
 
+pub async fn get_global_tags(path: String) -> Result<Vec<String>, ContentServiceError> {
+    let client = GLOBAL_CONTENT_CLIENT.clone();
+    let mut client_ref = client.lock().await;
+    client_ref.get_tags(path).await
+}
+
 pub async fn get_global_document(path: &str) -> Result<String, ContentServiceError> {
     let client = GLOBAL_CONTENT_CLIENT.clone();
     let mut client_ref = client.lock().await;

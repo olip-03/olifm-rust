@@ -1,3 +1,4 @@
+use crate::console_log;
 use crate::content::parse_debug_sequence;
 use crate::get_app;
 use crate::get_base_url;
@@ -7,6 +8,7 @@ use crate::pages::macros::Style;
 use crate::pages::macros::load_readme;
 use crate::render_site;
 use crate::setup_article_observer;
+
 use content_service::JsonEntry;
 use pulldown_cmark::{Parser, html};
 use std::collections::HashMap;

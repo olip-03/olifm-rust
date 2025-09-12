@@ -1,6 +1,7 @@
 use crate::console_log;
-use crate::content::{get_global_content, get_global_document}; // Add this import
+use crate::content::{get_global_content, get_global_document, get_global_tags};
 use crate::log;
+
 use content_service::ContentServiceError;
 use content_service::JsonEntry;
 pub enum Style {
@@ -19,10 +20,12 @@ macro_rules! render_site {
             let base = get_base_url!().to_string();
             let doc_url = format!("{}/content/{}/readme.md", base, content_path);
             match crate::pages::macros::get_page_content(&content_path, &doc_url).await {
-                Ok((mut repo_content, document)) => {
+                Ok((mut repo_content, document, tags)) => {
                     let mut html = String::new();
 
                     load_readme(&mut repo_content, &mut html, &document);
+
+                    console_log!("{:?}", tags);
 
                     if content_path != "" {
                         let div_class = format!("{}-container", &content_path);
@@ -62,11 +65,12 @@ macro_rules! render_site {
 pub async fn get_page_content(
     _path: &str,
     doc_url: &str,
-) -> Result<(Vec<JsonEntry>, String), ContentServiceError> {
+) -> Result<(Vec<JsonEntry>, String, Vec<String>), ContentServiceError> {
     let path = format!("/{}", _path);
-    let items = get_global_content(path, Some("file".to_string())).await?;
+    let items = get_global_content(path.clone(), Some("file".to_string())).await?;
+    let tags = get_global_tags(path.clone()).await?;
     let document = get_global_document(doc_url).await?;
-    Ok((items, document))
+    Ok((items, document, tags))
 }
 
 pub fn load_readme(content: &mut Vec<JsonEntry>, html: &mut String, document: &String) {
