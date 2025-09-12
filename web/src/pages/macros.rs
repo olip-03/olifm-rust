@@ -33,9 +33,6 @@ macro_rules! render_site {
                         html.push_str(&format!("<span class=\"tag\">{}</span>", tag));
                     }
                     html.push_str("</div>");
-                    html.push_str(
-                        "<img class=\"filter-icon\" src=\"/img/tag.svg\" alt=\"Filter\">",
-                    );
                     html.push_str("</div>");
 
                     if content_path != "" {
