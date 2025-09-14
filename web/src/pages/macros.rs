@@ -1,5 +1,11 @@
 use crate::console_log;
-use crate::content::{get_global_content, get_global_document, get_global_tags};
+use crate::content::get_tags_from_path;
+use crate::content::{
+    get_global_content, get_global_document, get_global_tags, parse_debug_sequence,
+};
+use regex::Regex;
+
+use crate::get_full_url;
 use crate::log;
 use chrono::{DateTime, NaiveDate, NaiveDateTime, Utc};
 use content_service::ContentServiceError;
@@ -16,7 +22,6 @@ macro_rules! render_site {
     ($path:expr, $style:expr) => {{
         let content_path = $path.to_string();
         let style = $style;
-
         wasm_bindgen_futures::spawn_local(async move {
             let base = get_base_url!().to_string();
             let doc_url = format!("{}/content/{}/readme.md", base, content_path);
@@ -26,12 +31,14 @@ macro_rules! render_site {
 
                     load_readme(&mut repo_content, &mut html, &document);
 
-                    console_log!("{:?}", tags);
-
                     html.push_str("<div class=\"tag-container\">");
                     html.push_str("<div class=\"tags\">");
                     for tag in tags {
-                        html.push_str(&format!("<span class=\"tag\">{}</span>", tag));
+                        // todo: on click event
+                        html.push_str(&format!(
+                            "<span class=\"tag\" onclick=\"on_tag_click('{}')\">{}</span>",
+                            tag, tag
+                        ));
                     }
                     html.push_str("</div>");
                     html.push_str("</div>");
@@ -75,14 +82,53 @@ pub async fn get_page_content(
     _path: &str,
     doc_url: &str,
 ) -> Result<(Vec<JsonEntry>, String, Vec<String>), ContentServiceError> {
+    let full_url = get_full_url!();
     let path = format!("/{}", _path);
     let mut items = get_global_content(path.clone(), Some("file".to_string())).await?;
 
     sort_entries_by_date(&mut items, true);
 
     let tags = get_global_tags(path.clone()).await?;
-    let document = get_global_document(doc_url).await?;
-    Ok((items, document, tags))
+
+    let page_tags_raw = get_tags_from_path(&full_url);
+    let allowed_tags = page_tags_raw
+        .split(',')
+        .map(|tag| tag.trim().to_string())
+        .filter(|tag| !tag.is_empty())
+        .collect::<Vec<String>>();
+
+    let mut to_keep = Vec::new();
+    if (allowed_tags.len() == 0) {
+        to_keep = items.clone();
+    } else {
+        for item in &items {
+            if let Some(item_tags) = item.metadata.get("tags") {
+                let re = Regex::new(r#"String\("([^"]*)"\)"#).unwrap();
+                let tags: Vec<&str> = re
+                    .captures_iter(item_tags)
+                    .map(|cap| cap.get(1).unwrap().as_str())
+                    .collect();
+                // if item doesn't contain any of the page tags, skip it
+                let mut tag_matches = 0;
+                for item_tag in &tags {
+                    for all_tag in &allowed_tags {
+                        let to_push = item.clone();
+                        if item_tag == all_tag {
+                            tag_matches += 1;
+                        }
+                        if tag_matches == allowed_tags.len() && !to_keep.contains(&to_push) {
+                            to_keep.push(to_push);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    let mut document = get_global_document(doc_url).await?;
+
+    Ok((to_keep, document, tags))
 }
 
 pub fn load_readme(content: &mut Vec<JsonEntry>, html: &mut String, document: &String) {

@@ -60,6 +60,11 @@ pub fn on_article_card_click(card_path: &str) {
     Router::navigate_to(&card_path);
 }
 
+#[wasm_bindgen]
+pub fn on_tag_click(tag: &str) {
+    console_log!("Tag clicked: {}", tag);
+}
+
 fn init_shell(document: web_sys::Document) {
     let body = document.body().expect("document should have a body");
 
@@ -183,5 +188,15 @@ macro_rules! get_base_url {
             .origin()
             .expect("Couldn't get site base url")
             .to_string()
+    }};
+}
+
+#[macro_export]
+macro_rules! get_full_url {
+    () => {{
+        let window = web_sys::window().expect("no global window exists");
+        let location = window.location();
+        // `href` returns the full URL (origin + path + query + fragment)
+        location.href().expect("Couldn't get full URL").to_string()
     }};
 }

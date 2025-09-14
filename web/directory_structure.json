@@ -4,7 +4,7 @@
     "type": "file",
     "size": 187,
     "name": "readme.md",
-    "date": "2025-09-14T08:21:07.434481400+00:00"
+    "date": "2025-09-14T15:41:37.796515600+00:00"
   },
   {
     "path": "/resume/2021-1-Cert-IV-CST.md",
@@ -21,9 +21,9 @@
       }
     ],
     "metadata": {
-      "date": "01/01/2021",
+      "name": "Certificate IV Computer Systems Technology",
       "tags": "Sequence [String(\"Qualification\"), String(\"Concluded\")]",
-      "name": "Certificate IV Computer Systems Technology"
+      "date": "01/01/2021"
     }
   },
   {
@@ -45,8 +45,8 @@
     "name": "Employment started with Monadelphous",
     "date": "01/10/2021",
     "metadata": {
-      "tags": "Sequence [String(\"Job\"), String(\"Concluded\")]",
       "date": "01/10/2021",
+      "tags": "Sequence [String(\"Job\"), String(\"Concluded\")]",
       "name": "Employment started with Monadelphous"
     }
   },
@@ -57,8 +57,8 @@
     "name": "User Offboarding Tool created for Monadelphous",
     "date": "11/09/2022",
     "metadata": {
-      "name": "User Offboarding Tool created for Monadelphous",
       "tags": "Sequence [String(\"Project\"), String(\"Concluded\")]",
+      "name": "User Offboarding Tool created for Monadelphous",
       "date": "11/09/2022"
     }
   },
@@ -69,9 +69,9 @@
     "name": "User Onboarding Tool created for Monadelphous",
     "date": "04/01/2023",
     "metadata": {
+      "date": "04/01/2023",
       "name": "User Onboarding Tool created for Monadelphous",
-      "tags": "Sequence [String(\"Project\"), String(\"Concluded\")]",
-      "date": "04/01/2023"
+      "tags": "Sequence [String(\"Project\"), String(\"Concluded\")]"
     }
   },
   {
@@ -81,9 +81,9 @@
     "name": "Portajel Music Player Project Starts",
     "date": "28/08/2023",
     "metadata": {
+      "date": "28/08/2023",
       "name": "Portajel Music Player Project Starts",
-      "tags": "Sequence [String(\"Project\"), String(\"Ongoing\")]",
-      "date": "28/08/2023"
+      "tags": "Sequence [String(\"Project\"), String(\"Ongoing\")]"
     }
   },
   {
@@ -94,8 +94,8 @@
     "date": "01/03/2024",
     "metadata": {
       "tags": "Sequence [String(\"Project\"), String(\"Concluded\")]",
-      "date": "01/03/2024",
-      "name": "User Management Tool created for Monadelphous"
+      "name": "User Management Tool created for Monadelphous",
+      "date": "01/03/2024"
     }
   },
   {
@@ -105,8 +105,8 @@
     "name": "Employment started with Dapth",
     "date": "10/10/2024",
     "metadata": {
-      "tags": "Sequence [String(\"Job\"), String(\"Concluded\")]",
       "date": "10/10/2024",
+      "tags": "Sequence [String(\"Job\"), String(\"Concluded\")]",
       "name": "Employment started with Dapth"
     }
   },
@@ -117,9 +117,9 @@
     "name": "Ponder CPD App",
     "date": "05/01/2025",
     "metadata": {
+      "tags": "Sequence [String(\"Project\"), String(\"Ongoing\")]",
       "name": "Ponder CPD App",
-      "date": "05/01/2025",
-      "tags": "Sequence [String(\"Project\"), String(\"Ongoing\")]"
+      "date": "05/01/2025"
     }
   },
   {
@@ -139,7 +139,7 @@
     "type": "file",
     "size": 1248,
     "name": "readme.md",
-    "date": "2025-09-14T08:21:07.435487700+00:00"
+    "date": "2025-09-14T15:41:37.798516100+00:00"
   },
   {
     "path": "/pictures/19-12-12 Gannet Family.md",
@@ -156,9 +156,9 @@
       }
     ],
     "metadata": {
+      "name": "Gannet Family",
       "date": "2019-12-12",
       "medium": "2009 Canon EOS 500D",
-      "name": "Gannet Family",
       "tags": "Sequence [String(\"Gannet\"), String(\"Bird\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]"
     }
   },
@@ -177,9 +177,9 @@
       }
     ],
     "metadata": {
-      "date": "2019-12-01",
-      "name": "Gannet In flight",
       "medium": "2009 Canon EOS 500D",
+      "name": "Gannet In flight",
+      "date": "2019-12-01",
       "tags": "Sequence [String(\"Bird\"), String(\"Gannet\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]"
     }
   },
@@ -199,9 +199,9 @@
     ],
     "metadata": {
       "tags": "Sequence [String(\"Bird\"), String(\"Gannet\"), String(\"Scenic\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]",
-      "date": "2019-12-12",
+      "medium": "2009 Canon EOS 500D",
       "name": "Gannet In Flight 2",
-      "medium": "2009 Canon EOS 500D"
+      "date": "2019-12-12"
     }
   },
   {
@@ -219,10 +219,10 @@
       }
     ],
     "metadata": {
-      "tags": "Sequence [String(\"Scenic\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]",
       "name": "Mauriwai Beach",
-      "medium": "2009 Canon EOS 500D",
-      "date": "2019-12-12"
+      "tags": "Sequence [String(\"Scenic\"), String(\"New-Zealand\"), String(\"Mauriwai-Beach\")]",
+      "date": "2019-12-12",
+      "medium": "2009 Canon EOS 500D"
     }
   },
   {
@@ -240,9 +240,9 @@
       }
     ],
     "metadata": {
-      "date": "2019-12-12",
       "name": "NZ Beach",
       "tags": "Sequence [String(\"Scenic\"), String(\"New-Zealand\")]",
+      "date": "2019-12-12",
       "medium": "2009 Canon EOS 500D"
     }
   },
@@ -261,10 +261,10 @@
       }
     ],
     "metadata": {
-      "date": "2019-12-14",
-      "medium": "2009 Canon EOS 500D",
+      "tags": "Sequence [String(\"Flowers\"), String(\"New-Zealand\"), String(\"Insects\"), String(\"Bee\")]",
       "name": "Bee Photography!",
-      "tags": "Sequence [String(\"Flowers\"), String(\"New-Zealand\"), String(\"Insects\"), String(\"Bee\")]"
+      "medium": "2009 Canon EOS 500D",
+      "date": "2019-12-14"
     }
   },
   {
@@ -282,9 +282,9 @@
       }
     ],
     "metadata": {
-      "date": "2019-12-12",
       "name": "Ducks",
       "medium": "2009 Canon EOS 500D",
+      "date": "2019-12-12",
       "tags": "Sequence [String(\"Statues\"), String(\"Bird\"), String(\"New-Zealand\")]"
     }
   },
@@ -303,10 +303,10 @@
       }
     ],
     "metadata": {
-      "name": "More bees!",
-      "date": "2019-12-14",
+      "medium": "2009 Canon EOS 500D",
       "tags": "Sequence [String(\"Insects\"), String(\"Flowers\"), String(\"New-Zealand\"), String(\"Bee\")]",
-      "medium": "2009 Canon EOS 500D"
+      "name": "More bees!",
+      "date": "2019-12-14"
     }
   },
   {
@@ -324,10 +324,10 @@
       }
     ],
     "metadata": {
+      "medium": "2009 Canon EOS 500D",
       "tags": "Sequence [String(\"Flowers\"), String(\"New-Zealand\")]",
       "name": "Wall of flowers",
-      "date": "2019-12-14",
-      "medium": "2009 Canon EOS 500D"
+      "date": "2019-12-14"
     }
   },
   {
@@ -345,8 +345,8 @@
       }
     ],
     "metadata": {
-      "medium": "2009 Canon EOS 500D",
       "name": "Yellow Dahlia",
+      "medium": "2009 Canon EOS 500D",
       "date": "2019-12-14",
       "tags": "Sequence [String(\"New-Zealand\"), String(\"Flowers\")]"
     }
@@ -366,10 +366,10 @@
       }
     ],
     "metadata": {
-      "tags": "Sequence [String(\"Scenic\"), String(\"WA-South-West\"), String(\"Australia\")]",
-      "medium": "2009 Canon EOS 500D",
+      "date": "2020-02-01",
       "name": "Karri Valley Waterfall",
-      "date": "2020-02-01"
+      "medium": "2009 Canon EOS 500D",
+      "tags": "Sequence [String(\"Scenic\"), String(\"WA-South-West\"), String(\"Australia\")]"
     }
   },
   {
@@ -387,10 +387,10 @@
       }
     ],
     "metadata": {
-      "tags": "Sequence [String(\"Djiti-Djiti\"), String(\"Bird\"), String(\"WA-South-West\"), String(\"Australia\")]",
-      "medium": "2009 Canon EOS 500D",
+      "date": "2020-04-08",
       "name": "Djiti-Djiti",
-      "date": "2020-04-08"
+      "tags": "Sequence [String(\"Djiti-Djiti\"), String(\"Bird\"), String(\"WA-South-West\"), String(\"Australia\")]",
+      "medium": "2009 Canon EOS 500D"
     }
   },
   {
@@ -408,9 +408,9 @@
       }
     ],
     "metadata": {
+      "date": "2021-05-25",
       "name": "Bluff Knoll",
       "tags": "Sequence [String(\"Scenic\"), String(\"WA-South-West\"), String(\"Australia\")]",
-      "date": "2021-05-25",
       "medium": "2009 Canon EOS 500D"
     }
   },
@@ -450,9 +450,9 @@
       }
     ],
     "metadata": {
-      "name": "Saskatoon",
       "date": "2024-07-05",
-      "medium": "Google Pixel 8"
+      "medium": "Google Pixel 8",
+      "name": "Saskatoon"
     }
   },
   {
@@ -470,8 +470,8 @@
       }
     ],
     "metadata": {
-      "tags": "Sequence [String(\"Scenic\"), String(\"Flowers\"), String(\"Canada\"), String(\"Saskatchewan\")]",
       "medium": "Google Pixel 8",
+      "tags": "Sequence [String(\"Scenic\"), String(\"Flowers\"), String(\"Canada\"), String(\"Saskatchewan\")]",
       "name": "Friends-Aunties Garden",
       "date": "2024-07-07"
     }
@@ -491,10 +491,10 @@
       }
     ],
     "metadata": {
-      "medium": "Google Pixel 8",
       "name": "Fisherman",
-      "date": "2024-07-09",
-      "tags": "Sequence [String(\"Fox\"), String(\"Canada\"), String(\"Saskatchewan\")]"
+      "tags": "Sequence [String(\"Fox\"), String(\"Canada\"), String(\"Saskatchewan\")]",
+      "medium": "Google Pixel 8",
+      "date": "2024-07-09"
     }
   },
   {
@@ -512,10 +512,10 @@
       }
     ],
     "metadata": {
-      "medium": "Nikon Coolpix P900",
-      "name": "Mr. Magpie",
       "tags": "Sequence [String(\"Magpie\"), String(\"Perth\"), String(\"Australia\"), String(\"Portrait\"), String(\"Bird\")]",
-      "date": "2025-06-12"
+      "name": "Mr. Magpie",
+      "date": "2025-06-12",
+      "medium": "Nikon Coolpix P900"
     }
   },
   {
@@ -533,10 +533,10 @@
       }
     ],
     "metadata": {
-      "name": "Mrs. Magpie",
+      "date": "2025-06-12",
       "medium": "Nikon Coolpix P900",
       "tags": "Sequence [String(\"Bird\"), String(\"Magpie\"), String(\"Australia\"), String(\"Perth\"), String(\"Portrait\")]",
-      "date": "2025-06-12"
+      "name": "Mrs. Magpie"
     }
   },
   {
@@ -555,9 +555,9 @@
     ],
     "metadata": {
       "name": "Oystercatchers",
+      "tags": "Sequence [String(\"Pied-Oystercatchers\"), String(\"Australia\"), String(\"Perth\"), String(\"Bird\")]",
       "medium": "Nikon Coolpix P900",
-      "date": "2025-07-27",
-      "tags": "Sequence [String(\"Pied-Oystercatchers\"), String(\"Australia\"), String(\"Perth\"), String(\"Bird\")]"
+      "date": "2025-07-27"
     }
   },
   {
@@ -575,10 +575,10 @@
       }
     ],
     "metadata": {
-      "date": "2025-08-11",
-      "name": "Crow Couple",
+      "tags": "Sequence [String(\"Australia\"), String(\"Perth\"), String(\"Bird\"), String(\"Crow\")]",
       "medium": "Nikon Coolpix P900",
-      "tags": "Sequence [String(\"Australia\"), String(\"Perth\"), String(\"Bird\"), String(\"Crow\")]"
+      "name": "Crow Couple",
+      "date": "2025-08-11"
     }
   },
   {
@@ -596,10 +596,10 @@
       }
     ],
     "metadata": {
-      "date": "2025-08-15",
       "tags": "Sequence [String(\"Australia\"), String(\"Bird\"), String(\"Perth\")]",
-      "medium": "Nikon Coolpix P900",
-      "name": "Puffy"
+      "date": "2025-08-15",
+      "name": "Puffy",
+      "medium": "Nikon Coolpix P900"
     }
   },
   {
@@ -607,7 +607,7 @@
     "type": "file",
     "size": 224,
     "name": "readme.md",
-    "date": "2025-09-14T08:21:07.422986+00:00"
+    "date": "2025-09-14T15:41:37.787611800+00:00"
   },
   {
     "path": "/blog/25-09-12 The lights are on.md",
@@ -617,8 +617,8 @@
     "date": "2025-09-12",
     "metadata": {
       "date": "2025-09-12",
-      "name": "The lights are on!",
-      "tags": "Sequence [String(\"Blog\")]"
+      "tags": "Sequence [String(\"Blog\")]",
+      "name": "The lights are on!"
     }
   },
   {
@@ -628,9 +628,9 @@
     "name": "New blog!",
     "date": "2025-09-10",
     "metadata": {
-      "tags": "Sequence [String(\"Blog\"), String(\"Testing\")]",
       "name": "New blog!",
-      "date": "2025-09-10"
+      "date": "2025-09-10",
+      "tags": "Sequence [String(\"Blog\"), String(\"Testing\")]"
     }
   },
   {
@@ -638,41 +638,41 @@
     "type": "file",
     "size": 224,
     "name": "readme.md",
-    "date": "2025-09-14T08:21:07.418967200+00:00"
+    "date": "2025-09-14T15:41:37.784098700+00:00"
   },
   {
     "path": "/.obsidian/app.json",
     "type": "file",
     "size": 27,
     "name": "app.json",
-    "date": "2025-09-14T08:21:07.366777100+00:00"
+    "date": "2025-09-14T15:41:37.726757+00:00"
   },
   {
     "path": "/.obsidian/appearance.json",
     "type": "file",
     "size": 2,
     "name": "appearance.json",
-    "date": "2025-09-14T08:21:07.367777600+00:00"
+    "date": "2025-09-14T15:41:37.726757+00:00"
   },
   {
     "path": "/.obsidian/core-plugins.json",
     "type": "file",
     "size": 697,
     "name": "core-plugins.json",
-    "date": "2025-09-14T08:21:07.367777600+00:00"
+    "date": "2025-09-14T15:41:37.727754800+00:00"
   },
   {
     "path": "/.obsidian/graph.json",
     "type": "file",
     "size": 514,
     "name": "graph.json",
-    "date": "2025-09-14T08:21:07.368777700+00:00"
+    "date": "2025-09-14T15:41:37.728754900+00:00"
   },
   {
     "path": "/.obsidian/workspace.json",
     "type": "file",
     "size": 6040,
     "name": "workspace.json",
-    "date": "2025-09-14T08:21:07.367777600+00:00"
+    "date": "2025-09-14T15:41:37.727754800+00:00"
   }
 ]

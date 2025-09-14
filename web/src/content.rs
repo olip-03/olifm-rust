@@ -98,3 +98,20 @@ pub fn parse_debug_sequence(debug_str: &str) -> String {
         items.join(" • ")
     }
 }
+
+pub fn get_tags_from_path(path: &str) -> String {
+    let mut path = path;
+    let mut tags = String::new();
+    // get tags
+    if let Some(query) = path.split_once('?') {
+        path = query.0;
+        let mut params = query.1.split('&').collect::<Vec<&str>>();
+        params.sort();
+        for param in params {
+            if param.starts_with("tags=") {
+                tags = param.split('=').nth(1).unwrap_or_default().to_string();
+            }
+        }
+    }
+    tags
+}
