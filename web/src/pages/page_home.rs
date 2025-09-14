@@ -1,6 +1,8 @@
 use crate::console_log;
+use crate::content::get_global_document;
 use crate::content::parse_debug_sequence;
 use crate::get_app;
+
 use crate::get_base_url;
 use crate::log;
 use crate::page::Page as PageType;
@@ -20,9 +22,21 @@ pub fn page_home() -> PageType {
 
     let on_after_render = || {
         render_site!("blog", Style::Card);
+        load_cache();
     };
 
     PageType::new("Home", params, render).with_on_after_render(Some(Box::new(on_after_render)))
+}
+
+fn load_cache() {
+    wasm_bindgen_futures::spawn_local(async {
+        let pages: [&str; 3] = ["pictures", "sounds", "resume"];
+        for page in pages {
+            let base = get_base_url!().to_string();
+            let doc_url = format!("{}/content/{}/readme.md", base, page).to_string();
+            get_global_document(&doc_url).await;
+        }
+    });
 }
 
 pub fn page_home_card_html(item: JsonEntry) -> String {
