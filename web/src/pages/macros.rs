@@ -1,9 +1,10 @@
 use crate::console_log;
 use crate::content::{get_global_content, get_global_document, get_global_tags};
 use crate::log;
-
+use chrono::{DateTime, NaiveDate, NaiveDateTime, Utc};
 use content_service::ContentServiceError;
 use content_service::JsonEntry;
+use std::cmp::Ordering;
 pub enum Style {
     Card,
     Photo,
@@ -75,7 +76,10 @@ pub async fn get_page_content(
     doc_url: &str,
 ) -> Result<(Vec<JsonEntry>, String, Vec<String>), ContentServiceError> {
     let path = format!("/{}", _path);
-    let items = get_global_content(path.clone(), Some("file".to_string())).await?;
+    let mut items = get_global_content(path.clone(), Some("file".to_string())).await?;
+
+    sort_entries_by_date(&mut items, true);
+
     let tags = get_global_tags(path.clone()).await?;
     let document = get_global_document(doc_url).await?;
     Ok((items, document, tags))
@@ -94,4 +98,49 @@ pub fn load_readme(content: &mut Vec<JsonEntry>, html: &mut String, document: &S
         html.push_str(&document);
     }
     html.push_str("</div>");
+}
+
+fn parse_date_to_utc(s: &str) -> Option<DateTime<Utc>> {
+    if let Ok(dt) = DateTime::parse_from_rfc3339(s) {
+        return Some(dt.with_timezone(&Utc));
+    }
+    if let Ok(ndt) = NaiveDateTime::parse_from_str(s, "%Y-%m-%d %H:%M:%S") {
+        return Some(DateTime::<Utc>::from_utc(ndt, Utc));
+    }
+
+    if let Ok(nd) = NaiveDate::parse_from_str(s, "%Y-%m-%d") {
+        return Some(DateTime::<Utc>::from_utc(nd.and_hms(0, 0, 0), Utc));
+    }
+    let fmts = ["%Y/%m/%d", "%d-%m-%Y", "%m/%d/%Y", "%B %d, %Y", "%b %d, %Y"];
+
+    for fmt in &fmts {
+        if let Ok(ndt) = NaiveDateTime::parse_from_str(s, fmt) {
+            return Some(DateTime::<Utc>::from_utc(ndt, Utc));
+        }
+        if let Ok(nd) = NaiveDate::parse_from_str(s, fmt) {
+            return Some(DateTime::<Utc>::from_utc(nd.and_hms(0, 0, 0), Utc));
+        }
+    }
+
+    None
+}
+
+pub fn sort_entries_by_date(entries: &mut [JsonEntry], newest_first: bool) {
+    entries.sort_by(|a, b| {
+        let a_date = a.metadata.get("date").and_then(|s| parse_date_to_utc(s));
+        let b_date = b.metadata.get("date").and_then(|s| parse_date_to_utc(s));
+
+        match (a_date, b_date) {
+            (Some(ad), Some(bd)) => {
+                if newest_first {
+                    bd.cmp(&ad)
+                } else {
+                    ad.cmp(&bd)
+                }
+            }
+            (Some(_), None) => Ordering::Less,
+            (None, Some(_)) => Ordering::Greater,
+            (None, None) => a.name.cmp(&b.name),
+        }
+    });
 }
