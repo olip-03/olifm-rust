@@ -37,8 +37,6 @@ impl Router {
         if let Some(query) = path.split_once('?') {
             path = query.0;
         }
-
-        console_log!("Page Tags: {:?}", tags);
         // set_params.insert("tags".to_string(), tags);
 
         // match page
