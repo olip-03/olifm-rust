@@ -12,6 +12,3 @@ If you're interested in contacting me, I can be reached at
 - Mail: [mail@oli.fm](mailto:mail@oli.fm)
 
 Thank you for visiting, and have a nice day.
-
----
-<h1 style="margin-bottom: 0; position: relative; bottom: -1rem;">Employment History</h1>

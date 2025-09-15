@@ -4,9 +4,8 @@ use crate::get_app;
 use crate::get_base_url;
 use crate::log;
 use crate::page::Page as PageType;
-use crate::pages::macros::load_readme;
+use crate::pages::macros::{Style, get_page_tags, load_readme};
 
-use crate::pages::macros::Style;
 use crate::render_site;
 use crate::setup_article_observer;
 use pulldown_cmark::{Parser, html};
@@ -17,8 +16,8 @@ pub fn page_about() -> PageType {
     let render = |_: &PageType| "".to_string();
 
     let on_after_render = || {
-        render_site!("resume", Style::Card);
-        // render_readme();
+        // render_site!("resume", Style::Card);
+        render_readme();
         // render_employment_history();
     };
 
@@ -29,7 +28,7 @@ fn render_readme() {
     wasm_bindgen_futures::spawn_local(async {
         let mut html = String::new();
         let base = get_base_url!().to_string();
-        let doc_url = format!("{}/content/readme.md", base).to_string();
+        let doc_url = format!("{}/content/resume/readme.md", base).to_string();
         match get_global_document(&doc_url).await {
             Ok(document) => {
                 let parser = Parser::new(&document);
