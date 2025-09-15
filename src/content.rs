@@ -21,6 +21,12 @@ pub async fn get_global_content(
     client_ref.get_content(path, filter).await
 }
 
+pub async fn get_global_tags(path: String) -> Result<Vec<String>, ContentServiceError> {
+    let client = GLOBAL_CONTENT_CLIENT.clone();
+    let mut client_ref = client.lock().await;
+    client_ref.get_tags(path).await
+}
+
 pub async fn get_global_document(path: &str) -> Result<String, ContentServiceError> {
     let client = GLOBAL_CONTENT_CLIENT.clone();
     let mut client_ref = client.lock().await;
@@ -91,4 +97,21 @@ pub fn parse_debug_sequence(debug_str: &str) -> String {
     } else {
         items.join(" • ")
     }
+}
+
+pub fn get_tags_from_path(path: &str) -> String {
+    let mut path = path;
+    let mut tags = String::new();
+    // get tags
+    if let Some(query) = path.split_once('?') {
+        path = query.0;
+        let mut params = query.1.split('&').collect::<Vec<&str>>();
+        params.sort();
+        for param in params {
+            if param.starts_with("tags=") {
+                tags = param.split('=').nth(1).unwrap_or_default().to_string();
+            }
+        }
+    }
+    tags
 }

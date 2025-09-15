@@ -1,8 +1,15 @@
 use crate::console_log;
-use crate::content::{get_global_content, get_global_document}; // Add this import
+use crate::content::get_tags_from_path;
+use crate::content::{
+    get_global_content, get_global_document, get_global_tags, parse_debug_sequence,
+};
+use crate::get_full_url;
 use crate::log;
+use chrono::{DateTime, NaiveDate, NaiveDateTime, Utc};
 use content_service::ContentServiceError;
 use content_service::JsonEntry;
+use regex::Regex;
+use std::cmp::Ordering;
 pub enum Style {
     Card,
     Photo,
@@ -14,15 +21,32 @@ macro_rules! render_site {
     ($path:expr, $style:expr) => {{
         let content_path = $path.to_string();
         let style = $style;
-
         wasm_bindgen_futures::spawn_local(async move {
             let base = get_base_url!().to_string();
             let doc_url = format!("{}/content/{}/readme.md", base, content_path);
             match crate::pages::macros::get_page_content(&content_path, &doc_url).await {
-                Ok((mut repo_content, document)) => {
+                Ok((mut repo_content, document, tags)) => {
                     let mut html = String::new();
 
                     load_readme(&mut repo_content, &mut html, &document);
+
+                    let allowed_tags = get_page_tags();
+                    html.push_str("<div class=\"tag-container\">");
+                    html.push_str("<div class=\"tags\">");
+                    for tag in tags {
+                        // todo: on click event
+                        let class = if allowed_tags.contains(&tag) {
+                            "tag selected"
+                        } else {
+                            "tag"
+                        };
+                        html.push_str(&format!(
+                            "<span class=\"{}\" onclick=\"on_tag_click('{}')\">{}</span>",
+                            class, tag, tag
+                        ));
+                    }
+                    html.push_str("</div>");
+                    html.push_str("</div>");
 
                     if content_path != "" {
                         let div_class = format!("{}-container", &content_path);
@@ -62,11 +86,86 @@ macro_rules! render_site {
 pub async fn get_page_content(
     _path: &str,
     doc_url: &str,
-) -> Result<(Vec<JsonEntry>, String), ContentServiceError> {
+) -> Result<(Vec<JsonEntry>, String, Vec<String>), ContentServiceError> {
     let path = format!("/{}", _path);
-    let items = get_global_content(path, Some("file".to_string())).await?;
-    let document = get_global_document(doc_url).await?;
-    Ok((items, document))
+    let mut items = get_global_content(path.clone(), Some("file".to_string())).await?;
+
+    sort_entries_by_date(&mut items, true);
+
+    // this gets all the selected tags on the page
+    let allowed_tags = get_page_tags();
+
+    let mut to_keep = Vec::new();
+    if (allowed_tags.len() == 0) {
+        to_keep = items.clone();
+    } else {
+        for item in &items {
+            if let Some(item_tags) = item.metadata.get("tags") {
+                let re = Regex::new(r#"String\("([^"]*)"\)"#).unwrap();
+                let tags: Vec<&str> = re
+                    .captures_iter(item_tags)
+                    .map(|cap| cap.get(1).unwrap().as_str())
+                    .collect();
+                let mut tag_matches = 0;
+                for item_tag in &tags {
+                    for all_tag in &allowed_tags {
+                        let to_push = item.clone();
+                        if item_tag == all_tag {
+                            tag_matches += 1;
+                        }
+                        if tag_matches == allowed_tags.len() && !to_keep.contains(&to_push) {
+                            to_keep.push(to_push);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    let mut document = get_global_document(doc_url).await?;
+    let mut tags: Vec<String> = Vec::new();
+    for article in &to_keep {
+        if let Some(item_tags) = article.metadata.get("tags") {
+            let re = Regex::new(r#"String\("([^"]*)"\)"#).unwrap();
+            let article_tags: Vec<&str> = re
+                .captures_iter(item_tags)
+                .map(|cap| cap.get(1).unwrap().as_str())
+                .collect();
+            // if item doesn't contain any of the page tags, skip it
+            let mut tag_matches = 0;
+            for tag in article_tags {
+                if !tags.contains(&tag.to_string()) {
+                    tags.push(tag.to_string());
+                }
+            }
+        }
+    }
+
+    let mut selected_tags = Vec::new();
+    let mut unselected_tags = Vec::new();
+    for tag in tags {
+        if allowed_tags.contains(&tag) {
+            selected_tags.push(tag);
+        } else {
+            unselected_tags.push(tag);
+        }
+    }
+    unselected_tags.sort();
+    selected_tags.extend(unselected_tags);
+    let tags = selected_tags;
+    Ok((to_keep, document, tags))
+}
+
+pub fn get_page_tags() -> Vec<String> {
+    let full_url = get_full_url!();
+    let page_tags_raw = get_tags_from_path(&full_url);
+    let page_tags = page_tags_raw
+        .split(',')
+        .map(|tag| tag.trim().to_string())
+        .filter(|tag| !tag.is_empty())
+        .collect::<Vec<String>>();
+    page_tags
 }
 
 pub fn load_readme(content: &mut Vec<JsonEntry>, html: &mut String, document: &String) {
@@ -82,4 +181,49 @@ pub fn load_readme(content: &mut Vec<JsonEntry>, html: &mut String, document: &S
         html.push_str(&document);
     }
     html.push_str("</div>");
+}
+
+fn parse_date_to_utc(s: &str) -> Option<DateTime<Utc>> {
+    if let Ok(dt) = DateTime::parse_from_rfc3339(s) {
+        return Some(dt.with_timezone(&Utc));
+    }
+    if let Ok(ndt) = NaiveDateTime::parse_from_str(s, "%Y-%m-%d %H:%M:%S") {
+        return Some(DateTime::<Utc>::from_utc(ndt, Utc));
+    }
+
+    if let Ok(nd) = NaiveDate::parse_from_str(s, "%Y-%m-%d") {
+        return Some(DateTime::<Utc>::from_utc(nd.and_hms(0, 0, 0), Utc));
+    }
+    let fmts = ["%Y/%m/%d", "%d-%m-%Y", "%m/%d/%Y", "%B %d, %Y", "%b %d, %Y"];
+
+    for fmt in &fmts {
+        if let Ok(ndt) = NaiveDateTime::parse_from_str(s, fmt) {
+            return Some(DateTime::<Utc>::from_utc(ndt, Utc));
+        }
+        if let Ok(nd) = NaiveDate::parse_from_str(s, fmt) {
+            return Some(DateTime::<Utc>::from_utc(nd.and_hms(0, 0, 0), Utc));
+        }
+    }
+
+    None
+}
+
+pub fn sort_entries_by_date(entries: &mut [JsonEntry], newest_first: bool) {
+    entries.sort_by(|a, b| {
+        let a_date = a.metadata.get("date").and_then(|s| parse_date_to_utc(s));
+        let b_date = b.metadata.get("date").and_then(|s| parse_date_to_utc(s));
+
+        match (a_date, b_date) {
+            (Some(ad), Some(bd)) => {
+                if newest_first {
+                    bd.cmp(&ad)
+                } else {
+                    ad.cmp(&bd)
+                }
+            }
+            (Some(_), None) => Ordering::Less,
+            (None, Some(_)) => Ordering::Greater,
+            (None, None) => a.name.cmp(&b.name),
+        }
+    });
 }
