@@ -207,6 +207,7 @@ dependencies = [
  "chrono",
  "gloo-net 0.4.0",
  "gloo-utils",
+ "regex",
  "serde",
  "serde_json",
  "wasm-bindgen",
@@ -1471,6 +1472,7 @@ version = "0.1.0"
 dependencies = [
  "base64",
  "blurhash",
+ "chrono",
  "content_service",
  "futures",
  "getrandom 0.2.16",

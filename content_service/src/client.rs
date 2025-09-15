@@ -122,6 +122,30 @@ impl ContentServiceClient {
         Ok(filtered_items)
     }
 
+    pub async fn get_tags(&mut self, path: String) -> Result<Vec<String>, ContentServiceError> {
+        let json_content = self.get_content(path, None).await?;
+
+        let mut tags: Vec<String> = Vec::new();
+        for entry in json_content {
+            if let Some(doc_tags) = entry.metadata.get("tags") {
+                use regex::Regex;
+                let re = Regex::new(r#"String\("([^"]*)"\)"#).unwrap();
+                let tag_str: Vec<&str> = re
+                    .captures_iter(doc_tags)
+                    .map(|cap| cap.get(1).unwrap().as_str())
+                    .collect();
+                for tag in tag_str {
+                    let to_push = tag.to_string();
+                    if tags.contains(&to_push) == false {
+                        tags.push(to_push);
+                    }
+                }
+            }
+        }
+
+        Ok(tags)
+    }
+
     pub async fn get_document(&mut self, path: &str) -> Result<String, ContentServiceError> {
         if path.trim().is_empty() {
             return Err(ContentServiceError::InvalidInput(
@@ -207,6 +231,18 @@ impl ContentServiceClientCallback {
 
         spawn_local(async move {
             let res = inner.get_content(path, filter).await;
+            callback(res);
+        });
+    }
+
+    pub fn get_tags<F>(&self, path: String, callback: F)
+    where
+        F: FnOnce(Result<Vec<String>, ContentServiceError>) + 'static,
+    {
+        let mut inner = self.inner.clone();
+
+        spawn_local(async move {
+            let res = inner.get_tags(path).await;
             callback(res);
         });
     }

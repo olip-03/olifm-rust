@@ -201,6 +201,7 @@ dependencies = [
  "chrono",
  "gloo-net",
  "gloo-utils",
+ "regex",
  "serde",
  "serde_json",
  "wasm-bindgen",

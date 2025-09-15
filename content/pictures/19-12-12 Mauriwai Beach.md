@@ -8,4 +8,4 @@ tags:
   - Mauriwai-Beach
 ---
 ![[Img15.jpg]]
-The other side Mauriwai Beach. 180 degrees towards the Gannet Colony. 
+The other side Mauriwai Beach.

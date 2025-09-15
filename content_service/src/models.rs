@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 pub struct JsonEntry {
     pub path: String,
     #[serde(rename = "type")]
@@ -16,7 +16,7 @@ pub struct JsonEntry {
     pub metadata: HashMap<String, String>,
 }
 
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, PartialEq, Eq)]
 pub struct Img {
     pub blurhash: String,
     pub aspect_ratio: String,
