@@ -1,14 +1,15 @@
-use crate::console_log;
 use crate::content::parse_debug_sequence;
 use crate::get_app;
 use crate::get_base_url;
 use crate::image::get_base64_from_blurhash;
 use crate::log;
 use crate::page::Page as PageType;
-use crate::pages::macros::{Style, get_page_tags, load_readme};
+use crate::pages::macros::Style;
+use crate::pages::macros::load_readme;
 use crate::render_site;
 use crate::setup_article_observer;
 use content_service::JsonEntry;
+use content_service::console_log;
 use pulldown_cmark::{Parser, html};
 use std::collections::HashMap;
 
