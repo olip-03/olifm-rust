@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "resume/2021-1-Cert-IV-CST.md",
+                "file": "pictures/25-08-16 Pelican Landing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2021-1-Cert-IV-CST"
+              "title": "25-08-16 Pelican Landing"
             }
           }
         ]
@@ -169,14 +169,28 @@
       "bases:Create new base": false
     }
   },
-  "active": "d62634511ebced84",
+  "active": "ee71349364b03e21",
   "lastOpenFiles": [
+    "assets/DSCN1910.jpg",
+    "assets/DSCN1918.jpg",
+    "assets/DSCN1509.jpg",
+    "assets/DSCN1608.jpg",
+    "assets/DSCN1529(edit-plz).jpg",
+    "pictures/25-08-16 Pelican Landing.md",
+    "pictures/25-08-16 Crow Profile.md",
+    "pictures/25-08-15 Puffy.md",
+    "pictures/25-08-12 Crow Couple.md",
+    "blog/25-9-10 Hello World!.md",
+    "blog/25-09-12 The lights are on.md",
+    "pictures/21-5-25 Bluff Knoll.md",
+    "pictures/24-07-05 Saskatoon.md",
+    "pictures/24-07-09 Fisherman.md",
+    "resume/readme.md",
     "resume/2024-2-Employment-Dapth.md",
+    "resume/2021-1-Cert-IV-CST.md",
     "resume/2025-1-Project-Ponder.md",
     "resume/2025-2-Project-Olifm.md",
-    "resume/readme.md",
     "resume/2021-2-Cert-IV-IT.md",
-    "resume/2021-1-Cert-IV-CST.md",
     "resume/2021-3-Employment-Monadel.md",
     "resume/2022-1-Project-User-Offboard.md",
     "resume/2023-1-Project-User-Onboard.md",
@@ -186,27 +200,12 @@
     "pictures/19-12-12 Gannet in flight 2.md",
     "pictures/24-07-07 Friends-Aunties Garden.md",
     "pictures/24-06-23 Daisies in Vancouver.md",
-    "pictures/21-5-25 Bluff Knoll.md",
     "pictures/19-12-13 Nz Beach.md",
-    "blog/25-09-12 The lights are on.md",
-    "blog/25-9-10 Hello World!.md",
-    "pictures/25-06-12 Mrs. Magpie.md",
-    "pictures/19-12-12 Gannet Family.md",
-    "sounds/readme.md",
-    "readme.md",
-    "pictures/20-04-12 Djiti-Djiti.md",
-    "pictures/24-07-05 Saskatoon.md",
-    "pictures/19-12-12 Gannet In flight 1.md",
-    "assets/DSCN1509.jpg",
-    "assets/DSCN1529(edit-plz).jpg",
-    "assets/DSCN1608.jpg",
     "assets/PXL_20240623_191141618.jpg",
     "assets/DSCN1661.jpg",
     "assets/DSCN1670.jpg",
     "assets/DSCN1675.jpg",
     "assets/PXL_20240705_215141089.jpg",
-    "assets/PXL_20240707_173245044.jpg",
-    "assets/PXL_20240709_182744715.jpg",
     "blog/assets"
   ]
 }
