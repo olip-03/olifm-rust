@@ -33,8 +33,10 @@ fn render_readme() {
             Ok(document) => {
                 let parser = Parser::new(&document);
                 let mut html_output = String::new();
+                html.push_str("<div class=\"page-title\">");
                 html::push_html(&mut html_output, parser);
                 html.push_str(&html_output);
+                html.push_str("</div>");
             }
             Err(e) => html.push_str(&format!(
                 "<p style=\"color: red;\">Error loading content: {}</p>",

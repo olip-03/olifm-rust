@@ -62,9 +62,22 @@ pub fn on_article_card_click(card_path: &str) {
 
 #[wasm_bindgen]
 pub fn on_tag_click(tag: &str) {
-    let url = get_full_url!();
-    let check_url = url.split("/#").nth(1).unwrap_or("");
+    let baseurl = get_base_url!();
+    let mut url = get_full_url!();
 
+    console_log!("base url: {}", url);
+
+    if !url.contains("#/") {
+        if url.ends_with("/") {
+            url.push_str("#/");
+        } else if url.contains("#") {
+            url.push_str("/");
+        } else {
+            url.push_str("/#/");
+        }
+    }
+
+    let check_url = url.split("/#").nth(1).unwrap_or("");
     if check_url.contains(&tag) {
         let mut new_url = check_url.to_string();
 
