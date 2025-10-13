@@ -62,7 +62,44 @@ pub fn on_article_card_click(card_path: &str) {
 
 #[wasm_bindgen]
 pub fn on_tag_click(tag: &str) {
-    console_log!("Tag clicked: {}", tag);
+    let baseurl = get_base_url!();
+    let mut url = get_full_url!();
+
+    console_log!("base url: {}", url);
+
+    if !url.contains("#/") {
+        if url.ends_with("/") {
+            url.push_str("#/");
+        } else if url.contains("#") {
+            url.push_str("/");
+        } else {
+            url.push_str("/#/");
+        }
+    }
+
+    let check_url = url.split("/#").nth(1).unwrap_or("");
+    if check_url.contains(&tag) {
+        let mut new_url = check_url.to_string();
+
+        if new_url.contains(&format!("{},", tag)) {
+            new_url = new_url.replace(&format!("{},", tag), "");
+        } else if new_url.contains(&format!(",{}", tag)) {
+            new_url = new_url.replace(&format!(",{}", tag), "");
+        } else {
+            new_url = new_url.replace(tag, "");
+        }
+
+        new_url = new_url.trim_end_matches(&['?', '&']).to_string();
+
+        Router::navigate_to(&new_url);
+        return;
+    }
+
+    if check_url.contains("tags=") {
+        Router::navigate_to(&format!("{},{}", check_url, tag));
+    } else {
+        Router::navigate_to(&format!("{}?tags={}", check_url, tag));
+    }
 }
 
 fn init_shell(document: web_sys::Document) {

@@ -3,8 +3,8 @@ use crate::get_app;
 use crate::get_base_url;
 use crate::log;
 use crate::page::Page as PageType;
-use crate::pages::macros::Style;
-use crate::pages::macros::load_readme;
+use crate::pages::macros::{Style, get_page_tags, load_readme};
+
 use crate::render_site;
 use crate::setup_article_observer;
 
