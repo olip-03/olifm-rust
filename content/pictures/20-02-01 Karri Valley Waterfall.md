@@ -9,6 +9,4 @@ tags:
 ---
 ![[Img4.jpg]]
 
-No post-processing is ever done on these photos yet some still come out looking quite surreal. I really love the colours in this one, perhaps that's just me.
-
-Definitely taken at the start of 2020 but I have no idea what month or what day. Another one from a while ago. 
+Definitely taken at the start of 2020 but I have no idea what month or what day. Another one from a while ago.
