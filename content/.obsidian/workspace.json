@@ -13,28 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/25-09-21 How does it work.md",
+                "file": "resume/2021-1-Cert-IV-CST.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "25-09-21 How does it work"
-            }
-          },
-          {
-            "id": "95b39b7933fa500c",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.9.14"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.9.14"
+              "title": "2021-1-Cert-IV-CST"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -182,34 +169,34 @@
       "bases:Create new base": false
     }
   },
-  "active": "95b39b7933fa500c",
+  "active": "d62634511ebced84",
   "lastOpenFiles": [
-    "blog/25-09-12 The lights are on.md",
-    "blog/25-09-21 How does it work.md",
-    "blog/readme.md",
-    "blog/25-9-10 Hello World!.md",
-    "resume/readme.md",
-    "resume/2025-2-Project-Olifm.md",
-    "pictures/19-12-12 Gannet In flight 1.md",
-    "pictures/19-12-12 Gannet in flight 2.md",
-    "pictures/19-12-12 Mauriwai Beach.md",
-    "resume/2025-1-Project-Ponder.md",
     "resume/2024-2-Employment-Dapth.md",
-    "resume/2024-1-Project-User-Management.md",
-    "resume/2023-2-Project-Portajel.md",
-    "resume/2023-1-Project-User-Onboard.md",
-    "resume/2022-1-Project-User-Offboard.md",
-    "resume/2021-1-Cert-IV-CST.md",
+    "resume/2025-1-Project-Ponder.md",
+    "resume/2025-2-Project-Olifm.md",
+    "resume/readme.md",
     "resume/2021-2-Cert-IV-IT.md",
+    "resume/2021-1-Cert-IV-CST.md",
     "resume/2021-3-Employment-Monadel.md",
+    "resume/2022-1-Project-User-Offboard.md",
+    "resume/2023-1-Project-User-Onboard.md",
+    "resume/2023-2-Project-Portajel.md",
+    "resume/2024-1-Project-User-Management.md",
     "2025-09-10.md",
+    "pictures/19-12-12 Gannet in flight 2.md",
     "pictures/24-07-07 Friends-Aunties Garden.md",
     "pictures/24-06-23 Daisies in Vancouver.md",
     "pictures/21-5-25 Bluff Knoll.md",
     "pictures/19-12-13 Nz Beach.md",
+    "blog/25-09-12 The lights are on.md",
+    "blog/25-9-10 Hello World!.md",
     "pictures/25-06-12 Mrs. Magpie.md",
     "pictures/19-12-12 Gannet Family.md",
     "sounds/readme.md",
+    "readme.md",
+    "pictures/20-04-12 Djiti-Djiti.md",
+    "pictures/24-07-05 Saskatoon.md",
+    "pictures/19-12-12 Gannet In flight 1.md",
     "assets/DSCN1509.jpg",
     "assets/DSCN1529(edit-plz).jpg",
     "assets/DSCN1608.jpg",
