@@ -1,43 +1,16 @@
 [package]
+authors = ["Oliver Posa"]
+edition = "2024"
 name = "web"
+publish = false
 version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-content_service = { path = "../content_service" }
-getrandom = { version = "0.2", features = ["js"] }
-wasm-bindgen = "0.2.100"
-web-sys = { version = "0.3.77", features = [
-  "Window",
-  "Document",
-  "Element",
-  "HtmlElement",
-  "HtmlInputElement",
-  "Event",
-  "EventTarget",
-  "History",
-  "Location",
-  "PopStateEvent",
-  "HashChangeEvent",
-  "Request",
-  "RequestInit",
-  "RequestMode",
-  "Response",
-  "Headers"
-] }
-wasm-bindgen-futures = "0.4.50"
-futures = "0.3.31"
-serde_json = "1.0.143"
-gloo-net = "0.6.0"
-once_cell = "1.21.3"
-blurhash = "0.2.3"
-base64 = "0.22.1"
-image = "0.25.8"
-js-sys = "0.3.78"
-pulldown-cmark = "0.13.0"
-urlencoding = "2.1.3"
-regex = "1.11.2"
-chrono = "0.4.42"
 
 [lib]
-crate-type = ["rlib", "cdylib"]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+admin = { path = "../admin" }
+wasm-bindgen = "0.2.118"
+wasm-bindgen-futures = "0.4.68"
+web-sys = "0.3.95"
+yew = { git = "https://github.com/yewstack/yew/", features = ["csr"] }

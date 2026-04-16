@@ -1,1 +1,0 @@
-I'm often out with a camera taking shots of things I like the look of. The photos I tend to adore the most will make their way up here, but they're often of birds, landscapes or other natural scenery that I though was nice. 
